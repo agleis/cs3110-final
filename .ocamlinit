@@ -1,0 +1,17 @@
+(**
+ * When running ocaml or utop, this file is automatically #used.
+ * Feel free to extend it if you find yourself typing the same thing over and
+ * over!
+ *)
+
+(** This loads the compiled modules from this directory *)
+#directory "_build";;
+#load "types.cmo";;
+#load "randoms.cmo";;
+#load "ai_helpers.cmo";;
+#load "ai_pass.cmo";;
+#load "ai_controller.cmo";;
+
+(** For convenience, we open a bunch of modules *)
+open Types
+open Randoms
