@@ -53,18 +53,37 @@ let lose_trick_if_possible hand pool =
 
 let guess_turn_last p_state pool data =
   match p_state.ai_level with
-  | 3 | 2 ->
+  | 3 ->
     if data.shooting_moon
     then take_trick_if_possible p_state.hand pool
     else lose_trick_if_possible p_state.hand pool
+  | 2 -> lose_trick_if_possible p_state.hand pool
+  | _ -> random_card p_state.hand
+
+let guess_turn_second p_state pool data =
+  match p_state.ai_level with
+  | 3 ->
+    if data.shooting_moon
+    then take_trick_if_possible p_state.hand pool
+    else lose_trick_if_possible p_state.hand pool
+  | 2 -> lose_trick_if_possible p_state.hand pool
+  | _ -> random_card p_state.hand
+
+let guess_turn_third p_state pool data =
+  match p_state.ai_level with
+  | 3 ->
+    if data.shooting_moon
+    then take_trick_if_possible p_state.hand pool
+    else lose_trick_if_possible p_state.hand pool
+  | 2 -> lose_trick_if_possible p_state.hand pool
   | _ -> random_card p_state.hand
 
 let guess_turn p_state pool data =
   match List.length pool with
   | 0 -> guess_turn_first p_state data
-  (* | 1 -> guess_turn_second p_state pool data
-  | 2 -> guess_turn_third p_state pool data *)
-  | 3 -> guess_turn_last p_state pool data
+  | 1 -> guess_turn_second p_state pool data
+  | 2 -> guess_turn_third p_state pool data
+  | _ -> guess_turn_last p_state pool data
 
 let pass_cards p_state =
   let spade_state = get_spade_state p_state.hand in
