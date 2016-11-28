@@ -87,12 +87,20 @@ let draw_pool pool w h=
   done;
   in ()
 
+let draw_player player w h= 
+  let () = 
+    Graphics.moveto ((int_of_float (0.05*.(float w)))) (int_of_float (0.95*.(float h)));
+    Graphics.draw_string ("Player " ^(string_of_int player) ^ " turn")
+  in ()
+
 let draw_board state lst pool = 
   let num = 13 in 
+  let player = 1 in 
   let width = Graphics.size_x () in 
   let height = Graphics.size_y () in 
   draw_card_top num ((int_of_float (0.30*.(float width)))) (int_of_float (0.8*.(float height))) width height;
   draw_card_side num (int_of_float (0.1*.(float width))) ((int_of_float (0.20*.(float height)))) width height;
   draw_card_side num (int_of_float (0.875*.(float width))) ((int_of_float (0.20*.(float height)))) width height;
   draw_hand lst width height;
-  draw_pool pool width height
+  draw_pool pool width height;
+  draw_player player width height
