@@ -3,3 +3,6 @@ ai:
 
 aitest:
 	ocamlbuild -pkgs oUnit,str,unix aitest.byte && ./aitest.byte
+
+display:
+	ocamlbuild -pkgs oUnit display_controller.byte	

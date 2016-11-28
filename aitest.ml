@@ -25,6 +25,7 @@ let hard_ai_akq = {
 	game_points = 0;
 	ai_level = 3;
 	collected_cards = [];
+  p_num = 0;
 }
 
 let tests = "test suite" >::: [
