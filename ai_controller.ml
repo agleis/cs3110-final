@@ -44,6 +44,12 @@ let take_trick_if_possible hand pool =
   then high_card_from_suit_not hand Heart (-1) (-1)
   else possible_play
 
+let take_trick_max hand pool =
+  take_trick_if_possible hand pool
+
+let lose_trick_max hand pool =
+  lose_trick_if_possible hand pool
+
 let lose_trick_if_possible hand pool =
   let high_card = highest_card_so_far pool in
   let possible_play = lose_to_card high_card hand in
@@ -52,20 +58,36 @@ let lose_trick_if_possible hand pool =
   else possible_play
 
 let guess_turn_last p_state pool data =
+  let lead_suit = (List.hd pool).suit in
+  let new_hand = (if data.q_spades_played ||
+                     lead_suit <> Spade ||
+                     List.length p_state.hand <= 2
+  then p_state.hand
+  else let without_k_spades =
+    hand_without_card p_state.hand {suit = Spade; value = 13} in
+    hand_without_card without_k_spades {suit = Spade; value = 14}) in
   match p_state.ai_level with
   | 3 ->
     if data.shooting_moon
-    then take_trick_if_possible p_state.hand pool
-    else lose_trick_if_possible p_state.hand pool
+    then take_trick_max p_state.hand pool
+    else lose_trick_max p_state.hand pool
   | 2 -> lose_trick_if_possible p_state.hand pool
   | _ -> random_card p_state.hand
 
 let guess_turn_second p_state pool data =
+  let lead_suit = (List.hd pool).suit in
+  let new_hand = (if data.q_spades_played ||
+                     lead_suit <> Spade ||
+                     List.length p_state.hand <= 2
+  then p_state.hand
+  else let without_k_spades =
+    hand_without_card p_state.hand {suit = Spade; value = 13} in
+    hand_without_card without_k_spades {suit = Spade; value = 14}) in
   match p_state.ai_level with
   | 3 ->
     if data.shooting_moon
-    then take_trick_if_possible p_state.hand pool
-    else lose_trick_if_possible p_state.hand pool
+    then take_trick_max p_state.hand pool
+    else lose_trick_max p_state.hand pool
   | 2 -> lose_trick_if_possible p_state.hand pool
   | _ -> random_card p_state.hand
 
