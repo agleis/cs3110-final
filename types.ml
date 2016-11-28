@@ -8,7 +8,7 @@ type card = {
 }
 
 type player_state = {
-  hand: card list;
+    hand: card list;
 	round_points: int;
 	game_points: int;
 	ai_level: int;
@@ -16,7 +16,7 @@ type player_state = {
 }
 
 type game_state = {
-  pool: card list;
+    pool: card list;
 	players: player_state list;
 	phase: state;
 }

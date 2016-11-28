@@ -3,3 +3,9 @@ ai:
 
 aitest:
 	ocamlbuild -pkgs oUnit,str,unix aitest.byte && ./aitest.byte
+
+game:
+		ocamlbuild game_controller.byte && ./game_controller.byte
+
+clean:
+		ocamlbuild -clean
