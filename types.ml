@@ -13,12 +13,14 @@ type player_state = {
 	game_points: int;
 	ai_level: int;
 	collected_cards: card list;
+    p_num: int;
 }
 
 type game_state = {
     pool: card list;
 	players: player_state list;
 	phase: state;
+    round_num: int
 }
 
 type stored_data = {
@@ -32,6 +34,7 @@ type stored_data = {
   mutable tricks_p1: card list;
   mutable tricks_p2: card list;
   mutable tricks_p3: card list;
+  mutable tricks_p4: card list;
 }
 
 let compare_desc i1 i2 =

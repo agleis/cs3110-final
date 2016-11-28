@@ -3,6 +3,8 @@ open Randoms
 open Ai_helpers
 open Ai_pass
 
+let card_to_play game_state player_state = {suit=Heart; value=2}
+
 let perfect_lead_card hand data =
   if data.hearts_played
   then if has_low_hearts hand

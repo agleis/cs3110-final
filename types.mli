@@ -17,12 +17,14 @@ type player_state = {
 	game_points: int;
 	ai_level: int;
 	collected_cards: card list;
+    p_num: int;
 }
 
 type game_state = {
     pool: card list;
 	players: player_state list;
 	phase: state;
+    round_num: int;
 }
 
 type stored_data = {

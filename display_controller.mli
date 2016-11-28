@@ -1,3 +1,4 @@
+open Types
 (* [display_state game_state] displays the game with the given game state. *)
 val display_state : game_state -> unit
 

@@ -10,3 +10,5 @@ val get_input : player_state -> unit
 val process_line : player_state -> string -> player_state
 
 val pass_cards : player_state -> card list
+
+val card_to_play : player_state -> card
