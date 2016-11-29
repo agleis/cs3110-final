@@ -39,11 +39,6 @@ let click_card lst =
     let s = Graphics.wait_next_event [Graphics.Button_down; Graphics.Button_up] in
     if s.Graphics.button then Graphics.close_graph ()
 
-<<<<<<< HEAD
-let draw_card num suit x y =
-    let card_char =
-    if num = 11 then "J"
-=======
 let draw_symbol sym x y =
   match sym with
   |Heart ->
@@ -66,26 +61,17 @@ let draw_symbol sym x y =
 let draw_card num suit x y cw ch =
     let card_char =
     if num = 11 then "J"
->>>>>>> bde8dc8441554fd70a08f7489d5b995577d62d3e
     else if num = 12 then "Q"
     else if num = 13 then "K"
     else if num = 14 || num = 1 then "A"
     else if num = 0 then "V"
     else if num = -1 then "H"
-<<<<<<< HEAD
-    else string_of_int num in
-    let (w,h) = Graphics.text_size "h" in
-    let () =
-    if card_char = "V" then
-      begin
-=======
     else string_of_int num in
     let card_width = cw in
     let card_height = ch in
     let () =
     if card_char = "V" then
       begin
->>>>>>> bde8dc8441554fd70a08f7489d5b995577d62d3e
         Graphics.set_color Graphics.black;
         Graphics.fill_rect x y card_width card_height;
         Graphics.set_color Graphics.white;
@@ -229,6 +215,7 @@ let draw_board state lst pool =
   draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height;
   draw_hand lst width height card_width card_height;
   draw_pool pool width height card_width card_height;
-  draw_player player width height
+  draw_player player width height;
+  while true do (); done
 
 let () = draw_board () lst1 pool1
