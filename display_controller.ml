@@ -39,53 +39,39 @@ let click_card lst =
     let s = Graphics.wait_next_event [Graphics.Button_down; Graphics.Button_up] in
     if s.Graphics.button then Graphics.close_graph ()
 
-<<<<<<< HEAD
-let draw_card num suit x y =
-    let card_char =
-    if num = 11 then "J"
-=======
-let draw_symbol sym x y =
+let draw_symbol sym x y = 
   match sym with
-  |Heart ->
+  |Heart -> 
     Graphics.set_color Graphics.red;
     Graphics.fill_poly [|(x,y);(x-10,y+10);(x-10,y+15);(x-5,y+15);(x,y+10);(x+5,y+15);(x+10,y+15);(x+10,y+10);(x,y)|]
-  |Diamond ->
+  |Diamond -> 
     Graphics.set_color Graphics.red;
     Graphics.fill_poly [|(x,y);(x+5,y+10);(x,y+20);(x-5,y+10);(x,y)|]
   |Spade ->
     Graphics.set_color Graphics.black;
     Graphics.fill_poly [|(x,y);(x-5,y-5);(x-10,y);(x-10,y+5);(x,y+15);(x+10,y+5);(x+10,y);(x+5,y-5);(x,y)|];
     Graphics.fill_rect (x-3) (y-10) 5 10
-  |Club ->
+  |Club -> 
     Graphics.set_color Graphics.black;
     Graphics.fill_circle (x-5) y 7;
     Graphics.fill_circle (x+5) y 7;
     Graphics.fill_circle x (y+10) 7;
     Graphics.fill_rect (x-2) (y-10) 4 10
 
-let draw_card num suit x y cw ch =
-    let card_char =
-    if num = 11 then "J"
->>>>>>> bde8dc8441554fd70a08f7489d5b995577d62d3e
+let draw_card num suit x y cw ch = 
+    let card_char = 
+    if num = 11 then "J" 
     else if num = 12 then "Q"
     else if num = 13 then "K"
     else if num = 14 || num = 1 then "A"
     else if num = 0 then "V"
     else if num = -1 then "H"
-<<<<<<< HEAD
-    else string_of_int num in
-    let (w,h) = Graphics.text_size "h" in
-    let () =
-    if card_char = "V" then
-      begin
-=======
-    else string_of_int num in
-    let card_width = cw in
-    let card_height = ch in
-    let () =
-    if card_char = "V" then
-      begin
->>>>>>> bde8dc8441554fd70a08f7489d5b995577d62d3e
+    else string_of_int num in 
+    let card_width = cw in 
+    let card_height = ch in 
+    let () = 
+    if card_char = "V" then 
+      begin 
         Graphics.set_color Graphics.black;
         Graphics.fill_rect x y card_width card_height;
         Graphics.set_color Graphics.white;
@@ -102,7 +88,7 @@ let draw_card num suit x y cw ch =
         Graphics.set_color Graphics.red;
         Graphics.fill_rect (x+5) (y+5) (card_height - 10) (card_width - 10)
       end
-    else
+    else 
       begin
         Graphics.set_color Graphics.black;
         Graphics.fill_rect x y card_width card_height;
@@ -130,7 +116,7 @@ let draw_card num suit x y cw ch =
           end
         else if suit = Spade then
           begin
-            let z = if num == 10 then 45 else 50 in
+            let z = if num == 10 then 45 else 50 in 
             Graphics.set_color Graphics.black;
             Graphics.moveto (x+5) (y+75);
             Graphics.draw_string card_char;
@@ -139,9 +125,9 @@ let draw_card num suit x y cw ch =
             Graphics.moveto (x+10) (y+40);
             draw_symbol Spade (x+(cw/2)) (y+(ch/2))
           end
-        else
+        else 
           begin
-            let z = if num == 10 then 45 else 50 in
+            let z = if num == 10 then 45 else 50 in 
             Graphics.set_color Graphics.black;
             Graphics.moveto (x+5) (y+75);
             Graphics.draw_string card_char;
@@ -151,9 +137,8 @@ let draw_card num suit x y cw ch =
             draw_symbol Club (x+(cw/2)) (y+(ch/2))
           end
       end
-    in
+    in 
     ()
-
 let draw_hand lst w h cw ch=
   let delta = ref 0 in
   let len = List.length lst in
