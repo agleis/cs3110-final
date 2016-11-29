@@ -1,39 +1,17 @@
 open Graphics
-#load "graphics.cma"
+open Types
+(* #load "graphics.cma" *)
 
 exception End;;
 
-type suit = Heart | Club | Diamond | Spade
-
-type state = Setup | Pass | Play
-
-type card = {
-  suit: suit;
-  value: int;
-}
-
-(* let lst1 = [(1,"Hearts");(2,"Hearts");(3,"Clubs");(4,"Clubs");(5,"Diamonds");(6,"Diamonds");(7,"Spades");(8,"Spades");(9,"Hearts");(10,"Clubs");(11,"Diamonds");(12,"Spades");(13,"Hearts")]
-let lst2 = [(1,"Hearts");(2,"Hearts");(3,"Clubs");(4,"Clubs");(5,"Diamonds");(6,"Diamonds");(7,"Spades")] *)
 let lst1 = [{suit=Heart; value=1};{suit=Heart; value=2};{suit=Club; value=3};{suit=Club; value=4};{suit=Diamond; value=5};{suit=Diamond; value=6}; {suit=Spade; value=7}; {suit=Spade; value=8}; {suit=Heart; value=9}; {suit=Club; value=10};{suit=Diamond; value=11};{suit=Spade; value=12};{suit=Heart; value=13}]
 let lst2 = [{suit=Heart; value=1};{suit=Heart; value=2};{suit=Club; value=3};{suit=Club; value=4};{suit=Diamond; value=5};{suit=Diamond; value=6}]
 let pool1 = [{suit=Diamond; value=5}; {suit=Diamond; value=6}; {suit=Spade; value=7}; {suit=Spade; value=8}]
-(* let pool1 = [(5,"Diamonds");(6,"Diamonds");(7,"Spades");(8,"Spades")] *)
 
 let window_width = 1280
 let window_height = 750
 let card_spacing = 5
 let player_hand = ref []
-
-(* let diamond = Graphics.fill_poly [|(10,10);(15,20);(10,30);(5,20);(10,10)|]
-let club = 
-  Graphics.fill_circle 100 100 7;;
-  Graphics.fill_circle 110 100 7;;
-  Graphics.fill_circle 105 110 7;;
-  Graphics.fill_rect 103 90 4 10;;
-let heart = Graphics.fill_poly [|(10,10);(0,20);(0,25);(5,25);(10,20);(15,25);(20,25);(20,20);(10,10)|];;
-let spade = 
-  Graphics.draw_poly [|(100,100);(95,100);(95,105);(100,110);(105,105);(105,100)|];;
-  Graphics.draw_rect 98 95 4 5;; *)
 
 let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in 
@@ -220,7 +198,7 @@ let draw_player player w h=
   in ()
 
 let draw_board state lst pool = 
-(*   init_window window_width window_height; *)
+  init_window window_width window_height;
   Graphics.clear_graph (); 
   let num = 13 in 
   let player = 1 in 
@@ -238,3 +216,7 @@ let draw_board state lst pool =
   draw_hand lst width height card_width card_height;
   draw_pool pool width height card_width card_height;
   draw_player player width height
+
+let () = draw_board () lst1 pool1
+
+
