@@ -2,6 +2,7 @@ open Types
 open Randoms
 open Ai_helpers
 open Ai_pass
+(* open Ai_probabilites *)
 
 let card_to_play game_state player_state = {suit=Heart; value=2}
 
@@ -30,7 +31,9 @@ let play_lead_card hand ai_level data =
   | _ -> random_card hand
 
 let guess_turn_first p_state data =
-  let new_hand = (if data.q_spades_played
+  let new_hand = (if data.q_spades_played ||
+                     get_index (Spade, 12) p_state.hand >= 0 ||
+                     List.length p_state.hand <= 2
   then p_state.hand
   else let without_k_spades =
     hand_without_card p_state.hand {suit = Spade; value = 13} in
@@ -56,20 +59,16 @@ let take_trick_if_possible hand pool =
   else possible_play
 
 let take_trick_max hand pool data =
-  take_trick_if_possible hand pool
+  let high_card = highest_card_so_far pool in
+  let prob_list = beating_cards_still_out high_card pool data in
+  let beating_cards = high_card::prob_list in
+  lowest_beating_card beating_cards hand data.hearts_played
 
 let lose_trick_max hand pool data =
-  lose_trick_if_possible hand pool
+  let high_card = highest_card_so_far pool in
+  highest_losing_card high_card hand data.hearts_played
 
 let guess_turn_last p_state pool data =
-  let lead_suit = (List.hd pool).suit in
-  let new_hand = (if data.q_spades_played ||
-                     lead_suit <> Spade ||
-                     List.length p_state.hand <= 2
-  then p_state.hand
-  else let without_k_spades =
-    hand_without_card p_state.hand {suit = Spade; value = 13} in
-    hand_without_card without_k_spades {suit = Spade; value = 14}) in
   match p_state.ai_level with
   | 3 ->
     if (List.nth data.players p_state.p_num).shooting_moon
@@ -81,6 +80,7 @@ let guess_turn_last p_state pool data =
 let guess_turn_second p_state pool data =
   let lead_suit = (List.hd pool).suit in
   let new_hand = (if data.q_spades_played ||
+                     get_index (Spade, 12) p_state.hand >= 0 ||
                      lead_suit <> Spade ||
                      List.length p_state.hand <= 2
   then p_state.hand
@@ -90,14 +90,15 @@ let guess_turn_second p_state pool data =
   match p_state.ai_level with
   | 3 ->
     if (List.nth data.players p_state.p_num).shooting_moon
-    then take_trick_max p_state.hand pool data
-    else lose_trick_max p_state.hand pool data
-  | 2 -> lose_trick_if_possible p_state.hand pool
+    then take_trick_max new_hand pool data
+    else lose_trick_max new_hand pool data
+  | 2 -> lose_trick_if_possible new_hand pool
   | _ -> random_card p_state.hand
 
 let guess_turn_third p_state pool data =
   let lead_suit = (List.hd pool).suit in
   let new_hand = (if data.q_spades_played ||
+                     get_index (Spade, 12) p_state.hand >= 0 ||
                      lead_suit <> Spade ||
                      List.length p_state.hand <= 2
   then p_state.hand
@@ -107,13 +108,13 @@ let guess_turn_third p_state pool data =
   match p_state.ai_level with
   | 3 ->
     if (List.nth data.players p_state.p_num).shooting_moon
-    then take_trick_max p_state.hand pool data
-    else lose_trick_max p_state.hand pool data
-  | 2 -> lose_trick_if_possible p_state.hand pool
+    then take_trick_max new_hand pool data
+    else lose_trick_max new_hand pool data
+  | 2 -> lose_trick_if_possible new_hand pool
   | _ -> random_card p_state.hand
 
 let guess_turn p_state pool data =
-  let d = check_if_shooting_moon p_state.hand pool data in
+  let _ = check_if_shooting_moon p_state.hand pool data p_state.p_num in
   match List.length pool with
   | 0 -> guess_turn_first p_state data
   | 1 -> guess_turn_second p_state pool data
@@ -123,13 +124,18 @@ let guess_turn p_state pool data =
 let pass_cards p_state =
   let spade_state = get_spade_state p_state.hand in
   match spade_state with
-  | Ace_and_king (a, k) -> ({suit = Spade; value = 14})::
-                        ({suit = Spade; value = 13})::
-                        (get_last_card p_state.hand p_state.ai_level a k)::[]
-  | Ace i -> ({suit = Spade; value = 14})::
-             (get_two_cards p_state.hand p_state.ai_level i)
-  | King i -> ({suit = Spade; value = 13})::
-              (get_two_cards p_state.hand p_state.ai_level i)
+  | Ace_and_king (a, k) ->
+    let one_hand = hand_without_card p_state.hand {suit = Spade; value = 14} in
+    let new_hand = hand_without_card one_hand {suit = Spade; value = 13} in
+    ({suit = Spade; value = 14})::
+    ({suit = Spade; value = 13})::
+    (get_last_card new_hand p_state.ai_level a k)::[]
+  | Ace i ->
+    let new_hand = hand_without_card p_state.hand {suit = Spade; value = 14} in
+    ({suit = Spade; value = 14})::(get_two_cards new_hand p_state.ai_level i)
+  | King i ->
+    let new_hand = hand_without_card p_state.hand {suit = Spade; value = 13} in
+    ({suit = Spade; value = 13})::(get_two_cards new_hand p_state.ai_level i)
   | None -> get_three_cards p_state.hand p_state.ai_level
 
 let initialize () =
