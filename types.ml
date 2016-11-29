@@ -9,18 +9,19 @@ type card = {
 
 (* [player_state] represents the state of the player. *)
 type player_state = {
-  hand: card list;
+    hand: card list;
 	round_points: int;
 	game_points: int;
 	ai_level: int;
 	collected_cards: card list;
-  p_num: int;
+    p_num: int;
 }
 
 type game_state = {
-  pool: card list;
-	players: player_state list;
+    pool: (card*int) list;
+	prs: player_state list;
 	phase: state;
+    round_num: int
 }
 
 type player_data = {

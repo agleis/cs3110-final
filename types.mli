@@ -1,7 +1,8 @@
 (* [game_state] is the type of a game_controller. *)
-type game_state
 
 type suit = Heart | Club | Diamond | Spade
+
+type state = Setup | Pass | Play
 
 (* [card] is the variant type of a card. *)
 type card = {
@@ -16,7 +17,14 @@ type player_state = {
 	game_points: int;
 	ai_level: int;
 	collected_cards: card list;
-  p_num: int;
+    p_num: int;
+}
+
+type game_state = {
+    pool: (card*int) list;
+	prs: player_state list;
+	phase: state;
+    round_num: int;
 }
 
 type player_data = {
