@@ -15,3 +15,41 @@
 (** For convenience, we open a bunch of modules *)
 open Types
 open Randoms
+
+let data = {
+  q_spades_played = false;
+  hearts_played = false;
+  players = [{
+    has_clubs = true;
+    has_spades = true;
+    has_diamonds = true;
+    has_hearts = true;
+    shooting_moon = false;
+    tricks = [];
+    round_points = 0;
+  }; {
+    has_clubs = true;
+    has_spades = true;
+    has_diamonds = true;
+    has_hearts = true;
+    shooting_moon = false;
+    tricks = [];
+    round_points = 0;
+  }; {
+    has_clubs = true;
+    has_spades = true;
+    has_diamonds = true;
+    has_hearts = true;
+    shooting_moon = false;
+    tricks = [];
+    round_points = 0;
+  }; {
+    has_clubs = true;
+    has_spades = true;
+    has_diamonds = true;
+    has_hearts = true;
+    shooting_moon = false;
+    tricks = [];
+    round_points = 0;
+  }]
+}

@@ -46,7 +46,7 @@ let rec has_low_hearts hand =
 let rec play_low_heart hand =
   let sorted_hand = List.sort (compare_cards false) hand in
   match sorted_hand with
-  | [] -> {suit = Diamond; value = -1}
+  | [] -> random_card hand
   | c::t -> if c.suit = Heart && c.value < 4
     then c
     else play_low_heart t
@@ -55,9 +55,18 @@ let get_shorted_suit data =
   shorted_suit data.players
 
 let find_min_suit c s d h =
-  if (c <= s && c <= h && c <= d) then ClubS c
-  else if (d <= c && d <= h && d <= s) then DiamondS d
-  else if (h <= c && h <= d && h <= s) then HeartS h
+  if ((s = 0 || c <= s) &&
+      (h = 0 || c <= h) &&
+      (d = 0 || c <= d) &&
+      c <> 0) then ClubS c
+  else if ((s = 0 || d <= s) &&
+          (h = 0 || d <= h) &&
+          (c = 0 || d <= c) &&
+          d <> 0) then DiamondS d
+  else if ((s = 0 || h <= s) &&
+          (c = 0 || h <= c) &&
+          (d = 0 || h <= d) &&
+          h <> 0) then HeartS h
   else SpadeS s
 
 let find_max_suit c s d h =
@@ -111,25 +120,25 @@ let high_card_from_suit hand suit ind1 ind2 =
     match suit_ind.heart with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Heart;
-               value = List.hd (List.sort (Pervasives.compare) (h::t))}
+               value = List.nth (List.sort (Pervasives.compare) (h::t)) (List.length (h::t) - 1)}
   end
   | Club -> begin
     match suit_ind.club with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Club;
-               value = List.hd (List.sort (Pervasives.compare) (h::t))}
+               value = List.nth (List.sort (Pervasives.compare) (h::t)) (List.length (h::t) - 1)}
   end
   | Spade -> begin
     match suit_ind.spade with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Spade;
-               value = List.hd (List.sort (Pervasives.compare) (h::t))}
+               value = List.nth (List.sort (Pervasives.compare) (h::t)) (List.length (h::t) - 1)}
   end
   | Diamond -> begin
     match suit_ind.diamond with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Diamond;
-               value = List.hd (List.sort (Pervasives.compare) (h::t))}
+               value = List.nth (List.sort (Pervasives.compare) (h::t)) (List.length (h::t) - 1)}
   end
 
 let middle_card_from_suit hand suit ind1 ind2 =
@@ -167,25 +176,25 @@ let low_card_from_suit hand suit ind1 ind2 =
     match suit_ind.heart with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Heart;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) ((List.length (h::t)) - 1)}
+               value = List.hd (List.sort (Pervasives.compare) (h::t))}
   end
   | Club -> begin
     match suit_ind.club with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Club;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) ((List.length (h::t)) - 1)}
+               value = List.hd (List.sort (Pervasives.compare) (h::t))}
   end
   | Spade -> begin
     match suit_ind.spade with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Spade;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) ((List.length (h::t)) - 1)}
+               value = List.hd (List.sort (Pervasives.compare) (h::t))}
   end
   | Diamond -> begin
     match suit_ind.diamond with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Diamond;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) ((List.length (h::t)) - 1)}
+               value = List.hd (List.sort (Pervasives.compare) (h::t))}
   end
 
 let high_card_from_suit_not hand suit ind1 ind2 =
@@ -266,6 +275,11 @@ let rec can_lose card hand =
             then true
             else can_lose card t
 
+let screw_other_player hand =
+  if get_index (Spade, 12) hand >= 0
+  then {suit = Spade; value = 12}
+  else high_card_from_suit hand Heart (-1) (-1)
+
 let rec get_losing_card card hand =
   let possible_heart = high_card_from_suit hand Heart (-1) (-1) in
   if possible_heart.value = (-1)
@@ -276,21 +290,73 @@ let rec get_losing_card card hand =
             else get_losing_card card t
   else possible_heart
 
+let rec highest_loser card hand max_val =
+  let cards_of_suit = List.filter (fun c -> c.suit = card.suit) hand in
+  match cards_of_suit with
+  | [] -> {suit = card.suit; value = max_val}
+  | c::t -> if c.value < card.value && c.value > max_val
+            then highest_loser card t c.value
+            else highest_loser card t max_val
+
+let highest_losing_card card hand h_played =
+  if has_card_of_suit card.suit hand
+  then highest_loser card hand 0
+  else if h_played
+  then screw_other_player hand
+  else if get_index (Spade, 12) hand >= 0
+  then {suit = Spade; value = 12}
+  else high_card_from_suit_not hand Heart (-1) (-1)
+
+let rec player_cards_of_suit suit players lst =
+  match players with
+  | [] -> lst
+  | p::t -> let new_lst = List.filter (fun c -> c.suit = suit) p.tricks in
+    player_cards_of_suit suit t (new_lst@lst)
+
+let cards_played suit pool data =
+  let pool_cards = List.filter (fun c -> c.suit = suit) pool in
+  let player_cards = player_cards_of_suit suit data.players [] in
+  player_cards@pool_cards
+
+let rec build_list suit i lst =
+  if i >= 2
+  then build_list suit (i - 1) ({suit = suit; value = i}::lst)
+  else lst
+
+let rec not_in_lst c = function
+  | [] -> true
+  | c1::t -> if c1 = c then false else not_in_lst c t
+
+let inverse_list suit lst =
+  let full_suit = build_list suit 14 [] in
+  List.filter (fun c -> not_in_lst c lst) full_suit
+
+let beating_cards_still_out card pool data =
+  let high_suit = card.suit in
+  let cards_of_suit_played = cards_played high_suit pool data in
+  inverse_list card.suit cards_of_suit_played
+
+let lowest_beating_card lst hand h_played =
+  let sorted_beaters = List.sort (compare_cards false) lst in
+  let sorted_hand = List.sort (compare_cards true) lst in
+  let highest_beater =
+    try List.hd sorted_beaters with
+    | _ -> {suit = Diamond; value = -1} in
+  let beater_mine = beat_card highest_beater sorted_hand in
+  if beater_mine.value = (-1)
+  then high_card_from_suit sorted_hand highest_beater.suit (-1) (-1)
+  else beater_mine
+
 let lose_to_card card hand =
   if has_card_of_suit card.suit hand
   then low_card_from_suit hand card.suit (-1) (-1)
   else if card.suit = Heart
   then if can_lose card hand
        then get_losing_card card hand
-       else high_card_from_suit_not hand Heart (-1) (-1)
+       else {suit = Diamond; value = -1}
   else if can_lose card hand
        then get_losing_card card hand
-       else high_card_from_suit_not hand Heart (-1) (-1)
-
-let screw_other_player hand =
-  if get_index (Spade, 12) hand >= 0
-  then {suit = Spade; value = 12}
-  else high_card_from_suit hand Heart (-1) (-1)
+       else {suit = Diamond; value = -1}
 
 let rec contains_heart_or_q_spades pool =
   match pool with
@@ -326,17 +392,33 @@ let check_if_shorted suit data =
   then ((List.nth data.players 0).shooting_moon <- true; data)
   else data
 
-let rec no_points = function
-  | [] -> true
-  | p::t -> p.round_points = 0 && no_points t
+let rec no_points player =
+  player.round_points = 0
 
-let check_if_shooting_moon hand pool data =
-  match get_long_suit hand with
-  | ClubS x -> if x >= (List.length hand)/2 && no_points data.players
+let rec no_player_points players p_num =
+  match p_num with
+  | 0 -> no_points (List.nth players 1) &&
+         no_points (List.nth players 2) &&
+         no_points (List.nth players 3)
+  | 1 -> no_points (List.nth players 0) &&
+         no_points (List.nth players 2) &&
+         no_points (List.nth players 3)
+  | 2 -> no_points (List.nth players 1) &&
+         no_points (List.nth players 0) &&
+         no_points (List.nth players 3)
+  | _ -> no_points (List.nth players 1) &&
+         no_points (List.nth players 2) &&
+         no_points (List.nth players 0)
+
+let check_if_shooting_moon hand pool data p_num =
+  if no_player_points data.players p_num
+  then match get_long_suit hand with
+  | ClubS x -> if x >= (List.length hand)/2
                then check_if_shorted Club data else data
-  | HeartS x -> if x >= (List.length hand)/2 && no_points data.players
+  | HeartS x -> if x >= (List.length hand)/2
                 then check_if_shorted Heart data else data
-  | DiamondS x -> if x >= (List.length hand)/2 && no_points data.players
+  | DiamondS x -> if x >= (List.length hand)/2
                   then check_if_shorted Diamond data else data
-  | SpadeS x -> if x >= (List.length hand)/2 && no_points data.players
+  | SpadeS x -> if x >= (List.length hand)/2
                 then check_if_shorted Spade data else data
+  else ((List.nth data.players 0).shooting_moon <- false; data)
