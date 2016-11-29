@@ -6,6 +6,14 @@ let get_input player_state = ()
  * returns the new state. *)
 let process_line p_state input = p_state
 
-let pass_cards p_state = List.find_all (fun x -> x.suit = Heart) p_state.hand
+let pass_cards p_state =
+	let i1 = read_int () in
+	let i2 = read_int () in
+	let i3 = read_int () in
+	(List.nth p_state.hand i1)::
+	(List.nth p_state.hand i2)::
+	(List.nth p_state.hand i3)::[]
 
-let card_to_play = {suit=Heart; value=2}
+let card_to_play p_state =
+	let input = read_int () in
+	List.nth p_state.hand input

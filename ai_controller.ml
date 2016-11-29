@@ -39,13 +39,6 @@ let guess_turn_first p_state data =
   then {suit = Club; value = 2}
   else play_lead_card new_hand p_state.ai_level data
 
-let take_trick_if_possible hand pool =
-  let high_card = highest_card_so_far pool in
-  let possible_play = beat_card high_card hand in
-  if possible_play.value = (-1)
-  then high_card_from_suit_not hand Heart (-1) (-1)
-  else possible_play
-
 let lose_trick_if_possible hand pool =
   let high_card = highest_card_so_far pool in
   let possible_play = lose_to_card high_card hand in
@@ -53,34 +46,74 @@ let lose_trick_if_possible hand pool =
   then high_card_from_suit_not hand Heart (-1) (-1)
   else possible_play
 
+let take_trick_if_possible hand pool =
+  let has_points = contains_heart_or_q_spades pool in
+  if not has_points then lose_trick_if_possible hand pool else
+  let high_card = highest_card_so_far pool in
+  let possible_play = beat_card high_card hand in
+  if possible_play.value = (-1)
+  then screw_other_player hand
+  else possible_play
+
+let take_trick_max hand pool data =
+  take_trick_if_possible hand pool
+
+let lose_trick_max hand pool data =
+  lose_trick_if_possible hand pool
+
 let guess_turn_last p_state pool data =
+  let lead_suit = (List.hd pool).suit in
+  let new_hand = (if data.q_spades_played ||
+                     lead_suit <> Spade ||
+                     List.length p_state.hand <= 2
+  then p_state.hand
+  else let without_k_spades =
+    hand_without_card p_state.hand {suit = Spade; value = 13} in
+    hand_without_card without_k_spades {suit = Spade; value = 14}) in
   match p_state.ai_level with
   | 3 ->
-    if data.shooting_moon
+    if (List.nth data.players p_state.p_num).shooting_moon
     then take_trick_if_possible p_state.hand pool
     else lose_trick_if_possible p_state.hand pool
   | 2 -> lose_trick_if_possible p_state.hand pool
   | _ -> random_card p_state.hand
 
 let guess_turn_second p_state pool data =
+  let lead_suit = (List.hd pool).suit in
+  let new_hand = (if data.q_spades_played ||
+                     lead_suit <> Spade ||
+                     List.length p_state.hand <= 2
+  then p_state.hand
+  else let without_k_spades =
+    hand_without_card p_state.hand {suit = Spade; value = 13} in
+    hand_without_card without_k_spades {suit = Spade; value = 14}) in
   match p_state.ai_level with
   | 3 ->
-    if data.shooting_moon
-    then take_trick_if_possible p_state.hand pool
-    else lose_trick_if_possible p_state.hand pool
+    if (List.nth data.players p_state.p_num).shooting_moon
+    then take_trick_max p_state.hand pool data
+    else lose_trick_max p_state.hand pool data
   | 2 -> lose_trick_if_possible p_state.hand pool
   | _ -> random_card p_state.hand
 
 let guess_turn_third p_state pool data =
+  let lead_suit = (List.hd pool).suit in
+  let new_hand = (if data.q_spades_played ||
+                     lead_suit <> Spade ||
+                     List.length p_state.hand <= 2
+  then p_state.hand
+  else let without_k_spades =
+    hand_without_card p_state.hand {suit = Spade; value = 13} in
+    hand_without_card without_k_spades {suit = Spade; value = 14}) in
   match p_state.ai_level with
   | 3 ->
-    if data.shooting_moon
-    then take_trick_if_possible p_state.hand pool
-    else lose_trick_if_possible p_state.hand pool
+    if (List.nth data.players p_state.p_num).shooting_moon
+    then take_trick_max p_state.hand pool data
+    else lose_trick_max p_state.hand pool data
   | 2 -> lose_trick_if_possible p_state.hand pool
   | _ -> random_card p_state.hand
 
 let guess_turn p_state pool data =
+  let d = check_if_shooting_moon p_state.hand pool data in
   match List.length pool with
   | 0 -> guess_turn_first p_state data
   | 1 -> guess_turn_second p_state pool data
@@ -95,20 +128,45 @@ let pass_cards p_state =
                         (get_last_card p_state.hand p_state.ai_level a k)::[]
   | Ace i -> ({suit = Spade; value = 14})::
              (get_two_cards p_state.hand p_state.ai_level i)
-  | King i -> ({suit = Spade; value = 14})::
+  | King i -> ({suit = Spade; value = 13})::
               (get_two_cards p_state.hand p_state.ai_level i)
   | None -> get_three_cards p_state.hand p_state.ai_level
 
 let initialize () =
   let data = {
-    has_clubs = [true; true; true];
-    has_spades = [true; true; true];
-    has_diamonds = [true; true; true];
-    has_hearts = [true; true; true];
     q_spades_played = false;
     hearts_played = false;
-    shooting_moon = true;
-    tricks_p1 = [];
-    tricks_p2 = [];
-    tricks_p3 = [];
+    players = [{
+      has_clubs = true;
+      has_spades = true;
+      has_diamonds = true;
+      has_hearts = true;
+      shooting_moon = false;
+      tricks = [];
+      round_points = 0;
+    }; {
+      has_clubs = true;
+      has_spades = true;
+      has_diamonds = true;
+      has_hearts = true;
+      shooting_moon = false;
+      tricks = [];
+      round_points = 0;
+    }; {
+      has_clubs = true;
+      has_spades = true;
+      has_diamonds = true;
+      has_hearts = true;
+      shooting_moon = false;
+      tricks = [];
+      round_points = 0;
+    }; {
+      has_clubs = true;
+      has_spades = true;
+      has_diamonds = true;
+      has_hearts = true;
+      shooting_moon = false;
+      tricks = [];
+      round_points = 0;
+    }]
   } in data

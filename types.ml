@@ -7,6 +7,7 @@ type card = {
   value: int;
 }
 
+(* [player_state] represents the state of the player. *)
 type player_state = {
     hand: card list;
 	round_points: int;
@@ -17,24 +18,26 @@ type player_state = {
 }
 
 type game_state = {
-    pool: card list;
-	players: player_state list;
+    pool: (card*int) list;
+	prs: player_state list;
 	phase: state;
     round_num: int
 }
 
+type player_data = {
+  mutable has_clubs: bool;
+  mutable has_spades: bool;
+  mutable has_diamonds: bool;
+  mutable has_hearts: bool;
+  mutable shooting_moon: bool;
+  mutable tricks: card list;
+  mutable round_points: int;
+}
+
 type stored_data = {
-  mutable has_clubs: bool list;
-  mutable has_spades: bool list;
-  mutable has_diamonds: bool list;
-  mutable has_hearts: bool list;
+  mutable players: player_data list;
   mutable q_spades_played: bool;
   mutable hearts_played: bool;
-  mutable shooting_moon: bool;
-  mutable tricks_p1: card list;
-  mutable tricks_p2: card list;
-  mutable tricks_p3: card list;
-  mutable tricks_p4: card list;
 }
 
 let compare_desc i1 i2 =

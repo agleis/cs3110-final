@@ -9,3 +9,6 @@ game:
 
 clean:
 		ocamlbuild -clean
+
+display:
+	ocamlbuild -pkgs oUnit display_controller.byte
