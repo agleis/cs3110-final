@@ -139,6 +139,7 @@ let draw_card num suit x y cw ch =
       end
     in 
     ()
+    
 let draw_hand lst w h cw ch=
   let delta = ref 0 in
   let len = List.length lst in
@@ -214,6 +215,7 @@ let draw_board state lst pool =
   draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height;
   draw_hand lst width height card_width card_height;
   draw_pool pool width height card_width card_height;
-  draw_player player width height
+  draw_player player width height;
+  while true do (); done
 
 let () = draw_board () lst1 pool1

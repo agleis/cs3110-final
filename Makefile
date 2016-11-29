@@ -5,4 +5,4 @@ aitest:
 	ocamlbuild -pkgs oUnit,str,unix aitest.byte && ./aitest.byte
 
 display:
-	ocamlbuild -pkgs oUnit,graphics display_controller.byte	
+	ocamlbuild -tag custom -lib graphics -pkgs oUnit display_controller.byte && ./display_controller.byte
