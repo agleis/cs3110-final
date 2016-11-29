@@ -24,6 +24,17 @@ let window_height = 750
 let card_spacing = 5
 let player_hand = ref []
 
+(* let diamond = Graphics.fill_poly [|(10,10);(15,20);(10,30);(5,20);(10,10)|]
+let club = 
+  Graphics.fill_circle 100 100 7;;
+  Graphics.fill_circle 110 100 7;;
+  Graphics.fill_circle 105 110 7;;
+  Graphics.fill_rect 103 90 4 10;;
+let heart = Graphics.fill_poly [|(10,10);(0,20);(0,25);(5,25);(10,20);(15,25);(20,25);(20,20);(10,10)|];;
+let spade = 
+  Graphics.draw_poly [|(100,100);(95,100);(95,105);(100,110);(105,105);(105,100)|];;
+  Graphics.draw_rect 98 95 4 5;; *)
+
 let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in 
   let () = Graphics.open_graph s in
@@ -49,6 +60,25 @@ let skel f_init f_end f_key f_mouse f_except =
 let click_card lst = 
     let s = Graphics.wait_next_event [Graphics.Button_down; Graphics.Button_up] in 
     if s.Graphics.button then Graphics.close_graph ()
+
+let draw_symbol sym x y = 
+  match sym with
+  |Heart -> 
+    Graphics.set_color Graphics.red;
+    Graphics.fill_poly [|(x,y);(x-10,y+10);(x-10,y+15);(x-5,y+15);(x,y+10);(x+5,y+15);(x+10,y+15);(x+10,y+10);(x,y)|]
+  |Diamond -> 
+    Graphics.set_color Graphics.red;
+    Graphics.fill_poly [|(x,y);(x+5,y+10);(x,y+20);(x-5,y+10);(x,y)|]
+  |Spade ->
+    Graphics.set_color Graphics.black;
+    Graphics.fill_poly [|(x,y);(x-5,y-5);(x-10,y);(x-10,y+5);(x,y+15);(x+10,y+5);(x+10,y);(x+5,y-5);(x,y)|];
+    Graphics.fill_rect (x-3) (y-10) 5 10
+  |Club -> 
+    Graphics.set_color Graphics.black;
+    Graphics.fill_circle (x-5) y 7;
+    Graphics.fill_circle (x+5) y 7;
+    Graphics.fill_circle x (y+10) 7;
+    Graphics.fill_rect (x-2) (y-10) 4 10
 
 let draw_card num suit x y cw ch = 
     let card_char = 
@@ -94,7 +124,7 @@ let draw_card num suit x y cw ch =
             Graphics.moveto (x+50) (y+10);
             Graphics.draw_string card_char;
             Graphics.moveto (x+ (int_of_float ((float card_width)/.6.0))) (y+40);
-            Graphics.draw_string "Heart"
+            draw_symbol Heart (x+(cw/2)) (y+(ch/2))
           end
         else if suit = Diamond then
           begin
@@ -104,7 +134,7 @@ let draw_card num suit x y cw ch =
             Graphics.moveto (x+50) (y+10);
             Graphics.draw_string card_char;
             Graphics.moveto (x+ (int_of_float ((float card_width)/.6.0))) (y+40);
-            Graphics.draw_string "Diamond"
+            draw_symbol Diamond (x+(cw/2)) (y+(ch/2))
           end
         else if suit = Spade then
           begin
@@ -115,7 +145,7 @@ let draw_card num suit x y cw ch =
             Graphics.moveto (x+z) (y+10);
             Graphics.draw_string card_char;
             Graphics.moveto (x+10) (y+40);
-            Graphics.draw_string "Spade"
+            draw_symbol Spade (x+(cw/2)) (y+(ch/2))
           end
         else 
           begin
@@ -126,7 +156,7 @@ let draw_card num suit x y cw ch =
             Graphics.moveto (x+z) (y+10);
             Graphics.draw_string card_char;
             Graphics.moveto (x+10) (y+40);
-            Graphics.draw_string "Club"
+            draw_symbol Club (x+(cw/2)) (y+(ch/2))
           end
       end
     in 
@@ -162,8 +192,6 @@ let draw_card_top num x y w h cw ch =
 let draw_card_side num x y w h cw ch = 
   let () = 
   let delta = ref 0 in 
-  let card_width = cw in 
-  let card_height = ch in 
   for i=1 to num do
     draw_card (-1) Spade x (y + !delta) cw ch;
     delta := !delta + (int_of_float ((float h)*.0.05))
