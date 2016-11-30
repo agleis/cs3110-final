@@ -291,10 +291,10 @@ let draw_play_phase x y =
   moveto (x+90) (y+20);
   lineto (x+115) y;
 
-  moveto (x+160) y;
-  lineto (x+160) (y+40);
-  moveto (x+140) (y+40);
-  lineto (x+180) (y+40);
+  moveto (x+170) y;
+  lineto (x+170) (y+40);
+  moveto (x+150) (y+40);
+  lineto (x+190) (y+40);
 
   draw_arc (x+210) (y+20) 12 20 180 360;
   moveto (x+198) (y+20);
