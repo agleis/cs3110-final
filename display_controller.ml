@@ -38,8 +38,8 @@ let game_state1 = {
 let window_width = 1280
 let window_height = 750
 let card_spacing = 5
-let player_hand = ref []
 let exit = ref true
+let player_hand = ref []
 
 let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in
@@ -49,7 +49,7 @@ let init_window w h =
 let click_card w h =
     let s = wait_next_event [Button_down; Button_up] in
     if s.button && s.mouse_x < (int_of_float (0.075*.(float w))) && s.mouse_y > (h-(int_of_float (0.025*.(float w)))) then
-      close_graph (); exit := false
+      begin close_graph (); exit := false end 
 
 let draw_symbol sym x y = 
   match sym with
@@ -69,6 +69,19 @@ let draw_symbol sym x y =
     fill_circle (x+5) y 7;
     fill_circle x (y+10) 7;
     fill_rect (x-2) (y-10) 4 10
+
+let draw_string_v  s = 
+   let (xi,yi) = Graphics.current_point() 
+   and l = String.length s 
+   and (_,h) = Graphics.text_size s 
+   in 
+      Graphics.draw_char s.[0];
+      for i=1 to l-1 do
+        let (_,b) = Graphics.current_point() 
+        in Graphics.moveto xi (b-h);
+           Graphics.draw_char s.[i] 
+       done;
+     let (a,_) = Graphics.current_point() in Graphics.moveto a yi;;
 
 let draw_card num suit x y cw ch = 
     let card_char = 
@@ -166,18 +179,35 @@ let draw_hand lst w h cw ch=
     done;
   in ()
 
-let draw_card_top num x y w h cw ch =
+let draw_card_top num x y w h cw ch s =
   let () =
   let delta = ref 0 in
+  set_color black;
+  moveto (x-(int_of_float (0.05*.(float w)))) (y+(int_of_float (0.1*.(float h))));
+  draw_string s;
   for i=1 to num do
     draw_card 0 Spade (x + !delta) y cw ch;
     delta := !delta + (int_of_float ((float w)*.0.03))
   done;
   in ()
 
-let draw_card_side num x y w h cw ch =
+let draw_card_side num x y w h cw ch s side =
   let () =
   let delta = ref 0 in
+  let () = 
+    if side then
+      begin
+        set_color black;
+        moveto (x-(int_of_float (0.02*.(float w)))) (y+(int_of_float (0.5*.(float h))));
+        draw_string_v s
+      end
+    else
+      begin
+        set_color black;
+        moveto (x+(int_of_float (0.08*.(float w)))) (y+(int_of_float (0.5*.(float h))));
+        draw_string_v s
+      end 
+  in 
   for i=1 to num do
     draw_card (-1) Spade x (y + !delta) cw ch;
     delta := !delta + (int_of_float ((float h)*.0.05))
@@ -191,7 +221,11 @@ let draw_pool pool w h cw ch =
   let () =
   for i=0 to (List.length pool) - 1 do
     let xpos = ((int_of_float (0.5*.(float w))) + !delta - (total_len/2)) in
-    draw_card ((fst (List.nth pool i)).value) ((fst (List.nth pool i)).suit) xpos (int_of_float (0.45*.(float h))) cw ch;
+    let ypos = (int_of_float (0.45*.(float h))) in 
+    draw_card ((fst (List.nth pool i)).value) ((fst (List.nth pool i)).suit) xpos ypos cw ch;
+    moveto xpos (ypos - 15);
+    set_color black;
+    draw_string ("Player " ^ (string_of_int (snd (List.nth pool i))));
     delta := !delta + (cw + card_spacing);
   done;
   in ()
@@ -216,6 +250,7 @@ let draw_board state current_player_state =
   init_window window_width window_height;
   set_window_title "CS 3110 Hearts Game";
   clear_graph ();
+(*   let exit = ref true in *)
   let num = List.length (current_player_state.hand) in
   let player = current_player_state.p_num in
   let lst = current_player_state.hand in 
@@ -225,13 +260,13 @@ let draw_board state current_player_state =
   let card_width = int_of_float ((float width)*.0.046875) in
   let card_height = int_of_float ((float height)*.0.12) in
   draw_quit width height;
-  draw_card_top num ((int_of_float (0.30*.(float width)))) (int_of_float (0.8*.(float height))) width height card_width card_height;
-  draw_card_side num (int_of_float (0.05*.(float width))) ((int_of_float (0.20*.(float height)))) width height card_width card_height;
-  draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height;
+  draw_card_top num ((int_of_float (0.30*.(float width)))) (int_of_float (0.8*.(float height))) width height card_width card_height "player 3";
+  draw_card_side num (int_of_float (0.05*.(float width))) ((int_of_float (0.20*.(float height)))) width height card_width card_height "player 2" true;
+  draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height "player 4" false;
   draw_hand lst width height card_width card_height;
   draw_pool pool width height card_width card_height;
-  draw_player player width height;
-  click_card width height;
+(*   draw_player player width height; *)
+(*   click_card width height; *)
   while !exit do (); done
 
 let () = draw_board game_state1 player_state1
