@@ -1,21 +1,48 @@
 open Graphics
 open Types
-(* #load "graphics.cma" *)
+(* #load "cma" *)
 
 exception End;;
 
 let lst1 = [{suit=Heart; value=1};{suit=Heart; value=2};{suit=Club; value=3};{suit=Club; value=4};{suit=Diamond; value=5};{suit=Diamond; value=6}; {suit=Spade; value=7}; {suit=Spade; value=8}; {suit=Heart; value=9}; {suit=Club; value=10};{suit=Diamond; value=11};{suit=Spade; value=12};{suit=Heart; value=13}]
 let lst2 = [{suit=Heart; value=1};{suit=Heart; value=2};{suit=Club; value=3};{suit=Club; value=4};{suit=Diamond; value=5};{suit=Diamond; value=6}]
+let lst3 = [{suit=Spade; value=1};{suit=Club; value=2};{suit=Club; value=3};{suit=Diamond; value=4};{suit=Diamond; value=5};{suit=Heart; value=6}; {suit=Spade; value=7}; {suit=Club; value=8}; {suit=Diamond; value=9}; {suit=Club; value=10};{suit=Heart; value=11};{suit=Spade; value=12};{suit=Diamond; value=13}]
+let lst4 = [{suit=Heart; value=7};{suit=Heart; value=8};{suit=Club; value=9};{suit=Club; value=10};{suit=Diamond; value=11};{suit=Diamond; value=12}]
 let pool1 = [{suit=Diamond; value=5}; {suit=Diamond; value=6}; {suit=Spade; value=7}; {suit=Spade; value=8}]
+
+let player_state1 = {
+  hand = lst1;
+  round_points = 2;
+  game_points = 20;
+  ai_level = 0;
+  collected_cards = lst2;
+  p_num = 1
+}
+
+let player_state2 = {
+  hand = lst3;
+  round_points = 5;
+  game_points = 25;
+  ai_level = 0;
+  collected_cards = lst4;
+  p_num = 2
+}
+
+let game_state1 = {
+  pool = pool1;
+  players = [player_state1; player_state2];
+  phase = Play
+}
 
 let window_width = 1280
 let window_height = 750
 let card_spacing = 5
 let player_hand = ref []
+let exit = ref true
 
 let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in
-  let () = Graphics.open_graph s in
+  let () = open_graph s in
   ()
 
 let skel f_init f_end f_key f_mouse f_except =
@@ -23,11 +50,11 @@ let skel f_init f_end f_key f_mouse f_except =
   try
       while true do
         try
-          let s = Graphics.wait_next_event
-                    [Graphics.Button_down; Graphics.Key_pressed]
-          in if s.Graphics.keypressed then f_key s.Graphics.key
-             else if s.Graphics.button
-                  then f_mouse s.Graphics.mouse_x s.Graphics.mouse_y
+          let s = wait_next_event
+                    [Button_down; Key_pressed]
+          in if s.keypressed then f_key s.key
+             else if s.button
+                  then f_mouse s.mouse_x s.mouse_y
         with
              End -> raise End
            |  e  -> f_except e
@@ -35,28 +62,29 @@ let skel f_init f_end f_key f_mouse f_except =
   with
       End  -> f_end ();;
 
-let click_card lst =
-    let s = Graphics.wait_next_event [Graphics.Button_down; Graphics.Button_up] in
-    if s.Graphics.button then Graphics.close_graph ()
+let click_card w h =
+    let s = wait_next_event [Button_down; Button_up] in
+    if s.button && s.mouse_x < (int_of_float (0.075*.(float w))) && s.mouse_y > (h-(int_of_float (0.025*.(float w)))) then
+      close_graph (); exit := false
 
 let draw_symbol sym x y = 
   match sym with
   |Heart -> 
-    Graphics.set_color Graphics.red;
-    Graphics.fill_poly [|(x,y);(x-10,y+10);(x-10,y+15);(x-5,y+15);(x,y+10);(x+5,y+15);(x+10,y+15);(x+10,y+10);(x,y)|]
+    set_color red;
+    fill_poly [|(x,y);(x-10,y+10);(x-10,y+15);(x-5,y+15);(x,y+10);(x+5,y+15);(x+10,y+15);(x+10,y+10);(x,y)|]
   |Diamond -> 
-    Graphics.set_color Graphics.red;
-    Graphics.fill_poly [|(x,y);(x+5,y+10);(x,y+20);(x-5,y+10);(x,y)|]
+    set_color red;
+    fill_poly [|(x,y);(x+5,y+10);(x,y+20);(x-5,y+10);(x,y)|]
   |Spade ->
-    Graphics.set_color Graphics.black;
-    Graphics.fill_poly [|(x,y);(x-5,y-5);(x-10,y);(x-10,y+5);(x,y+15);(x+10,y+5);(x+10,y);(x+5,y-5);(x,y)|];
-    Graphics.fill_rect (x-3) (y-10) 5 10
+    set_color black;
+    fill_poly [|(x,y);(x-5,y-5);(x-10,y);(x-10,y+5);(x,y+15);(x+10,y+5);(x+10,y);(x+5,y-5);(x,y)|];
+    fill_rect (x-3) (y-10) 5 10
   |Club -> 
-    Graphics.set_color Graphics.black;
-    Graphics.fill_circle (x-5) y 7;
-    Graphics.fill_circle (x+5) y 7;
-    Graphics.fill_circle x (y+10) 7;
-    Graphics.fill_rect (x-2) (y-10) 4 10
+    set_color black;
+    fill_circle (x-5) y 7;
+    fill_circle (x+5) y 7;
+    fill_circle x (y+10) 7;
+    fill_rect (x-2) (y-10) 4 10
 
 let draw_card num suit x y cw ch = 
     let card_char = 
@@ -72,82 +100,78 @@ let draw_card num suit x y cw ch =
     let () = 
     if card_char = "V" then 
       begin 
-        Graphics.set_color Graphics.black;
-        Graphics.fill_rect x y card_width card_height;
-        Graphics.set_color Graphics.white;
-        Graphics.fill_rect (x+2) (y+2) (card_width - 4) (card_height - 4);
-        Graphics.set_color Graphics.red;
-        Graphics.fill_rect (x+5) (y+5) (card_width - 10) (card_height - 10)
+        set_color black;
+        fill_rect x y card_width card_height;
+        set_color white;
+        fill_rect (x+2) (y+2) (card_width - 4) (card_height - 4);
+        set_color red;
+        fill_rect (x+5) (y+5) (card_width - 10) (card_height - 10)
       end
     else if card_char = "H" then
       begin
-        Graphics.set_color Graphics.black;
-        Graphics.fill_rect x y card_height card_width;
-        Graphics.set_color Graphics.white;
-        Graphics.fill_rect (x+2) (y+2) (card_height - 4) (card_width - 4);
-        Graphics.set_color Graphics.red;
-        Graphics.fill_rect (x+5) (y+5) (card_height - 10) (card_width - 10)
+        set_color black;
+        fill_rect x y card_height card_width;
+        set_color white;
+        fill_rect (x+2) (y+2) (card_height - 4) (card_width - 4);
+        set_color red;
+        fill_rect (x+5) (y+5) (card_height - 10) (card_width - 10)
       end
     else 
       begin
-        Graphics.set_color Graphics.black;
-        Graphics.fill_rect x y card_width card_height;
-        Graphics.set_color Graphics.white;
-        Graphics.fill_rect (x+2) (y+2) (card_width - 4) (card_height - 4);
+        set_color black;
+        fill_rect x y card_width card_height;
+        set_color white;
+        fill_rect (x+2) (y+2) (card_width - 4) (card_height - 4);
         if suit = Heart then
           begin
-            Graphics.set_color Graphics.red;
-            Graphics.moveto (x+5) (y+75);
-            Graphics.draw_string card_char;
-            Graphics.moveto (x+50) (y+10);
-            Graphics.draw_string card_char;
-            Graphics.moveto (x+ (int_of_float ((float card_width)/.6.0))) (y+40);
+            set_color red;
+            moveto (x+5) (y+75);
+            draw_string card_char;
+            moveto (x+50) (y+10);
+            draw_string card_char;
+            moveto (x+ (int_of_float ((float card_width)/.6.0))) (y+40);
             draw_symbol Heart (x+(cw/2)) (y+(ch/2))
           end
         else if suit = Diamond then
           begin
-            Graphics.set_color Graphics.red;
-            Graphics.moveto (x+5) (y+75);
-            Graphics.draw_string card_char;
-            Graphics.moveto (x+50) (y+10);
-            Graphics.draw_string card_char;
-            Graphics.moveto (x+ (int_of_float ((float card_width)/.6.0))) (y+40);
+            set_color red;
+            moveto (x+5) (y+75);
+            draw_string card_char;
+            moveto (x+50) (y+10);
+            draw_string card_char;
+            moveto (x+ (int_of_float ((float card_width)/.6.0))) (y+40);
             draw_symbol Diamond (x+(cw/2)) (y+(ch/2))
           end
         else if suit = Spade then
           begin
             let z = if num == 10 then 45 else 50 in 
-            Graphics.set_color Graphics.black;
-            Graphics.moveto (x+5) (y+75);
-            Graphics.draw_string card_char;
-            Graphics.moveto (x+z) (y+10);
-            Graphics.draw_string card_char;
-            Graphics.moveto (x+10) (y+40);
+            set_color black;
+            moveto (x+5) (y+75);
+            draw_string card_char;
+            moveto (x+z) (y+10);
+            draw_string card_char;
+            moveto (x+10) (y+40);
             draw_symbol Spade (x+(cw/2)) (y+(ch/2))
           end
         else 
           begin
             let z = if num == 10 then 45 else 50 in 
-            Graphics.set_color Graphics.black;
-            Graphics.moveto (x+5) (y+75);
-            Graphics.draw_string card_char;
-            Graphics.moveto (x+z) (y+10);
-            Graphics.draw_string card_char;
-            Graphics.moveto (x+10) (y+40);
+            set_color black;
+            moveto (x+5) (y+75);
+            draw_string card_char;
+            moveto (x+z) (y+10);
+            draw_string card_char;
+            moveto (x+10) (y+40);
             draw_symbol Club (x+(cw/2)) (y+(ch/2))
           end
       end
     in 
     ()
-    
+
 let draw_hand lst w h cw ch=
   let delta = ref 0 in
   let len = List.length lst in
   let total_len = (len * (cw + card_spacing)) in
-  let () = print_int total_len in
-  let () = print_string "\n" in
-  let () = print_int cw in
-  let () = print_string "\n" in
   let () =
   for i=0 to (List.length lst) - 1 do
       let xpos = ((int_of_float (0.5*.(float w))) + !delta - (total_len/2)) in
@@ -188,34 +212,42 @@ let draw_pool pool w h cw ch =
   done;
   in ()
 
-let draw_player player w h=
+let draw_player player w h =
   let () =
-    Graphics.set_color Graphics.black;
-    Graphics.moveto ((int_of_float (0.05*.(float w)))) (int_of_float (0.95*.(float h)));
-    Graphics.draw_string ("Player " ^ (string_of_int player) ^ "'s turn");
-    Graphics.moveto ((int_of_float (0.05*.(float w)))) (int_of_float (0.90*.(float h)));
-    Graphics.draw_string ("Points: " ^ (string_of_int 0))
+    set_color black;
+    moveto ((int_of_float (0.05*.(float w)))) (int_of_float (0.95*.(float h)));
+    draw_string ("Player " ^ (string_of_int player) ^ "'s turn");
+    moveto ((int_of_float (0.05*.(float w)))) (int_of_float (0.90*.(float h)));
+    draw_string ("Points: " ^ (string_of_int 0))
   in ()
 
-let draw_board state lst pool =
+let draw_quit w h =
+  set_color green;
+  fill_rect 0 (h-(int_of_float (0.025*.(float w)))) (int_of_float (0.075*.(float w))) (int_of_float (0.025*.(float w)));
+  set_color black;
+  moveto ((int_of_float (0.35*.0.075*.(float w)))) (h-(int_of_float (0.6*.0.025*.(float w))));
+  draw_string "QUIT"
+
+let draw_board state =
   init_window window_width window_height;
-  Graphics.clear_graph ();
-  let num = 13 in
-  let player = 1 in
-  let width = Graphics.size_x () in
-  let height = Graphics.size_y () in
-  let () = print_int width in
-  let () = print_string "\n" in
-  let () = print_int height in
-  let () = print_string "\n" in
+  set_window_title "CS 3110 Hearts Game";
+  clear_graph ();
+  let num = List.length ((List.nth state.players 0).hand) in
+  let player = (List.nth state.players 0).p_num in
+  let lst = (List.nth state.players 0).hand in 
+  let pool = state.pool in 
+  let width = size_x () in
+  let height = size_y () in
   let card_width = int_of_float ((float width)*.0.046875) in
   let card_height = int_of_float ((float height)*.0.12) in
+  draw_quit width height;
   draw_card_top num ((int_of_float (0.30*.(float width)))) (int_of_float (0.8*.(float height))) width height card_width card_height;
   draw_card_side num (int_of_float (0.05*.(float width))) ((int_of_float (0.20*.(float height)))) width height card_width card_height;
   draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height;
   draw_hand lst width height card_width card_height;
   draw_pool pool width height card_width card_height;
+  click_card width height;
   draw_player player width height;
-  while true do (); done
+  while !exit do (); done
 
-let () = draw_board () lst1 pool1
+let () = draw_board game_state1
