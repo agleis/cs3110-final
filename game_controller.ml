@@ -74,8 +74,6 @@ let get_ordered_p_states players =
 	List.sort (fun x1 x2 -> x1.p_num - x2.p_num) players
 
 let fix_ai_data_suits players (data:player_data list) =
-	let _ = print_string ("Players length: "^(string_of_int (List.length players))^"\n") in
-	let _ = print_string ("Data length: "^(string_of_int (List.length data))^"\n") in
 	List.iter2 (fun p d ->
 			d.has_clubs <- (List.exists (fun x -> x.suit=Club) p.hand);
 			d.has_spades <- (List.exists (fun x -> x.suit=Spade) p.hand);
@@ -126,13 +124,16 @@ let do_trading st =
 let rec build_pool const_ps ps cur_pool data =
 	match ps with
 		| h::t -> begin
+			let pool_cards = fst (List.split cur_pool) in
+			let _ = print_string "\n\npool -----\n" in
+			let _ = print_cards pool_cards in
 			let _ = print_string ("\n\nPlayer "^(string_of_int h.p_num)^"'s turn\n") in
 			let card_to_play = if h.ai_level=0 then Human_controller.card_to_play h
-						else Ai_controller.guess_turn h cur_pool data in
+						else Ai_controller.guess_turn h pool_cards data in
 			let new_hand = remove_cards h.hand [card_to_play] in
 			let new_p_state = {h with hand=new_hand} in
 			let _ = fix_ai_data_suits (get_ordered_p_states const_ps) data.players in
-			(card_to_play, new_p_state)::(build_pool const_ps t (card_to_play::cur_pool) data)
+			(card_to_play, new_p_state)::(build_pool const_ps t ((card_to_play,h.p_num)::cur_pool) data)
 		end
 		| [] -> []
 
