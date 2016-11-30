@@ -148,12 +148,10 @@ let rec repl st (data:stored_data) =
 								let n_state = resolve_round round_result data in
 								repl n_state data
 
-let main =
+let main p_lst =
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
-	let init_state = initialize_state [0; 0; 0; 0] shuffled in
+	let init_state = initialize_state p_lst shuffled in
 	let ai_data = build_ai_data init_state.prs in
 	let _ = print_cards shuffled in
 	repl init_state ai_data
-
-let () = main

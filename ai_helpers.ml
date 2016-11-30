@@ -46,7 +46,7 @@ let rec has_low_hearts hand =
 let rec play_low_heart hand =
   let sorted_hand = List.sort (compare_cards false) hand in
   match sorted_hand with
-  | [] -> random_card hand
+  | [] -> random_card hand Heart
   | c::t -> if c.suit = Heart && c.value < 4
     then c
     else play_low_heart t

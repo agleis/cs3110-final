@@ -28,7 +28,7 @@ let play_lead_card hand ai_level data =
   | 2 -> if data.hearts_played
          then high_card_from_short_suit hand (-1) (-1)
          else high_card_from_suit_not hand Heart (-1) (-1)
-  | _ -> random_card hand
+  | _ -> random_card hand Club
 
 let guess_turn_first p_state data =
   let new_hand = (if data.q_spades_played ||
@@ -69,13 +69,14 @@ let lose_trick_max hand pool data =
   highest_losing_card high_card hand data.hearts_played
 
 let guess_turn_last p_state pool data =
+  let lead_suit = (List.hd pool).suit in
   match p_state.ai_level with
   | 3 ->
     if (List.nth data.players p_state.p_num).shooting_moon
     then take_trick_if_possible p_state.hand pool
     else lose_trick_if_possible p_state.hand pool
   | 2 -> lose_trick_if_possible p_state.hand pool
-  | _ -> random_card p_state.hand
+  | _ -> random_card p_state.hand lead_suit
 
 let guess_turn_second p_state pool data =
   let lead_suit = (List.hd pool).suit in
@@ -93,7 +94,7 @@ let guess_turn_second p_state pool data =
     then take_trick_max new_hand pool data
     else lose_trick_max new_hand pool data
   | 2 -> lose_trick_if_possible new_hand pool
-  | _ -> random_card p_state.hand
+  | _ -> random_card p_state.hand lead_suit
 
 let guess_turn_third p_state pool data =
   let lead_suit = (List.hd pool).suit in
@@ -111,7 +112,7 @@ let guess_turn_third p_state pool data =
     then take_trick_max new_hand pool data
     else lose_trick_max new_hand pool data
   | 2 -> lose_trick_if_possible new_hand pool
-  | _ -> random_card p_state.hand
+  | _ -> random_card p_state.hand lead_suit
 
 let guess_turn p_state pool data =
   let _ = check_if_shooting_moon p_state.hand pool data p_state.p_num in
