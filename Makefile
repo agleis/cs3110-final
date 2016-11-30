@@ -11,7 +11,7 @@ clean:
 		ocamlbuild -clean
 
 display:
-	ocamlbuild -tag custom -lib graphics -pkgs oUnit display_controller.byte && ./display_controller.byte
+	ocamlbuild -pkgs oUnit,graphics display_controller.byte && ./display_controller.byte
 
 setup:
 	ocamlbuild setup_controller.byte && ./setup_controller.byte
