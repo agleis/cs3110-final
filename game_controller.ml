@@ -81,6 +81,7 @@ let fix_ai_data_suits players (data:player_data list) =
 			d.has_hearts <- (List.exists (fun x -> x.suit=Heart) p.hand)) players data
 
 let shuffle_deck deck =
+  Random.self_init ();
 	let weighted = List.map (fun x -> ((Random.int 5000), x)) deck in
 	let sorted = List.sort (fun x1 x2 -> (fst x1) - (fst x2)) weighted in
 	List.map (fun x -> snd x) sorted
@@ -208,12 +209,10 @@ and reflush_round (st:game_state) data =
 		pool=[];
 		phase=Pass} data
 
-let main =
+let main p_lst =
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
-	let init_state = initialize_state [0; 0; 0; 0] shuffled in
+	let init_state = initialize_state p_lst shuffled in
 	let ai_data = build_ai_data init_state.prs in
 	let _ = print_cards shuffled in
 	repl init_state ai_data
-
-let () = main
