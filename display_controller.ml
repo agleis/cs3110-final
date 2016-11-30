@@ -8,7 +8,7 @@ let lst1 = [{suit=Heart; value=1};{suit=Heart; value=2};{suit=Club; value=3};{su
 let lst2 = [{suit=Heart; value=1};{suit=Heart; value=2};{suit=Club; value=3};{suit=Club; value=4};{suit=Diamond; value=5};{suit=Diamond; value=6}]
 let lst3 = [{suit=Spade; value=1};{suit=Club; value=2};{suit=Club; value=3};{suit=Diamond; value=4};{suit=Diamond; value=5};{suit=Heart; value=6}; {suit=Spade; value=7}; {suit=Club; value=8}; {suit=Diamond; value=9}; {suit=Club; value=10};{suit=Heart; value=11};{suit=Spade; value=12};{suit=Diamond; value=13}]
 let lst4 = [{suit=Heart; value=7};{suit=Heart; value=8};{suit=Club; value=9};{suit=Club; value=10};{suit=Diamond; value=11};{suit=Diamond; value=12}]
-let pool1 = [{suit=Diamond; value=5}; {suit=Diamond; value=6}; {suit=Spade; value=7}; {suit=Spade; value=8}]
+let pool1 = [({suit=Diamond; value=5},1); ({suit=Diamond; value=6},2); ({suit=Spade; value=7},3); ({suit=Spade; value=8},4)]
 
 let player_state1 = {
   hand = lst1;
@@ -30,8 +30,9 @@ let player_state2 = {
 
 let game_state1 = {
   pool = pool1;
-  players = [player_state1; player_state2];
-  phase = Play
+  prs = [player_state1; player_state2];
+  phase = Play;
+  round_num = 1
 }
 
 let window_width = 1280
@@ -44,23 +45,6 @@ let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in
   let () = open_graph s in
   ()
-
-let skel f_init f_end f_key f_mouse f_except =
-  f_init ();
-  try
-      while true do
-        try
-          let s = wait_next_event
-                    [Button_down; Key_pressed]
-          in if s.keypressed then f_key s.key
-             else if s.button
-                  then f_mouse s.mouse_x s.mouse_y
-        with
-             End -> raise End
-           |  e  -> f_except e
-      done
-  with
-      End  -> f_end ();;
 
 let click_card w h =
     let s = wait_next_event [Button_down; Button_up] in
@@ -207,7 +191,7 @@ let draw_pool pool w h cw ch =
   let () =
   for i=0 to (List.length pool) - 1 do
     let xpos = ((int_of_float (0.5*.(float w))) + !delta - (total_len/2)) in
-    draw_card ((List.nth pool i).value) ((List.nth pool i).suit) xpos (int_of_float (0.45*.(float h))) cw ch;
+    draw_card ((fst (List.nth pool i)).value) ((fst (List.nth pool i)).suit) xpos (int_of_float (0.45*.(float h))) cw ch;
     delta := !delta + (cw + card_spacing);
   done;
   in ()
@@ -228,13 +212,13 @@ let draw_quit w h =
   moveto ((int_of_float (0.35*.0.075*.(float w)))) (h-(int_of_float (0.6*.0.025*.(float w))));
   draw_string "QUIT"
 
-let draw_board state =
+let draw_board state current_player_state =
   init_window window_width window_height;
   set_window_title "CS 3110 Hearts Game";
   clear_graph ();
-  let num = List.length ((List.nth state.players 0).hand) in
-  let player = (List.nth state.players 0).p_num in
-  let lst = (List.nth state.players 0).hand in 
+  let num = List.length (current_player_state.hand) in
+  let player = current_player_state.p_num in
+  let lst = current_player_state.hand in 
   let pool = state.pool in 
   let width = size_x () in
   let height = size_y () in
@@ -246,8 +230,8 @@ let draw_board state =
   draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height;
   draw_hand lst width height card_width card_height;
   draw_pool pool width height card_width card_height;
-  click_card width height;
   draw_player player width height;
+  click_card width height;
   while !exit do (); done
 
-let () = draw_board game_state1
+let () = draw_board game_state1 player_state1
