@@ -17,10 +17,10 @@ type player_state = {
 }
 
 type game_state = {
-    pool: (card*int) list;
+  pool: (card*int) list;
 	prs: player_state list;
 	phase: state;
-    round_num: int
+  round_num: int
 }
 
 type player_data = {
