@@ -83,6 +83,7 @@ let fix_ai_data_suits players (data:player_data list) =
 			d.has_hearts <- (List.exists (fun x -> x.suit=Heart) p.hand)) players data
 
 let shuffle_deck deck =
+  Random.self_init ();
 	let weighted = List.map (fun x -> ((Random.int 5000), x)) deck in
 	let sorted = List.sort (fun x1 x2 -> (fst x1) - (fst x2)) weighted in
 	List.map (fun x -> snd x) sorted
