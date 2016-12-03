@@ -62,15 +62,123 @@ let card_spacing = 5
 let exit = ref true
 let player_hand = ref []
 
+let f_triple (a,_,_) = a
+let s_triple (_,a,_) = a
+let t_triple (_,_,a) = a
+
+
+
 let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in
   let () = open_graph s in
   ()
 
-let click_card w h =
-    let s = wait_next_event [Button_down; Button_up] in
-    if s.button && s.mouse_x < (int_of_float (0.075*.(float w))) && s.mouse_y > (h-(int_of_float (0.025*.(float w)))) then
-      begin close_graph (); exit := false end 
+let card_selection c index cw ch = 
+  set_line_width 10; set_color yellow; draw_rect (s_triple c) (t_triple c) cw ch
+
+let click_card hand cw ch =
+  let s = wait_next_event [Key_pressed] in
+  if s.keypressed && s.key = '`' then
+    begin 
+      let c = List.nth hand 0 in
+      let () = card_selection c 0 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '1' then 
+    begin 
+      let c = List.nth hand 1 in
+      let () = card_selection c 1 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '2' then
+    begin 
+      let c = List.nth hand 2 in
+      let () = card_selection c 2 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '3' then
+    begin 
+      let c = List.nth hand 3 in
+      let () = card_selection c 3 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '4' then  
+    begin 
+      let c = List.nth hand 4 in
+      let () = card_selection c 4 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '5' then
+    begin 
+      let c = List.nth hand 5 in
+      let () = card_selection c 5 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '6' then
+    begin 
+      let c = List.nth hand 6 in
+      let () = card_selection c 1 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '7' then
+    begin 
+      let c = List.nth hand 7 in
+      let () = card_selection c 7 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '8' then 
+    begin 
+      let c = List.nth hand 8 in
+      let () = card_selection c 8 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '9' then 
+    begin 
+      let c = List.nth hand 9 in
+      let () = card_selection c 9 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '0' then
+    begin 
+      let c = List.nth hand 10 in
+      let () = card_selection c 10 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '-' then
+    begin 
+      let c = List.nth hand 11 in
+      let () = card_selection c 11 cw ch in 
+      (f_triple c)
+    end
+  else if s.keypressed && s.key = '=' then
+    begin 
+      let c = List.nth hand 12 in
+      let () = card_selection c 12 cw ch in 
+      (f_triple c)
+    end
+  else failwith "Invalid key press" 
+
+(*
+let click_card (hand : int list) : int =
+  let s = wait_next_event [Key_pressed] in
+  let card =
+  if (s.keypressed && s.key == '`') then (List.nth hand 0 )
+  else if (s.keypressed && s.key == '1') then (List.nth hand 1)
+  else if (s.keypressed && s.key == '2') then (List.nth hand 2)
+  else if (s.keypressed && s.key == '3') then (List.nth hand 3)
+  else if (s.keypressed && s.key == '4') then (List.nth hand 4)
+  else if (s.keypressed && s.key == '5') then (List.nth hand 5)
+  else if (s.keypressed && s.key == '6') then (List.nth hand 6)
+  else if (s.keypressed && s.key == '7') then (List.nth hand 7)
+  else if (s.keypressed && s.key == '8') then (List.nth hand 8)
+  else if (s.keypressed && s.key == '9') then (List.nth hand 9)
+  else if (s.keypressed && s.key == '0') then (List.nth hand 10)
+  else if (s.keypressed && s.key == '-') then (List.nth hand 11)
+  else if (s.keypressed && s.key == '=') then (List.nth hand 12)
+  else failwith "Invalid key press"
+  in card;;
+*)
+
 
 let draw_symbol sym x y = 
   match sym with
@@ -346,6 +454,7 @@ let draw_phase phase x y =
   match phase with
   |Play -> draw_play_phase x y
   |Pass -> draw_pass_phase x (y-300)
+  |Setup -> draw_pass_phase x (y-300)
 
 let rec find_index lst num acc =
   match lst with
@@ -361,7 +470,6 @@ let draw_board state current_player_state =
   let player = current_player_state.p_num in
   let lst = current_player_state.hand in 
   let index = find_index state.prs player 0 in
-  let () = print_int index in  
   let left_index = (index + 1) mod 4 in 
   let right_index = (index + 2) mod 4 in 
   let top_index = (index + 3) mod 4 in 
@@ -380,8 +488,8 @@ let draw_board state current_player_state =
   draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height right_player false;
   draw_hand lst width height card_width card_height;
   draw_pool pool width height card_width card_height;
+  let card_chosen = click_card !player_hand card_width card_height in 
 (*   draw_player player width height; *)
-(*   click_card width height; *)
   while true do (); done
 
 let () = draw_board game_state1 player_state2
