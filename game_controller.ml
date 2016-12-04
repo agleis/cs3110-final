@@ -6,6 +6,11 @@ open Unix
 
 let determine_winner st = 0
 
+let rec num_humans_playing ps = 
+	match ps with
+		| h::t -> if h.ai_level=0 then 1 + num_humans_playing t else num_humans_playing t
+		| [] -> 0
+
 let round_over st =
 	match st.prs with
 		| h::t -> (List.length h.hand) = 0
@@ -54,10 +59,16 @@ let rec build_player_states ai_list pnum deck =
 				 ai_level=h; collected_cards=[]; p_num=pnum}::(build_player_states t (pnum+1) deck)
 		| [] -> []
 
+
+let rec find_first_human ps =
+	match ps with
+		| h::t -> if h.ai_level=0 then h.p_num else find_first_human t
+		| [] -> failwith "No humans"
+
 let rec initialize_state ai_list deck =
 	let p_states = build_player_states ai_list 0 deck in
-	let reorder_cards = reorder_players_2clubs p_states [] in
-	{pool=[]; prs=reorder_cards; phase=Pass; round_num=1; last_human_player=0}
+	let next_human = find_first_human p_states in
+	{pool=[]; prs=p_states; phase=Pass; round_num=1; last_human_player=next_human}
 
 let build_single_data player =
 	{
@@ -89,6 +100,11 @@ let fix_ai_data_suits players (data:player_data list) =
 			d.has_diamonds <- (List.exists (fun x -> x.suit=Diamond) p.hand);
 			d.has_hearts <- (List.exists (fun x -> x.suit=Heart) p.hand)) players data
 
+let fix_ai_data (crd:card) (ps:player_state list) (dt:stored_data) = 
+	let () = if crd.suit=Heart then dt.hearts_played<-true
+			else if crd={suit=Spade; value=11} then dt.q_spades_played<-true else () in
+	fix_ai_data_suits ps dt.players
+
 let shuffle_deck deck =
   Random.self_init ();
 	let weighted = List.map (fun x -> ((Random.int 5000), x)) deck in
@@ -117,10 +133,10 @@ let rec are_valid_trades cards =
 	let sorted = List.sort (fun x1 x2 -> compare_cards true x1 x2) cards in
 	valid_helper sorted
 
-let rec get_human_cards_to_pass () =
+let rec get_human_cards_to_pass st p =
 	let cards = Display_controller.trade_cards () in
 	if are_valid_trades cards then cards
-	else get_human_cards_to_pass ()
+	else let () = draw_board st p in get_human_cards_to_pass st p
 
 let rec process_players_trades st ps =
 	match ps with
@@ -128,18 +144,27 @@ let rec process_players_trades st ps =
 			let is_ai = h.ai_level<>0 in
 			if is_ai then begin
 				(* draw board*)
+				let () = draw_board st h in
 				let to_pass = Ai_controller.pass_cards h in
-				to_pass::(process_players_trades st t)
 				(* delay*)
+				let () = Unix.sleep 1 in
+				to_pass::(process_players_trades st t)
 			end
 			else begin
 			(* display board with st having last_human_player updated if need be*)
+			let () = draw_board {st with last_human_player=h.p_num} h in
 			(* let _ = print_string ("\n\nPlayer "^(string_of_int h.p_num)^"'s turn - trading\n") in *)
-			let to_pass = get_human_cards_to_pass () in
+			let to_pass = get_human_cards_to_pass st h in
+			(* switch player*)
+			let multi_player = (num_humans_playing st.prs) > 1 in
+			let () = if multi_player then switch_player () else () in
 			to_pass::(process_players_trades {st with last_human_player=h.p_num} t)
 			end
 		end
-		| [] -> (* draw board - delay*) []
+		| [] -> (* draw board - delay*) 
+				let () = draw_board st (List.nth st.prs ((List.length st.prs)-1)) in
+				let () = Unix.sleep 1 in
+				[]
 
 let remove_cards main_list to_remove =
 	List.filter (fun x -> not (List.exists (fun y -> x=y) to_remove)) main_list
@@ -162,11 +187,13 @@ let do_trading st =
 	let fin_players = add_cards new_players to_add_cards in
 	{st with prs=fin_players; phase=Play}
 
-let rec get_human_card_to_play pool pnum data =
+let rec get_human_card_to_play st p data =
+	let pool = st.pool in
+	let pnum = p.p_num in
 	let card_to_play = Display_controller.click_card () in
-	if is_valid_play pool pnum data card_to_play
-	then get_human_card_to_play pool pnum data
-	else card_to_play
+	if is_valid_play (List.rev pool) pnum data card_to_play
+	then card_to_play 
+	else let () = draw_board st p in get_human_card_to_play st p data
 
 let rec process_players st data ps =
 	match ps with
@@ -174,6 +201,8 @@ let rec process_players st data ps =
 			let is_ai = (h.ai_level<>0) in
 			if is_ai then begin
 				(* draw board *)
+				let () = Unix.sleep 1 in
+				let () = draw_board st h in
 				let pool_cards = fst (List.split st.pool) in
 				let card_to_play = Ai_controller.guess_turn h pool_cards data in
 				let valid_play = is_valid_play st.pool h.p_num data card_to_play in
@@ -181,27 +210,33 @@ let rec process_players st data ps =
 				let new_p_state = {h with hand=new_hand} in
 				let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
 													else x) st.prs in
-				let _ = fix_ai_data_suits (get_ordered_p_states st.prs) data.players in
+				let _ = fix_ai_data card_to_play (get_ordered_p_states st.prs) data in
 				(* delay *)
 				let ns = {st with prs=new_players; pool=((card_to_play,h.p_num)::st.pool)} in
 				process_players ns data t
 			end
 			else begin
 				(* draw board with st having last_human_player=h.pnum *)
-				let card_to_play = get_human_card_to_play st.pool h.p_num data in
+				let () = draw_board {st with last_human_player=h.p_num} h in
+				let card_to_play = get_human_card_to_play st h data in
 				let new_hand = remove_cards h.hand [card_to_play] in
 				let new_p_state = {h with hand=new_hand} in
 				let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
 													else x) st.prs in
-				let _ = fix_ai_data_suits (get_ordered_p_states st.prs) data.players in
+				let _ = fix_ai_data card_to_play (get_ordered_p_states st.prs) data in
 				(* if multiple players then switch_player *)
+				let multi_player = (num_humans_playing st.prs) > 1 in
+				let () = if multi_player then switch_player () else () in
 				let ns = {st with prs=new_players;
 								pool=((card_to_play,h.p_num)::st.pool);
 								last_human_player=h.p_num} in
 				process_players ns data t
 			end
 		end
-		| [] -> (* draw board then delay *) st
+		| [] -> (* draw board then delay *) 
+				let () = draw_board st (List.nth st.prs ((List.length st.prs)-1)) in
+				let () = Unix.sleep 1 in
+				st
 
 let do_round st data =
 	let new_state = process_players st data st.prs in
@@ -216,19 +251,25 @@ let point_allocation acc y =
 	else if y={suit=Spade;value=12} then acc + 13
 	else acc
 
+let rec reorder_players_winner ps acc winner= 
+	match ps with
+		| h::t -> if h.p_num=winner then (h::t)@(List.rev acc) else reorder_players_winner t (h::acc) winner
+		| [] -> []
+
 let resolve_round st data =
-	let loser = get_loser ((fst (List.hd st.pool)).suit) st.pool in
-	let loser_player = snd loser in
+	let losr = get_loser ((fst (List.hd (List.rev st.pool))).suit) st.pool in
+	let loser = snd losr in
 	let pool_cards = fst (List.split st.pool) in
 	let points = List.fold_left point_allocation 0 pool_cards in
-	let new_players = List.map (fun x-> if x.p_num<>loser_player then x
+	let new_players = List.map (fun x-> if x.p_num<>loser then x
 				else {x with round_points=x.round_points+points}) st.prs in
-	let to_change = List.nth data.players loser_player in
+	let to_change = List.nth data.players loser in
 	let () = to_change.round_points<-(to_change.round_points + points) in
 	let () = to_change.tricks<-(to_change.tricks@pool_cards) in
-	let split_players = List.partition (fun x -> x.p_num >= loser_player) new_players in
-	let reorder_players = (fst split_players)@(snd split_players) in
+	let split_players = List.partition (fun x -> x.p_num >= loser) new_players in
+	let reorder_players = reorder_players_winner new_players [] loser in
 	(* draw winner with loser *)
+	let () = winner loser in
 	{st with pool=[]; prs=reorder_players}
 
 let rec make_moon_h points =
@@ -251,7 +292,9 @@ let rec repl st (data:stored_data) =
 		if st.phase=Pass then
 								let n_state = do_trading st in
 								let _ = fix_ai_data_suits n_state.prs data.players in
-								repl n_state data
+								let reorder_players = reorder_players_2clubs n_state.prs [] in
+								let next_human = find_first_human reorder_players in
+								repl {n_state with prs=reorder_players; last_human_player=next_human} data
 							else
 								let round_result = do_round st data in
 								let n_state = resolve_round round_result data in
@@ -262,14 +305,14 @@ and reflush_round (st:game_state) data =
 	let point_list = List.map (fun x-> (List.fold_left point_allocation 0 x)) trick_list in
 	let checked_for_moon = make_moon_points point_list in
 	(* game_points display call *)
+	let () = game_points checked_for_moon in
 	let new_players = dole_out_points st.prs checked_for_moon in
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
 	let init_state = initialize_state [0;0;0;0] shuffled in
 	let hands = List.map (fun x -> x.hand) init_state.prs in
 	let f_players = List.map2 (fun p h -> {p with hand=h}) new_players hands in
-	let reorder_players = reorder_players_2clubs f_players [] in
-	repl { st with prs=reorder_players;
+	repl { st with prs=f_players;
 		round_num=(st.round_num+1);
 		pool=[];
 		phase=Pass} data

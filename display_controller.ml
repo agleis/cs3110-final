@@ -80,6 +80,12 @@ let explode s =
     if i < 0 then l else exp (i - 1) (s.[i] :: l) in
   exp (String.length s - 1) []
 
+let get_player_hand () =
+  !player_hand
+
+let clear_player_hand () = 
+  player_hand := []
+
 let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in
   let () = open_graph s in
@@ -91,24 +97,29 @@ let card_selection hand index =
   let () = set_color yellow in 
   draw_rect (s_triple c) (t_triple c) card_width card_height
 
-let click_card () = 
+let rec click_card () = 
   let s = wait_next_event [Key_pressed] in
   let tpl = (s.keypressed, s.key) in 
-  match tpl with 
-  |(true, '`') -> card_selection !player_hand 0; f_triple (List.nth !player_hand 0) 
-  |(true, '1') -> card_selection !player_hand 1; f_triple (List.nth !player_hand 1) 
-  |(true, '2') -> card_selection !player_hand 2; f_triple (List.nth !player_hand 2) 
-  |(true, '3') -> card_selection !player_hand 3; f_triple (List.nth !player_hand 3) 
-  |(true, '4') -> card_selection !player_hand 4; f_triple (List.nth !player_hand 4)
-  |(true, '5') -> card_selection !player_hand 5; f_triple (List.nth !player_hand 5)
-  |(true, '6') -> card_selection !player_hand 6; f_triple (List.nth !player_hand 6)
-  |(true, '7') -> card_selection !player_hand 7; f_triple (List.nth !player_hand 7)
-  |(true, '8') -> card_selection !player_hand 8; f_triple (List.nth !player_hand 8)
-  |(true, '9') -> card_selection !player_hand 9; f_triple (List.nth !player_hand 9)
-  |(true, '0') -> card_selection !player_hand 10; f_triple (List.nth !player_hand 10)
-  |(true, '-') -> card_selection !player_hand 11; f_triple (List.nth !player_hand 11)
-  |(true, '=') -> card_selection !player_hand 12; f_triple (List.nth !player_hand 12)
-  |_ -> failwith "Invalid key option" 
+  let ph = get_player_hand () in 
+  let card  = 
+  (match tpl with 
+  |(true, '`') -> card_selection ph 0; f_triple (List.nth ph 0)
+  |(true, '1') -> card_selection ph 1; f_triple (List.nth ph 1) 
+  |(true, '2') -> card_selection ph 2; f_triple (List.nth ph 2) 
+  |(true, '3') -> card_selection ph 3; f_triple (List.nth ph 3) 
+  |(true, '4') -> card_selection ph 4; f_triple (List.nth ph 4)
+  |(true, '5') -> card_selection ph 5; f_triple (List.nth ph 5)
+  |(true, '6') -> card_selection ph 6; f_triple (List.nth ph 6)
+  |(true, '7') -> card_selection ph 7; f_triple (List.nth ph 7)
+  |(true, '8') -> card_selection ph 8; f_triple (List.nth ph 8)
+  |(true, '9') -> card_selection ph 9; f_triple (List.nth ph 9)
+  |(true, '0') -> card_selection ph 10; f_triple (List.nth ph 10)
+  |(true, '-') -> card_selection ph 11; f_triple (List.nth ph 11)
+  |(true, '=') -> card_selection ph 12; f_triple (List.nth ph 12)) 
+  in 
+  card
+(*   let s = wait_next_event [Key_pressed] in 
+  if s.keypressed && s.key = '\r' then card else click_card () *)
 
 let trade_cards () = 
   [click_card (); click_card(); click_card()]
@@ -215,6 +226,7 @@ let draw_card num suit x y =
     ()
 
 let draw_hand lst s =
+  clear_player_hand ();
   set_color black;
   moveto ((window_width/2)-125) ((window_height/2)-225);
   draw_string ((f_triple s) ^ "         " ^ (s_triple s) ^ "         " ^ (t_triple s));
@@ -453,6 +465,6 @@ let draw_board state pstate =
   draw_hand human_pstate.hand (player_string state human_index);
 (*   switch_player (); *)
 (*   game_points [1;2;3;4]; *)
-  while true do (); done
-
-let () = draw_board game_state1 player_state1
+(*   while true do (); done *)
+(* 
+let () = draw_board game_state1 player_state1 *)
