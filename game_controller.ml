@@ -143,7 +143,7 @@ let rec repl st (data:stored_data) =
 	begin
 		if st.phase=Pass then
 								let n_state = do_trading st in
-								let _ = fix_ai_data_suits n_state.prs data.players in
+								let _ = fix_ai_data_suits (get_ordered_p_states n_state.prs) data.players in
 								let reorder_players = reorder_players_2clubs n_state.prs [] in
 								let next_human = find_first_human reorder_players in
 								repl {n_state with prs=reorder_players; last_human_player=next_human} data
