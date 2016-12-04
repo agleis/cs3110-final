@@ -172,7 +172,7 @@ and reflush_round (st:game_state) data =
 		pool=[];
 		phase=Pass} data
 
-let main p_lst =
+let main p_lst name_lst =
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
 	let init_state = initialize_state p_lst shuffled in
