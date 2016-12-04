@@ -265,6 +265,69 @@ let draw_Z x y =
   lineto x y;
   lineto (x+30) y
 
+let draw_1 x y =
+  moveto (x+15) y;
+  lineto (x+15) (y+40);
+  lineto (x+10) (y+40);
+  moveto (x+15) y;
+  lineto (x+10) y;
+  moveto x y;
+  lineto (x+30) y
+
+let draw_2 x y =
+  moveto x (y+40);
+  lineto (x+30) (y+40);
+  lineto (x+30) (y+20);
+  lineto x (y+20);
+  lineto x y;
+  lineto (x+30) y
+
+let draw_3 x y =
+  moveto x (y+40);
+  lineto (x+30) (y+40);
+  lineto (x+30) (y+20);
+  lineto x (y+20);
+  moveto (x+30) (y+20);
+  lineto (x+30) y;
+  lineto x y
+
+let draw_4 x y =
+  moveto x (y+40);
+  lineto x (y+20);
+  lineto (x+30) (y+20);
+  moveto (x+30) (y+40);
+  lineto (x+30) y
+
+let draw_6 x y = 
+  moveto (x+30) (y+40);
+  lineto x (y+40);
+  lineto x y;
+  lineto (x+30) y;
+  lineto (x+30) (y+20);
+  lineto x (y+20)
+
+let draw_7 x y =
+  moveto x (y+40);
+  lineto (x+30) (y+40);
+  lineto (x+30) y
+
+let draw_8 x y =
+  moveto x y;
+  lineto x (y+40);
+  lineto (x+30) (y+40);
+  lineto (x+30) y;
+  lineto x y;
+  moveto x (y+20);
+  lineto (x+30) (y+20)
+
+let draw_9 x y =
+  moveto (x+30) y;
+  lineto (x+30) (y+40);
+  lineto x (y+40);
+  lineto x (y+20);
+  lineto (x+30) (y+20)
+
+
 let draw_letter ch x y =
   match ch with
   |'A' -> draw_A x y
@@ -293,12 +356,23 @@ let draw_letter ch x y =
   |'X' -> draw_X x y 
   |'Y' -> draw_Y x y 
   |'Z' -> draw_Z x y 
+  |'0' -> draw_O x y
+  |'1' -> draw_1 x y
+  |'2' -> draw_2 x y
+  |'3' -> draw_3 x y
+  |'4' -> draw_4 x y
+  |'5' -> draw_S x y
+  |'6' -> draw_6 x y
+  |'7' -> draw_7 x y
+  |'8' -> draw_8 x y
+  |'9' -> draw_9 x y
   |_ -> failwith "Not a letter"
 
 let draw_string1 s x y = 
   let lst = explode s in
   let () = set_line_width 10 in 
   for i = 0 to (List.length lst) - 1 do
+    if (List.nth lst i) = ' ' then moveto (x+(50*i)) y else
     draw_letter (List.nth lst i) (x + (50*i)) y
   done
 
@@ -403,20 +477,22 @@ let draw_card num suit x y =
         fill_rect (x+2) (y+2) (card_width - 4) (card_height - 4);
         if suit = Heart then
           begin
+            let z = if num == 10 then 45 else 50 in
             set_color red;
             moveto (x+5) (y+75);
             draw_string card_char;
-            moveto (x+50) (y+10);
+            moveto (x+z) (y+10);
             draw_string card_char;
             moveto (x+ (int_of_float ((float card_width)/.6.0))) (y+40);
             draw_symbol Heart (x+(card_width/2)) (y+(card_height/2))
           end
         else if suit = Diamond then
           begin
+            let z = if num == 10 then 45 else 50 in
             set_color red;
             moveto (x+5) (y+75);
             draw_string card_char;
-            moveto (x+50) (y+10);
+            moveto (x+z) (y+10);
             draw_string card_char;
             moveto (x+ (int_of_float ((float card_width)/.6.0))) (y+40);
             draw_symbol Diamond (x+(card_width/2)) (y+(card_height/2))
@@ -538,122 +614,50 @@ let draw_pool pool =
   done;
   in ()
 
-(* let draw_big_string lst x y =
-  for i = 0 to (List.length lst) - 1 do
-    
- *)
-
-
 let draw_play_phase x y = 
 
   set_line_width 10;
   set_color black;
-   
-  moveto x y;
-  lineto x (y+20);
-  lineto (x-10) (y+40);
-  moveto x (y+20);
-  lineto (x+10) (y+40);
-
-  draw_ellipse (x+30) (y+20) 12 20;
-
-  draw_arc (x+65) (y+20) 12 20 180 360;
-  moveto (x+53) (y+20);
-  lineto (x+53) (y+40);
-  moveto (x+77) (y+20);
-  lineto (x+77) (y+40);
-
-  moveto (x+90) y;
-  lineto (x+90) (y+40);
-  draw_arc (x+90) (y+30) 25 10 (-90) 90;
-  moveto (x+90) (y+20);
-  lineto (x+115) y;
-
-  moveto (x+170) y;
-  lineto (x+170) (y+40);
-  moveto (x+150) (y+40);
-  lineto (x+190) (y+40);
-
-  draw_arc (x+210) (y+20) 12 20 180 360;
-  moveto (x+198) (y+20);
-  lineto (x+198) (y+40);
-  moveto (x+222) (y+20);
-  lineto (x+222) (y+40);
-
-  moveto (x+240) y;
-  lineto (x+240) (y+40);
-  draw_arc (x+240) (y+30) 25 10 (-90) 90;
-  moveto (x+240) (y+20);
-  lineto (x+265) y;
-
-  moveto (x+280) y;
-  lineto (x+280) (y+40);
-  lineto (x+310) y;
-  lineto (x+310) (y+40)
+  draw_string1 "YOUR TURN" x y
 
 let draw_pass_phase x y =
   set_line_width 10;
   set_color black;
-
-  draw_arc (x+15) (y+20) 15 20 45 305;
-
-  moveto (x+40) y;
-  lineto (x+40) (y+40);
-  moveto (x+40) (y+20);
-  lineto (x+60) (y+20);
-  moveto (x+60) y;
-  lineto (x+60) (y+40);
-
-  draw_ellipse (x+85) (y+20) 12 20;
-  draw_ellipse (x+120) (y+20) 12 20;
-
-  draw_arc (x+155) (y+10) 10 10 (-150) 90;
-  draw_arc (x+155) (y+30) 10 10 270 50;
-
-  moveto (x+180) y;
-  lineto (x+180) (y+40);
-  lineto (x+210) (y+40);
-  moveto (x+180) (y+20);
-  lineto (x+200) (y+20);
-  moveto (x+180) y;
-  lineto (x+210) y;
-
-  draw_arc (x+270) (y+30) 10 10 130 (-110);
-  draw_arc (x+270) (y+10) 10 10 110 (-130)
+  draw_string1 "CHOOSE THREE" x y
 
 let draw_phase phase x y = 
   match phase with
-  |Play -> draw_play_phase x y
-  |Pass -> draw_pass_phase x (y-300)
+  |Play -> draw_play_phase (x+60) y
+  |Pass -> draw_pass_phase (x-50) (y-300)
   |Setup -> draw_pass_phase x (y-300)
 
 let rec switch_player () =
   clear_graph ();
+  set_color black;
   moveto (window_width/2) (window_height/2);
-  draw_string "PRESS ENTER TO SWITCH PLAYER";
+  draw_string1 "PRESS ENTER TO" ((window_width/2) - 350) (window_height/2);
+  draw_string1 "SWITCH PLAYERS" ((window_width/2) - 350) ((window_height/2) - 60);
   let s = wait_next_event [Key_pressed] in 
   if s.keypressed && s.key = '\r' then () else switch_player ()
 
-let rec winner pnum =
+let rec winner state pnum =
   clear_graph ();
-  moveto (window_width/2) (window_height/2);
-  draw_string "HAND GOES TO: ";
-  moveto (window_width/2) ((window_height/2) - 20);
-  draw_string ("Player " ^ (string_of_int pnum));
-  moveto (window_width/2) ((window_height/2) - 40);
-  moveto (window_width/2) (window_height - 40);
-  draw_string "PRESS ENTER TO CONTINUE";
+  set_color black;
+  draw_string1 " HAND GOES TO " ((window_width/2) - 350) ((window_height/2) + 160);
+  draw_string1 ("PLAYER " ^ (string_of_int pnum)) ((window_width/2) - 200) ((window_height/2) + 100);
+  draw_string1 "PRESS ENTER TO CONTINUE" ((window_width/2) - 575) ((window_height/2) - 200);
+  draw_pool state.pool;
   let s = wait_next_event [Key_pressed] in 
-  if s.keypressed && s.key = '\r' then () else winner pnum
+  if s.keypressed && s.key = '\r' then () else winner state  pnum
 
 let rec game_points lst = 
   clear_graph ();
+  set_color black;
   for i = 0 to (List.length lst) - 1 do
     moveto (window_width/2) ((window_height/2) - (i*20));
-    draw_string ("Player " ^ (string_of_int i) ^ " has " ^ (string_of_int (List.nth lst i)) ^ " points")
+    draw_string1 ("PLAYER " ^ (string_of_int i) ^ " HAS " ^ (string_of_int (List.nth lst i)) ^ " POINTS") ((window_width/2)-525) (((3*(window_height/4)) - (i*60)))
   done;
-  moveto (window_width/2) (window_height - 40);
-  draw_string "PRESS ENTER TO CONTINUE";
+  draw_string1 "PRESS ENTER TO CONTINUE" ((window_width/2) - 575) (80);
   let s = wait_next_event [Key_pressed] in 
   if s.keypressed && s.key = '\r' then () else game_points lst
 
@@ -681,7 +685,7 @@ let draw_board state pstate =
   let num_right = List.length ((List.nth state.prs right_index).hand) in 
   let num_top = List.length ((List.nth state.prs top_index).hand) in 
   if (state.last_human_player = pstate.p_num) then 
-  draw_phase state.phase (int_of_float (0.375*.(float window_width))) (int_of_float (0.65*.(float window_height)));
+  draw_phase state.phase (int_of_float (0.3*.(float window_width))) (int_of_float (0.65*.(float window_height)));
   draw_card_top num_top ((int_of_float (0.30*.(float window_width)))) (int_of_float (0.8*.(float window_height))) (player_string state top_index);
   draw_card_side num_left (int_of_float (0.095*.(float window_width))) ((int_of_float (0.20*.(float window_height)))) (player_string state left_index) true;
   draw_card_side num_right ((int_of_float (0.905*.(float window_width))) - card_height) ((int_of_float (0.20*.(float window_height)))) (player_string state right_index) false;

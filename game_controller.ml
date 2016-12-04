@@ -134,7 +134,7 @@ let resolve_round st data =
 	let split_players = List.partition (fun x -> x.p_num >= loser) new_players in
 	let reorder_players = reorder_players_winner new_players [] loser in
 	(* draw winner with loser *)
-	let () = winner loser in
+	let () = winner st loser in
 	{st with pool=[]; prs=reorder_players}
 
 let rec repl st (data:stored_data) =
