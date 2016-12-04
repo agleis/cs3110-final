@@ -404,7 +404,7 @@ let draw_board state current_player_state =
   draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height right_player false;
   draw_hand lst width height card_width card_height;
   draw_pool pool width height card_width card_height;
-  let card_chosen = click_card !player_hand card_width card_height in 
-  while true do (); done
+(*   let card_chosen =  *)click_card !player_hand card_width card_height (* in  *)
+(*   while true do (); done *)
 
-let () = draw_board game_state1 player_state2
+(* let () = draw_board game_state1 player_state2 *)
