@@ -10,6 +10,16 @@ type suit_values = {
   mutable diamond: int list;
 }
 
+let rec count_cards_of_suit suit hand i =
+  match hand with
+  | [] -> i
+  | c::t -> if c.suit = suit
+            then count_cards_of_suit suit t (i + 1)
+            else count_cards_of_suit suit t i
+
+let cards_of_suit suit hand =
+  count_cards_of_suit suit hand 0
+
 let hand_without_card hand card =
   List.filter (fun c -> c <> card) hand
 
@@ -245,18 +255,18 @@ let middle_card_from_short_suit hand =
   | SpadeS _ -> middle_card_from_suit hand Spade (-1) (-1)
   | DiamondS _ -> middle_card_from_suit hand Diamond (-1) (-1)
 
-let highest_card_so_far pool =
+let highest_card_so_far pool lead_suit =
   match pool with
   | [] -> {suit = Diamond; value = -1}
   | c1::[] -> c1
-  | c1::c2::[] -> if compare_cards_with_suit c1.suit c1 c2 >= 0
+  | c1::c2::[] -> if compare_cards_with_suit lead_suit c1 c2 >= 0
                   then c1
                   else c2
-  | c1::c2::c3::[] -> if compare_cards_with_suit c1.suit c1 c2 >= 0
-                      then if compare_cards_with_suit c1.suit c1 c3 >= 0
+  | c1::c2::c3::[] -> if compare_cards_with_suit lead_suit c1 c2 >= 0
+                      then if compare_cards_with_suit lead_suit c1 c3 >= 0
                            then c1
                            else c3
-                      else if compare_cards_with_suit c1.suit c2 c3 >= 0
+                      else if compare_cards_with_suit lead_suit c2 c3 >= 0
                            then c2
                            else c3
   | c::t -> c
@@ -275,8 +285,10 @@ let rec can_lose card hand =
             then true
             else can_lose card t
 
-let screw_other_player hand =
-  if get_index (Spade, 12) hand >= 0
+let screw_other_player hand lead_suit =
+  if has_card_of_suit lead_suit hand
+  then low_card_from_suit hand lead_suit (-1) (-1)
+  else if get_index (Spade, 12) hand >= 0
   then {suit = Spade; value = 12}
   else high_card_from_suit hand Heart (-1) (-1)
 
@@ -300,12 +312,8 @@ let rec highest_loser card hand max_val =
 
 let highest_losing_card card hand h_played =
   if has_card_of_suit card.suit hand
-  then highest_loser card hand 0
-  else if h_played
-  then screw_other_player hand
-  else if get_index (Spade, 12) hand >= 0
-  then {suit = Spade; value = 12}
-  else high_card_from_suit_not hand Heart (-1) (-1)
+  then highest_loser card hand (-1)
+  else screw_other_player hand card.suit
 
 let rec player_cards_of_suit suit players lst =
   match players with
@@ -354,9 +362,7 @@ let lose_to_card card hand =
   then if can_lose card hand
        then get_losing_card card hand
        else {suit = Diamond; value = -1}
-  else if can_lose card hand
-       then get_losing_card card hand
-       else {suit = Diamond; value = -1}
+  else screw_other_player hand card.suit
 
 let rec contains_heart_or_q_spades pool =
   match pool with
