@@ -6,14 +6,14 @@ exception End;;
 
 let lst1 = [{suit=Heart; value=1};{suit=Heart; value=2};{suit=Club; value=3};{suit=Club; value=4};{suit=Diamond; value=5};{suit=Diamond; value=6}; {suit=Spade; value=7}; {suit=Spade; value=8}; {suit=Heart; value=9}; {suit=Club; value=10};{suit=Diamond; value=11};{suit=Spade; value=12};{suit=Heart; value=13}]
 let lst2 = [{suit=Heart; value=1};{suit=Heart; value=2};{suit=Club; value=3};{suit=Club; value=4};{suit=Diamond; value=5};{suit=Diamond; value=6}]
-let lst3 = [{suit=Spade; value=1};{suit=Club; value=2};{suit=Club; value=3};{suit=Diamond; value=4};{suit=Diamond; value=5};{suit=Heart; value=6}; {suit=Spade; value=7}; {suit=Club; value=8}; {suit=Diamond; value=9}; {suit=Club; value=10};{suit=Heart; value=11};{suit=Spade; value=12};{suit=Diamond; value=13}]
+let lst3 = [{suit=Spade; value=1};{suit=Spade; value=2};{suit=Spade; value=3};{suit=Spade; value=4};{suit=Spade; value=5};{suit=Spade; value=6}; {suit=Spade; value=7}; {suit=Spade; value=8}; {suit=Spade; value=9}; {suit=Spade; value=10};{suit=Spade; value=11};{suit=Spade; value=12};{suit=Spade; value=13}]
 let lst4 = [{suit=Heart; value=7};{suit=Heart; value=8};{suit=Club; value=9};{suit=Club; value=10};{suit=Diamond; value=11};{suit=Diamond; value=12}]
 let pool1 = [({suit=Diamond; value=5},2); ({suit=Diamond; value=6},3); ({suit=Spade; value=7},4); ({suit=Spade; value=8},1)]
 
 let player_state1 = {
   hand = lst1;
   game_points = 20;
-  round_pionts = 5;
+  round_points = 5;
   ai_level = 0;
   collected_cards = lst2;
   p_num = 1
@@ -30,8 +30,8 @@ let player_state2 = {
 
 let player_state3 = {
   hand = lst3;
-  game_points = 25;
-  round_points = 10;
+  game_points = 100;
+  round_points = 100;
   ai_level = 0;
   collected_cards = lst4;
   p_num = 3
@@ -39,8 +39,8 @@ let player_state3 = {
 
 let player_state4 = {
   hand = lst3;
-  game_points = 25;
-  round_points = 5;
+  game_points = 50;
+  round_points = 0;
   ai_level = 0;
   collected_cards = lst4;
   p_num = 4
@@ -48,16 +48,18 @@ let player_state4 = {
 
 let game_state1 = {
   pool = pool1;
-  prs = [player_state3; player_state4; player_state1; player_state2];
+  prs = [player_state1; player_state2; player_state3; player_state4];
   phase = Play;
-  round_num = 1
+  round_num = 1;
+  last_human_player = 3
 }
 
 let game_state2 = {
   pool = pool1;
   prs = [player_state3; player_state4; player_state1; player_state2];
   phase = Pass;
-  round_num = 1
+  round_num = 1;
+  last_human_player = 1;
 }
 
 let window_width = 1280
@@ -71,6 +73,12 @@ let player_hand = ref []
 let f_triple (a,_,_) = a
 let s_triple (_,a,_) = a
 let t_triple (_,_,a) = a
+
+(* http://stackoverflow.com/questions/10068713/string-to-list-of-char *)
+let explode s =
+  let rec exp i l =
+    if i < 0 then l else exp (i - 1) (s.[i] :: l) in
+  exp (String.length s - 1) []
 
 let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in
@@ -123,19 +131,6 @@ let draw_symbol sym x y =
     fill_circle (x+5) y 7;
     fill_circle x (y+10) 7;
     fill_rect (x-2) (y-10) 4 10
-
-let draw_string_v  s = 
-   let (xi,yi) = Graphics.current_point() 
-   and l = String.length s 
-   and (_,h) = Graphics.text_size s 
-   in 
-      Graphics.draw_char s.[0];
-      for i=1 to l-1 do
-        let (_,b) = Graphics.current_point() 
-        in Graphics.moveto xi (b-h);
-           Graphics.draw_char s.[i] 
-       done;
-     let (a,_) = Graphics.current_point() in Graphics.moveto a yi;;
 
 let draw_card num suit x y = 
     let card_char = 
@@ -219,7 +214,10 @@ let draw_card num suit x y =
     in 
     ()
 
-let draw_hand lst =
+let draw_hand lst s =
+  set_color black;
+  moveto ((window_width/2)-125) ((window_height/2)-225);
+  draw_string ((f_triple s) ^ "         " ^ (s_triple s) ^ "         " ^ (t_triple s));
   let delta = ref 0 in
   let len = List.length lst in
   let total_len = (len * (card_width + card_spacing)) in
@@ -247,11 +245,11 @@ let draw_card_top num x y s =
   let () =
   let delta = ref 0 in
   set_color black;
-  moveto (x-(int_of_float (0.05*.(float window_width)))) (y+(int_of_float (0.1*.(float window_height))));
+  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 30) (y+(int_of_float (0.1*.(float window_height))));
   draw_string (f_triple s);
-  moveto (x-(int_of_float (0.05*.(float window_width)))) ((y+(int_of_float (0.1*.(float window_height)))) - 20);
+  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 30) ((y+(int_of_float (0.1*.(float window_height)))) - 20);
   draw_string (s_triple s);
-  moveto (x-(int_of_float (0.05*.(float window_width)))) ((y+(int_of_float (0.1*.(float window_height)))) - 40);
+  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 30) ((y+(int_of_float (0.1*.(float window_height)))) - 40);
   draw_string (t_triple s);
   for i=1 to num do
     draw_card 0 Spade (x + !delta) y;
@@ -266,21 +264,21 @@ let draw_card_side num x y s side =
     if side then
       begin
         set_color black;
-        moveto (x-(int_of_float (0.05*.(float window_width)))) ((y+(int_of_float (0.1*.(float window_height)))) - 0);
+        moveto (x-(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 0);
         draw_string (f_triple s);
-        moveto (x-(int_of_float (0.05*.(float window_width)))) ((y+(int_of_float (0.1*.(float window_height)))) - 20);
+        moveto (x-(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 20);
         draw_string (s_triple s);
-        moveto (x-(int_of_float (0.05*.(float window_width)))) ((y+(int_of_float (0.1*.(float window_height)))) - 40);
+        moveto (x-(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 40);
         draw_string (t_triple s)
       end
     else
       begin
         set_color black;
-        moveto (x-(int_of_float (0.05*.(float window_width)))) ((y+(int_of_float (0.1*.(float window_height)))) - 0);
+        moveto (x+(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 0);
         draw_string (f_triple s);
-        moveto (x-(int_of_float (0.05*.(float window_width)))) ((y+(int_of_float (0.1*.(float window_height)))) - 20);
+        moveto (x+(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 20);
         draw_string (s_triple s);
-        moveto (x-(int_of_float (0.05*.(float window_width)))) ((y+(int_of_float (0.1*.(float window_height)))) - 40);
+        moveto (x+(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 40);
         draw_string (t_triple s)
       end 
   in 
@@ -305,6 +303,12 @@ let draw_pool pool =
     delta := !delta + (card_width + card_spacing);
   done;
   in ()
+
+(* let draw_big_string lst x y =
+  for i = 0 to (List.length lst) - 1 do
+    
+ *)
+
 
 let draw_play_phase x y = 
 
@@ -429,25 +433,26 @@ let player_string state idx =
   let round_points = "Round Points: " ^ (string_of_int (List.nth state.prs idx).round_points) in
   (player, game_points, round_points)
 
-let draw_board state pstate human =
+let draw_board state pstate =
   init_window window_width window_height;
   set_window_title "CS 3110 Hearts Game";
   clear_graph ();
   let num = List.length (pstate.hand) in
   let index = find_index state.prs pstate.p_num 0 in
-  let human_index = find_index state.prs human 0 in
+  let human_index = find_index state.prs state.last_human_player 0 in
   let human_pstate = List.nth state.prs human_index in  
-  let left_index = (idx + 1) mod 4 in 
-  let right_index = (idx + 2) mod 4 in 
-  let top_index = (idx + 3) mod 4 in 
-  draw_phase state.phase (int_of_float (0.375*.(float window_width))) (int_of_float (0.65*.(float window_height)));
-  draw_card_top num ((int_of_float (0.30*.(float window_width)))) (int_of_float (0.8*.(float window_height))) (player_string top_index);
-  draw_card_side num (int_of_float (0.075*.(float window_width))) ((int_of_float (0.20*.(float window_height)))) (player_string left_index) true;
-  draw_card_side num ((int_of_float (0.925*.(float window_width))) - card_height) ((int_of_float (0.20*.(float window_height)))) (player_string right_index) false;
+  let left_index = (human_index + 1) mod 4 in 
+  let top_index = (human_index + 2) mod 4 in 
+  let right_index = (human_index + 3) mod 4 in 
+  if (state.last_human_player = pstate.p_num) then 
+    draw_phase state.phase (int_of_float (0.375*.(float window_width))) (int_of_float (0.65*.(float window_height)));
+  draw_card_top num ((int_of_float (0.30*.(float window_width)))) (int_of_float (0.8*.(float window_height))) (player_string state top_index);
+  draw_card_side num (int_of_float (0.095*.(float window_width))) ((int_of_float (0.20*.(float window_height)))) (player_string state left_index) true;
+  draw_card_side num ((int_of_float (0.905*.(float window_width))) - card_height) ((int_of_float (0.20*.(float window_height)))) (player_string state right_index) false;
   draw_pool state.pool;
-  draw_hand human_pstate.hand;
+  draw_hand human_pstate.hand (player_string state human_index);
 (*   switch_player (); *)
 (*   game_points [1;2;3;4]; *)
   while true do (); done
 
-let () = draw_board game_state1 player_state1 1
+let () = draw_board game_state1 player_state1
