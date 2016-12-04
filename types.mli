@@ -14,6 +14,7 @@ type card = {
 type player_state = {
   hand: card list;
 	game_points: int;
+    round_points: int;
 	ai_level: int;
 	collected_cards: card list;
     p_num: int;
@@ -24,6 +25,7 @@ type game_state = {
 	prs: player_state list;
 	phase: state;
   round_num: int;
+  last_human_player: int;
 }
 
 type player_data = {
