@@ -14,6 +14,10 @@ let pass_cards p_state =
 	(List.nth p_state.hand i2)::
 	(List.nth p_state.hand i3)::[]
 
-let card_to_play p_state =
+let valid_move c = true
+
+
+let rec card_to_play p_state =
 	let input = read_int () in
-	List.nth p_state.hand input
+	let card = List.nth p_state.hand input in
+	if valid_move card then card else card_to_play p_state

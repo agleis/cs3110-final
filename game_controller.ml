@@ -146,7 +146,7 @@ let do_round st data =
 	{prs=n_players; pool=n_pool; round_num=st.round_num+1; phase=Play}
 
 let get_loser su cards =
-	let sorted = List.sort (fun x1 x2-> compare_cards_with_suit su (fst x1) (fst x2)) cards in
+	let sorted = List.sort (fun x1 x2-> compare_cards_with_suit su (fst x2) (fst x1)) cards in
 	List.hd sorted
 
 let point_allocation acc y =
@@ -162,7 +162,9 @@ let resolve_round st data =
 	let to_change = List.nth data.players loser_player in
 	let () = to_change.round_points<-(to_change.round_points + points) in
 	let () = to_change.tricks<-(to_change.tricks@pool_cards) in
-	{st with pool=[]}
+	let split_players = List.partition (fun x -> x.p_num >= loser_player) st.prs in
+	let reorder_players = (fst split_players)@(snd split_players) in
+	{st with pool=[]; prs=reorder_players}
 
 let rec make_moon_h points =
 	match points with
@@ -203,8 +205,7 @@ and reflush_round (st:game_state) data =
 	let init_state = initialize_state [0;0;0;0] shuffled in
 	let hands = List.map (fun x -> x.hand) init_state.prs in
 	let f_players = List.map2 (fun p h -> {p with hand=h}) new_players hands in
-	repl {st with
-		prs=f_players;
+	repl { prs=f_players;
 		round_num=(st.round_num+1);
 		pool=[];
 		phase=Pass} data
