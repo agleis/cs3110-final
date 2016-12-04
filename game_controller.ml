@@ -111,6 +111,19 @@ let shuffle_deck deck =
 	let sorted = List.sort (fun x1 x2 -> (fst x1) - (fst x2)) weighted in
 	List.map (fun x -> snd x) sorted
 
+let remove_cards main_list to_remove =
+	List.filter (fun x -> not (List.exists (fun y -> x=y) to_remove)) main_list
+
+let reorder_cards cardlist =
+	List.rev cardlist
+
+let add_cards players cards =
+	List.map2 (fun p c -> {p with hand=(p.hand@c)}) players cards
+
+let remove_cards_players p_states to_remove =
+	List.map2 (fun p t -> {p with hand=(remove_cards p.hand t)})
+		p_states to_remove
+
 let suit_available su pdata =
 	match su with
 		| Heart -> pdata.has_hearts
@@ -146,38 +159,34 @@ let rec process_players_trades st ps =
 				(* draw board*)
 				let () = draw_board st h in
 				let to_pass = Ai_controller.pass_cards h in
+				let new_hand = remove_cards h.hand to_pass in
+				let new_p_state = {h with hand=new_hand} in
+				let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
+												else x) st.prs in
+				let () = draw_board {st with prs=new_players} h in
 				(* delay*)
 				let () = Unix.sleep 1 in
-				to_pass::(process_players_trades st t)
+				to_pass::(process_players_trades {st with prs=new_players} t)
 			end
 			else begin
 			(* display board with st having last_human_player updated if need be*)
 			let () = draw_board {st with last_human_player=h.p_num} h in
-			(* let _ = print_string ("\n\nPlayer "^(string_of_int h.p_num)^"'s turn - trading\n") in *)
 			let to_pass = get_human_cards_to_pass st h in
+			let new_hand = remove_cards h.hand to_pass in
+			let new_p_state = {h with hand=new_hand} in
+			let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
+												else x) st.prs in
+			let () = draw_board {st with last_human_player=h.p_num; prs=new_players} h in
 			(* switch player*)
 			let multi_player = (num_humans_playing st.prs) > 1 in
 			let () = if multi_player then switch_player () else () in
-			to_pass::(process_players_trades {st with last_human_player=h.p_num} t)
+			to_pass::(process_players_trades {st with last_human_player=h.p_num; prs=new_players} t)
 			end
 		end
 		| [] -> (* draw board - delay*) 
 				let () = draw_board st (List.nth st.prs ((List.length st.prs)-1)) in
 				let () = Unix.sleep 1 in
 				[]
-
-let remove_cards main_list to_remove =
-	List.filter (fun x -> not (List.exists (fun y -> x=y) to_remove)) main_list
-
-let reorder_cards cardlist =
-	List.rev cardlist
-
-let add_cards players cards =
-	List.map2 (fun p c -> {p with hand=(p.hand@c)}) players cards
-
-let remove_cards_players p_states to_remove =
-	List.map2 (fun p t -> {p with hand=(remove_cards p.hand t)})
-		p_states to_remove
 
 let do_trading st =
 	let p = st.round_num in
@@ -201,7 +210,6 @@ let rec process_players st data ps =
 			let is_ai = (h.ai_level<>0) in
 			if is_ai then begin
 				(* draw board *)
-				let () = Unix.sleep 1 in
 				let () = draw_board st h in
 				let pool_cards = fst (List.split st.pool) in
 				let card_to_play = Ai_controller.guess_turn h pool_cards data in
@@ -210,6 +218,8 @@ let rec process_players st data ps =
 				let new_p_state = {h with hand=new_hand} in
 				let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
 													else x) st.prs in
+				let () = draw_board {st with prs=new_players; pool=((card_to_play,h.p_num)::st.pool)} h in
+				let () = Unix.sleep 1 in
 				let _ = fix_ai_data card_to_play (get_ordered_p_states st.prs) data in
 				(* delay *)
 				let ns = {st with prs=new_players; pool=((card_to_play,h.p_num)::st.pool)} in
@@ -230,12 +240,14 @@ let rec process_players st data ps =
 				let ns = {st with prs=new_players;
 								pool=((card_to_play,h.p_num)::st.pool);
 								last_human_player=h.p_num} in
+				let () = draw_board ns h in
+				let () = Unix.sleep 1 in
 				process_players ns data t
 			end
 		end
 		| [] -> (* draw board then delay *) 
-				let () = draw_board st (List.nth st.prs ((List.length st.prs)-1)) in
-				let () = Unix.sleep 1 in
+				(* let () = draw_board st (List.nth st.prs ((List.length st.prs)-1)) in
+				let () = Unix.sleep 1 in *)
 				st
 
 let do_round st data =

@@ -293,13 +293,14 @@ let draw_letter ch x y =
   |'X' -> draw_X x y 
   |'Y' -> draw_Y x y 
   |'Z' -> draw_Z x y 
+  |_ -> failwith "Not a letter"
 
-let draw_string s x y = 
+let draw_string1 s x y = 
   let lst = explode s in
   let () = set_line_width 10 in 
   for i = 0 to (List.length lst) - 1 do
     draw_letter (List.nth lst i) (x + (50*i)) y
-  done;
+  done
 
 let clear_player_hand () = 
   player_hand := []
@@ -307,11 +308,9 @@ let clear_player_hand () =
 let get_player_hand () =
   !player_hand
 
-
 let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in
-  let () = open_graph s in
-  ()
+  open_graph s
 
 let card_selection hand index =
   let c = List.nth hand index in
@@ -337,7 +336,8 @@ let rec click_card () =
   |(true, '9') -> card_selection ph 9; f_triple (List.nth ph 9)
   |(true, '0') -> card_selection ph 10; f_triple (List.nth ph 10)
   |(true, '-') -> card_selection ph 11; f_triple (List.nth ph 11)
-  |(true, '=') -> card_selection ph 12; f_triple (List.nth ph 12)) 
+  |(true, '=') -> card_selection ph 12; f_triple (List.nth ph 12)
+  |_ -> failwith "Invalid key") 
   in 
   card
 (*   let s = wait_next_event [Key_pressed] in 
@@ -547,6 +547,7 @@ let draw_pool pool =
 let draw_play_phase x y = 
 
   set_line_width 10;
+  set_color black;
    
   moveto x y;
   lineto x (y+20);
@@ -671,18 +672,19 @@ let draw_board state pstate =
   init_window window_width window_height;
   set_window_title "CS 3110 Hearts Game";
   clear_graph ();
-  let num = List.length (pstate.hand) in
-  let index = find_index state.prs pstate.p_num 0 in
   let human_index = find_index state.prs state.last_human_player 0 in
   let human_pstate = List.nth state.prs human_index in  
   let left_index = (human_index + 1) mod 4 in 
   let top_index = (human_index + 2) mod 4 in 
   let right_index = (human_index + 3) mod 4 in 
+  let num_left = List.length ((List.nth state.prs left_index).hand) in 
+  let num_right = List.length ((List.nth state.prs right_index).hand) in 
+  let num_top = List.length ((List.nth state.prs top_index).hand) in 
   if (state.last_human_player = pstate.p_num) then 
-    draw_phase state.phase (int_of_float (0.375*.(float window_width))) (int_of_float (0.65*.(float window_height)));
-  draw_card_top num ((int_of_float (0.30*.(float window_width)))) (int_of_float (0.8*.(float window_height))) (player_string state top_index);
-  draw_card_side num (int_of_float (0.095*.(float window_width))) ((int_of_float (0.20*.(float window_height)))) (player_string state left_index) true;
-  draw_card_side num ((int_of_float (0.905*.(float window_width))) - card_height) ((int_of_float (0.20*.(float window_height)))) (player_string state right_index) false;
+  draw_phase state.phase (int_of_float (0.375*.(float window_width))) (int_of_float (0.65*.(float window_height)));
+  draw_card_top num_top ((int_of_float (0.30*.(float window_width)))) (int_of_float (0.8*.(float window_height))) (player_string state top_index);
+  draw_card_side num_left (int_of_float (0.095*.(float window_width))) ((int_of_float (0.20*.(float window_height)))) (player_string state left_index) true;
+  draw_card_side num_right ((int_of_float (0.905*.(float window_width))) - card_height) ((int_of_float (0.20*.(float window_height)))) (player_string state right_index) false;
   draw_pool state.pool;
   draw_hand human_pstate.hand (player_string state human_index);
 (*   switch_player (); *)
