@@ -224,6 +224,23 @@ let high_card_from_suit_not hand suit ind1 ind2 =
   | SpadeS _ -> high_card_from_suit hand Spade ind1 ind2
   | DiamondS _ -> high_card_from_suit hand Diamond ind1 ind2
 
+let middle_card_from_suit_not hand suit ind1 ind2 =
+  let suit_ind = get_suit_values hand in
+  let num_hearts = List.length (suit_ind.heart) in
+  let num_clubs = List.length (suit_ind.club) in
+  let num_diamonds = List.length (suit_ind.diamond) in
+  let num_spades = List.length (suit_ind.spade) in
+  let min_suit = (match suit with
+  | Heart -> find_min_suit num_clubs num_spades num_diamonds 0
+  | Diamond -> find_min_suit num_clubs num_spades 0 num_hearts
+  | Spade -> find_min_suit num_clubs 0 num_diamonds num_hearts
+  | Club -> find_min_suit 0 num_spades num_diamonds num_hearts) in
+  match min_suit with
+  | HeartS _ -> middle_card_from_suit hand Heart ind1 ind2
+  | ClubS _ -> middle_card_from_suit hand Club ind1 ind2
+  | SpadeS _ -> middle_card_from_suit hand Spade ind1 ind2
+  | DiamondS _ -> middle_card_from_suit hand Diamond ind1 ind2
+
 let low_card_from_suit_not hand suit ind1 ind2 =
   let suit_ind = get_suit_values hand in
   let num_hearts = List.length (suit_ind.heart) in
@@ -320,6 +337,10 @@ let rec highest_loser card hand max_val =
 let highest_losing_card card hand h_played =
   if has_card_of_suit card.suit hand
   then highest_loser card hand (-1)
+  else if get_index (Spade, 14) hand  >= 0
+  then {suit = Spade; value = 14}
+  else if get_index (Spade, 13) hand  >= 0
+  then {suit = Spade; value = 13}
   else screw_other_player hand card.suit
 
 let rec player_cards_of_suit suit players lst =
