@@ -63,7 +63,9 @@ let rec process_players_trades st ps =
 				let () = Unix.sleep 1 in
 				[]
 
-(* [do_trading st] is the modified game_state after all 4 players *)
+(* [do_trading st] is the modified game_state after all 4 players have
+ * traded three cards. Relies on process_players_trades. Has side effect of
+ * updating the ai_data variable that is used by the ai_controller*)
 let do_trading st =
 	let p = st.round_num in
 	let traded_cards = process_players_trades st st.prs in
@@ -72,6 +74,9 @@ let do_trading st =
 	let fin_players = add_cards new_players to_add_cards in
 	{st with prs=fin_players; phase=Play}
 
+(* [get_human_card_to_play st p data] is the valid card that player p submits
+* to play. It relies on polling display_controller for input
+* and recursively calling itself until a result from display_controller is valid*)
 let rec get_human_card_to_play st p data =
 	let pool = st.pool in
 	let pnum = p.p_num in
@@ -81,6 +86,10 @@ let rec get_human_card_to_play st p data =
 	then card_to_play
 	else let () = draw_board st p in get_human_card_to_play st p data
 
+(* [process_players st data ps] is the modified game_state after all players
+* have chosen a card to place from thier hand into the pool. It also has the
+* side effect of calling GUI draw functions and delaying so that the game
+* can be absorbed *)
 let rec process_players st data ps =
 	match ps with
 		| h::t-> begin
@@ -129,10 +138,16 @@ let rec process_players st data ps =
 				let () = Unix.sleep 1 in *)
 				st
 
+(* [do_round st data] is the modified game_state after all players are run
+* and then the round_num incremented*)
 let do_round st data =
 	let new_state = process_players st data st.prs in
 	{new_state with round_num=st.round_num+1; phase=Play}
 
+(* [resolve_round st data] is the modified game_state after the game decides
+* who won the trick and how many points they should receive. It has the side
+* effect of modifiying ai_data and calling display functions in GUI to show
+* who won the trick *)
 let resolve_round st data =
 	let losr = get_loser ((fst (List.hd (List.rev st.pool))).suit) st.pool in
 	let loser = snd losr in
@@ -148,6 +163,8 @@ let resolve_round st data =
 	let () = winner st loser in
 	{st with pool=[]; prs=reorder_players}
 
+(* [repl st] is the modified st after either the PASS phase or the PLAY phase
+* is run*)
 let rec repl st (data:stored_data) =
 	if round_over st then reflush_round st data else
 	begin
@@ -186,6 +203,8 @@ and reflush_round (st:game_state) data =
 		pool=[];
 		phase=Pass} data
 
+(* [main p_lst name_lst] is the main entry point of the program - kicks off
+* repl loop*)
 let main p_lst name_lst =
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
