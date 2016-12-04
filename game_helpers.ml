@@ -152,6 +152,24 @@ let fix_ai_data (crd:card) (ps:player_state list) (dt:stored_data) =
 			else if crd={suit=Spade; value=11} then dt.q_spades_played<-true else () in
 	fix_ai_data_suits ps dt.players
 
+let reset_players_data prs =
+	match prs with
+		| h::t -> begin
+			h.has_clubs <- false;
+			h.has_spades <- false;
+			h.has_diamonds <- false;
+			h.has_hearts <- false;
+			h.shooting_moon <- false;
+			h.tricks <- [];
+			h.round_points <- 0;
+		end
+		| [] -> ()
+
+let reset_ai_data dt =
+	let () = dt.hearts_played<-false in
+	let () = dt.q_spades_played<-false in
+	let () = reset_players_data dt.players in
+	()
 (* Game state init helpers *)
 let rec build_player_states ai_name_list pnum deck =
 	match ai_name_list with
