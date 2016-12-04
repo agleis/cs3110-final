@@ -107,15 +107,39 @@ let is_valid_play pool pnum data crd =
 		| (c, pn)::t -> c.suit = crd.suit || not (suit_available c.suit (List.nth data.players pnum))
 		| [] -> crd.suit<>Heart || data.hearts_played
 
+let rec valid_helper cards =
+	match cards with
+	| h1::h2::t -> h1<>h2 && valid_helper (h2::t)
+	| h::t -> true
+	| [] -> true
+
+let rec are_valid_trades cards =
+	let sorted = List.sort (fun x1 x2 -> compare_cards true x1 x2) cards in
+	valid_helper sorted
+
+let rec get_human_cards_to_pass () =
+	let cards = Display_controller.trade_cards () in
+	if are_valid_trades cards then cards
+	else get_human_cards_to_pass ()
+
 let rec process_players_trades st ps =
 	match ps with
 		| h::t -> begin
+			let is_ai = h.ai_level<>0 in
+			if is_ai then begin
+				(* draw board*)
+				let to_pass = Ai_controller.pass_cards h in
+				to_pass::(process_players_trades st t)
+				(* delay*)
+			end
+			else begin
+			(* display board with st having last_human_player updated if need be*)
 			(* let _ = print_string ("\n\nPlayer "^(string_of_int h.p_num)^"'s turn - trading\n") in *)
-			let x = if h.ai_level=0 then Display_controller.trade_cards ()
-					else Ai_controller.pass_cards h in
-			x::(process_players_trades st t)
+			let to_pass = get_human_cards_to_pass () in
+			to_pass::(process_players_trades {st with last_human_player=h.p_num} t)
+			end
 		end
-		| [] -> []
+		| [] -> (* draw board - delay*) []
 
 let remove_cards main_list to_remove =
 	List.filter (fun x -> not (List.exists (fun y -> x=y) to_remove)) main_list
@@ -133,13 +157,7 @@ let remove_cards_players p_states to_remove =
 let do_trading st =
 	let p = st.round_num in
 	let traded_cards = process_players_trades st st.prs in
-	(* let t = List.nth traded_cards 0 in
-	let _ = print_string "\nP0 traded these cards ---\n" in
-	let _ = print_cards t in *)
 	let new_players = remove_cards_players st.prs traded_cards in
-	(* let p0hand = (List.nth new_players 0).hand in
-	let _ = print_string "\nP0 hand ---\n" in
-	let _ = print_cards p0hand in *)
 	let to_add_cards = reorder_cards traded_cards in
 	let fin_players = add_cards new_players to_add_cards in
 	{st with prs=fin_players; phase=Play}
@@ -154,8 +172,8 @@ let rec process_players st data ps =
 	match ps with
 		| h::t-> begin
 			let is_ai = (h.ai_level<>0) in
-			(* draw board *)
 			if is_ai then begin
+				(* draw board *)
 				let pool_cards = fst (List.split st.pool) in
 				let card_to_play = Ai_controller.guess_turn h pool_cards data in
 				let valid_play = is_valid_play st.pool h.p_num data card_to_play in
@@ -169,6 +187,7 @@ let rec process_players st data ps =
 				process_players ns data t
 			end
 			else begin
+				(* draw board with st having last_human_player=h.pnum *)
 				let card_to_play = get_human_card_to_play st.pool h.p_num data in
 				let new_hand = remove_cards h.hand [card_to_play] in
 				let new_p_state = {h with hand=new_hand} in
@@ -241,9 +260,8 @@ let rec repl st (data:stored_data) =
 and reflush_round (st:game_state) data =
 	let trick_list = List.map (fun x->x.tricks) data.players in
 	let point_list = List.map (fun x-> (List.fold_left point_allocation 0 x)) trick_list in
-	(* let _ = List.iter (fun x-> print_string ("pts: "^(string_of_int x)^"\n")) point_list in *)
 	let checked_for_moon = make_moon_points point_list in
-	(* let _ = List.iter (fun x-> print_string ("points: "^(string_of_int x)^"\n")) checked_for_moon in *)
+	(* game_points display call *)
 	let new_players = dole_out_points st.prs checked_for_moon in
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
