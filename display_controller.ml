@@ -392,8 +392,22 @@ let card_selection hand index =
   let () = set_color yellow in 
   draw_rect (s_triple c) (t_triple c) card_width card_height
 
-let rec click_card () = 
+let rec click_card  () (* st pstate *) = 
   let s = wait_next_event [Key_pressed] in
+(*   match s with
+  |(true, '`') -> card_selection ph 0; f_triple (List.nth ph 0)
+  |(true, '1') -> card_selection ph 1; f_triple (List.nth ph 1) 
+  |(true, '2') -> card_selection ph 2; f_triple (List.nth ph 2) 
+  |(true, '3') -> card_selection ph 3; f_triple (List.nth ph 3) 
+  |(true, '4') -> card_selection ph 4; f_triple (List.nth ph 4)
+  |(true, '5') -> card_selection ph 5; f_triple (List.nth ph 5)
+  |(true, '6') -> card_selection ph 6; f_triple (List.nth ph 6)
+  |(true, '7') -> card_selection ph 7; f_triple (List.nth ph 7)
+  |(true, '8') -> card_selection ph 8; f_triple (List.nth ph 8)
+  |(true, '9') -> card_selection ph 9; f_triple (List.nth ph 9)
+  |(true, '0') -> card_selection ph 10; f_triple (List.nth ph 10)
+  |(true, '-') -> card_selection ph 11; f_triple (List.nth ph 11)
+  |(true, '=') -> card_selection ph 12; f_triple (List.nth ph 12) *)
   let tpl = (s.keypressed, s.key) in 
   let ph = get_player_hand () in 
   let card  = 

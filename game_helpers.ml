@@ -97,7 +97,7 @@ let suit_available su pdata =
 let is_valid_play pool pnum data has_2clubs crd =
 	match pool with
 		| (c, pn)::t -> c.suit = crd.suit || not (suit_available c.suit (List.nth data.players pnum))
-		| [] -> (not has_2clubs) && (crd.suit<>Heart || data.hearts_played)
+		| [] -> (not has_2clubs || crd={suit=Club; value=2}) && (crd.suit<>Heart || data.hearts_played)
 
 let rec valid_helper cards =
 	match cards with
