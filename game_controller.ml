@@ -5,17 +5,27 @@ open Display_controller
 open Game_helpers
 open Unix
 
+(* [initialize_state a n d] is a record of type game_state that is
+ * takes in a list of ai_levels, a list of names, and a deck of cards
+ * and initializes to the correct fields and deals the deck to the players*)
 let rec initialize_state ai_list name_list deck =
 	let ai_name_list = List.map2 (fun x1 x2 -> (x1,x2)) ai_list name_list in
 	let p_states = build_player_states ai_name_list 0 deck in
 	let next_human = find_first_human p_states in
 	{pool=[]; prs=p_states; phase=Pass; round_num=1; last_human_player=next_human}
 
+(* [get_human_cards_to_pass st p]  is a list of valid cards that player p
+ * can play given game _state st. It relies on polling display_controller for input
+ * and recursively calling itself until a result from display_controller is valid*)
 let rec get_human_cards_to_pass st p =
 	let cards = Display_controller.trade_cards [] st p in
 	if are_valid_trades cards then cards
 	else let () = draw_board st p in get_human_cards_to_pass st p
 
+(* [process_players_trades st ps] is a list of tuples of cards selected to
+ * trade and modified player_states. It also has the side effect of calling
+ * GUI draw functions and delaying so that the game can be absorbed
+ * *)
 let rec process_players_trades st ps =
 	match ps with
 		| h::t -> begin
@@ -53,6 +63,7 @@ let rec process_players_trades st ps =
 				let () = Unix.sleep 1 in
 				[]
 
+(* [do_trading st] is the modified game_state after all 4 players *)
 let do_trading st =
 	let p = st.round_num in
 	let traded_cards = process_players_trades st st.prs in
@@ -128,7 +139,7 @@ let resolve_round st data =
 	let pool_cards = fst (List.split st.pool) in
 	let points = List.fold_left point_allocation 0 pool_cards in
 	let new_players = List.map (fun x-> if x.p_num<>loser then x
-				else {x with round_points=x.round_points+points}) st.prs in
+				else {x with round_pts=x.round_pts+points}) st.prs in
 	let to_change = List.nth data.players loser in
 	let () = to_change.round_points<-(to_change.round_points + points) in
 	let () = to_change.tricks<-(to_change.tricks@pool_cards) in
@@ -156,8 +167,9 @@ and reflush_round (st:game_state) data =
 	let point_list = List.map (fun x-> (List.fold_left point_allocation 0 x)) trick_list in
 	let checked_for_moon = make_moon_points point_list in
 	(* game_points display call *)
-	let () = game_points checked_for_moon in
-	let new_players = dole_out_points st.prs checked_for_moon in
+	let n_players = dole_out_points st.prs checked_for_moon in
+	let new_players = List.map (fun x->{x with round_pts=(List.nth checked_for_moon x.p_num)}) n_players in
+	let () = game_points new_players in
 	let total_points = List.map (fun x-> x.game_points) (get_ordered_p_states new_players) in
 	let did_win = List.exists (fun x-> x>=100) total_points in
 	let () = if did_win then draw_end_game new_players in
@@ -165,7 +177,7 @@ and reflush_round (st:game_state) data =
 	let shuffled = shuffle_deck deck in
 	let init_state = initialize_state [0;0;0;0] ["";"";"";""] shuffled in
 	let hands = List.map (fun x -> x.hand) init_state.prs in
-	let f_players = List.map2 (fun p h -> {p with hand=h; round_points=0}) new_players hands in
+	let f_players = List.map2 (fun p h -> {p with hand=h; round_pts=0}) new_players hands in
 	let () = reset_ai_data data in
 	let () = fix_ai_data_suits (get_ordered_p_states f_players) data.players in
 	if did_win then () else

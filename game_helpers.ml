@@ -174,7 +174,7 @@ let reset_ai_data dt =
 let rec build_player_states ai_name_list pnum deck =
 	match ai_name_list with
 		| (a, n)::t -> let p_cards = partition_list deck (pnum*13) 13 in
-				{hand=p_cards; game_points=99; round_points=0; name=n;
+				{hand=p_cards; game_points=99; round_pts=0; name=n;
 				 ai_level=a; collected_cards=[]; p_num=pnum}::(build_player_states t (pnum+1) deck)
 		| [] -> []
 
