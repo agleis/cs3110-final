@@ -15,6 +15,7 @@ type player_state = {
 	ai_level: int;
 	collected_cards: card list;
     p_num: int;
+    name: string;
 }
 
 type game_state = {

@@ -5,8 +5,9 @@ open Display_controller
 open Game_helpers
 open Unix
 
-let rec initialize_state ai_list deck =
-	let p_states = build_player_states ai_list 0 deck in
+let rec initialize_state ai_list name_list deck =
+	let ai_name_list = List.map2 (fun x1 x2 -> (x1,x2)) ai_list name_list in
+	let p_states = build_player_states ai_name_list 0 deck in
 	let next_human = find_first_human p_states in
 	{pool=[]; prs=p_states; phase=Pass; round_num=1; last_human_player=next_human}
 
@@ -163,7 +164,7 @@ and reflush_round (st:game_state) data =
 	let () = if did_win then draw_end_game total_points in
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
-	let init_state = initialize_state [0;0;0;0] shuffled in
+	let init_state = initialize_state [0;0;0;0] ["";"";"";""] shuffled in
 	let hands = List.map (fun x -> x.hand) init_state.prs in
 	let f_players = List.map2 (fun p h -> {p with hand=h}) new_players hands in
 	if did_win then () else
