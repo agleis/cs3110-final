@@ -6,7 +6,7 @@ open Unix
 
 let determine_winner st = 0
 
-let rec num_humans_playing ps = 
+let rec num_humans_playing ps =
 	match ps with
 		| h::t -> if h.ai_level=0 then 1 + num_humans_playing t else num_humans_playing t
 		| [] -> 0
@@ -100,7 +100,7 @@ let fix_ai_data_suits players (data:player_data list) =
 			d.has_diamonds <- (List.exists (fun x -> x.suit=Diamond) p.hand);
 			d.has_hearts <- (List.exists (fun x -> x.suit=Heart) p.hand)) players data
 
-let fix_ai_data (crd:card) (ps:player_state list) (dt:stored_data) = 
+let fix_ai_data (crd:card) (ps:player_state list) (dt:stored_data) =
 	let () = if crd.suit=Heart then dt.hearts_played<-true
 			else if crd={suit=Spade; value=11} then dt.q_spades_played<-true else () in
 	fix_ai_data_suits ps dt.players
@@ -131,10 +131,10 @@ let suit_available su pdata =
 		| Spade -> pdata.has_spades
 		| Diamond -> pdata.has_diamonds
 
-let is_valid_play pool pnum data crd =
+let is_valid_play pool pnum data has_2clubs crd =
 	match pool with
 		| (c, pn)::t -> c.suit = crd.suit || not (suit_available c.suit (List.nth data.players pnum))
-		| [] -> crd.suit<>Heart || data.hearts_played
+		| [] -> (not has_2clubs) && (crd.suit<>Heart || data.hearts_played)
 
 let rec valid_helper cards =
 	match cards with
@@ -183,7 +183,7 @@ let rec process_players_trades st ps =
 			to_pass::(process_players_trades {st with last_human_player=h.p_num; prs=new_players} t)
 			end
 		end
-		| [] -> (* draw board - delay*) 
+		| [] -> (* draw board - delay*)
 				let () = draw_board st (List.nth st.prs ((List.length st.prs)-1)) in
 				let () = Unix.sleep 1 in
 				[]
@@ -199,9 +199,10 @@ let do_trading st =
 let rec get_human_card_to_play st p data =
 	let pool = st.pool in
 	let pnum = p.p_num in
+	let has_2clubs = List.exists (fun x-> x={suit=Club; value=2}) p.hand in
 	let card_to_play = Display_controller.click_card () in
-	if is_valid_play (List.rev pool) pnum data card_to_play
-	then card_to_play 
+	if is_valid_play (List.rev pool) pnum data has_2clubs card_to_play
+	then card_to_play
 	else let () = draw_board st p in get_human_card_to_play st p data
 
 let rec process_players st data ps =
@@ -213,7 +214,8 @@ let rec process_players st data ps =
 				let () = draw_board st h in
 				let pool_cards = fst (List.split st.pool) in
 				let card_to_play = Ai_controller.guess_turn h pool_cards data in
-				let valid_play = is_valid_play st.pool h.p_num data card_to_play in
+				let has_2clubs = List.exists (fun x-> x={suit=Club; value=2}) h.hand in
+				let valid_play = is_valid_play st.pool h.p_num data has_2clubs card_to_play in
 				let new_hand = remove_cards h.hand [card_to_play] in
 				let new_p_state = {h with hand=new_hand} in
 				let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
@@ -240,12 +242,13 @@ let rec process_players st data ps =
 				let ns = {st with prs=new_players;
 								pool=((card_to_play,h.p_num)::st.pool);
 								last_human_player=h.p_num} in
+				let () = Unix.sleepf 0.25 in
 				let () = draw_board ns h in
 				let () = Unix.sleep 1 in
 				process_players ns data t
 			end
 		end
-		| [] -> (* draw board then delay *) 
+		| [] -> (* draw board then delay *)
 				(* let () = draw_board st (List.nth st.prs ((List.length st.prs)-1)) in
 				let () = Unix.sleep 1 in *)
 				st
@@ -263,7 +266,7 @@ let point_allocation acc y =
 	else if y={suit=Spade;value=12} then acc + 13
 	else acc
 
-let rec reorder_players_winner ps acc winner= 
+let rec reorder_players_winner ps acc winner=
 	match ps with
 		| h::t -> if h.p_num=winner then (h::t)@(List.rev acc) else reorder_players_winner t (h::acc) winner
 		| [] -> []
@@ -319,11 +322,15 @@ and reflush_round (st:game_state) data =
 	(* game_points display call *)
 	let () = game_points checked_for_moon in
 	let new_players = dole_out_points st.prs checked_for_moon in
+	let total_points = List.map (fun x-> x.game_points) (get_ordered_p_states new_players) in
+	let did_win = List.exists (fun x-> x>=100) total_points in
+	let () = if did_win then draw_end_game total_points in
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
 	let init_state = initialize_state [0;0;0;0] shuffled in
 	let hands = List.map (fun x -> x.hand) init_state.prs in
 	let f_players = List.map2 (fun p h -> {p with hand=h}) new_players hands in
+	if did_win then () else
 	repl { st with prs=f_players;
 		round_num=(st.round_num+1);
 		pool=[];

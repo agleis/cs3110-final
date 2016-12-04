@@ -9,7 +9,8 @@ val trade_cards: unit -> card list
 
 val switch_player: unit -> unit
 
-val winner: int -> unit 
+val winner: int -> unit
 
 val game_points: int list -> unit
 
+val draw_end_game: int list -> unit
