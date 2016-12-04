@@ -3,9 +3,9 @@ open Types
 (* [display_state game_state] displays the game with the given game state. *)
 val draw_board: Types.game_state -> Types.player_state -> unit
 
-val click_card: unit -> card
+val click_card: card list -> Types.game_state -> Types.player_state  -> card
 
-val trade_cards: unit -> card list
+val trade_cards: card list -> Types.game_state -> Types.player_state -> card list
 
 val switch_player: unit -> unit
 

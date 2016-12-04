@@ -11,7 +11,7 @@ let rec initialize_state ai_list deck =
 	{pool=[]; prs=p_states; phase=Pass; round_num=1; last_human_player=next_human}
 
 let rec get_human_cards_to_pass st p =
-	let cards = Display_controller.trade_cards () in
+	let cards = Display_controller.trade_cards [] st p in
 	if are_valid_trades cards then cards
 	else let () = draw_board st p in get_human_cards_to_pass st p
 
@@ -64,7 +64,7 @@ let rec get_human_card_to_play st p data =
 	let pool = st.pool in
 	let pnum = p.p_num in
 	let has_2clubs = List.exists (fun x-> x={suit=Club; value=2}) p.hand in
-	let card_to_play = Display_controller.click_card () in
+	let card_to_play = Display_controller.click_card [] st p in
 	if is_valid_play (List.rev pool) pnum data has_2clubs card_to_play
 	then card_to_play
 	else let () = draw_board st p in get_human_card_to_play st p data
