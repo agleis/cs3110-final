@@ -47,3 +47,15 @@ let rec random_card hand lead_suit =
     then random_card hand lead_suit
     else card
   else List.nth hand (Random.int (List.length hand)))
+
+let rec random_card_no_suit hand =
+  if List.length hand = 0
+  then {suit = Diamond; value = -1}
+  else (Random.self_init ();
+    let card = List.nth hand (Random.int (List.length hand)) in
+    if card.suit = Heart &&
+       (has_card_of_suit Club hand || 
+        has_card_of_suit Diamond hand ||
+        has_card_of_suit Spade hand)
+    then random_card_no_suit hand
+    else card)

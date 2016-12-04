@@ -144,11 +144,18 @@ let guess_turn_third p_state pool data =
 
 let guess_turn p_state pool data =
   let _ = check_if_shooting_moon p_state.hand pool data p_state.p_num in
-  match List.length pool with
-  | 0 -> guess_turn_first p_state data
-  | 1 -> guess_turn_second p_state pool data
-  | 2 -> guess_turn_third p_state pool data
-  | _ -> guess_turn_last p_state pool data
+  let possible_card =
+    match List.length pool with
+    | 0 -> guess_turn_first p_state data
+    | 1 -> guess_turn_second p_state pool data
+    | 2 -> guess_turn_third p_state pool data
+    | _ -> guess_turn_last p_state pool data in
+  if possible_card.value = (-1)
+  then if List.length pool = 0
+       then random_card_no_suit p_state.hand
+       else let lead_suit = (last_card pool).suit in
+       random_card p_state.hand lead_suit
+  else possible_card
 
 let pass_cards p_state =
   let spade_state = get_spade_state p_state.hand in
