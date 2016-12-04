@@ -183,6 +183,7 @@ let dole_out_points (players:player_state list) points =
 
 let rec repl st (data:stored_data) =
 	let _ = print_game st in
+	(* let () = draw_board st (List.nth (st.prs) 0) in  *)
 	if round_over st then reflush_round st data else
 	begin
 		if st.phase=Pass then
