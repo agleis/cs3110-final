@@ -15,7 +15,7 @@ let perfect_lead_card hand data =
   if data.hearts_played
   then if has_low_hearts hand
        then play_low_heart hand
-       else middle_card_from_short_suit hand
+       else low_card_from_short_suit hand
   else if (match get_short_suit hand with SpadeS _ -> true | _ -> false)
   then if has_card_of_suit Diamond hand
        then high_card_from_suit hand Diamond (-1) (-1)
@@ -75,9 +75,6 @@ let take_trick_if_possible hand pool =
 
 let take_trick_max hand pool data =
   let lead_suit = (last_card pool).suit in
-  print_string "Current lead suit (take): ";
-  let suit_str = match lead_suit with Club -> "Club" | Diamond -> "Diamond" | Spade -> "Spade" | _ -> "Heart" in
-  print_string suit_str; print_string "\n";
   let high_card = highest_card_so_far pool lead_suit in
   let prob_list = beating_cards_still_out high_card pool data in
   let beating_cards = high_card::prob_list in
@@ -85,9 +82,6 @@ let take_trick_max hand pool data =
 
 let lose_trick_max hand pool data =
   let lead_suit = (last_card pool).suit in
-  print_string "Current lead suit (lose): ";
-  let suit_str = match lead_suit with Club -> "Club" | Diamond -> "Diamond" | Spade -> "Spade" | _ -> "Heart" in
-  print_string suit_str; print_string "\n";
   let high_card = highest_card_so_far pool lead_suit in
   let played_card = highest_losing_card high_card hand data.hearts_played in
   if played_card.value = (-1)
