@@ -56,7 +56,7 @@ let do_trading st =
 	let p = st.round_num in
 	let traded_cards = process_players_trades st st.prs in
 	let new_players = remove_cards_players st.prs traded_cards in
-	let to_add_cards = reorder_cards traded_cards in
+	let to_add_cards = reorder_cards (p mod 3) traded_cards in
 	let fin_players = add_cards new_players to_add_cards in
 	{st with prs=fin_players; phase=Play}
 
