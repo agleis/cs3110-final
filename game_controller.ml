@@ -1,6 +1,7 @@
 open Types
 open Human_controller
 open Ai_controller
+open Display_controller
 
 let determine_winner st = 0
 

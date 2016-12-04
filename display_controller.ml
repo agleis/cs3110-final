@@ -8,11 +8,10 @@ let lst1 = [{suit=Heart; value=1};{suit=Heart; value=2};{suit=Club; value=3};{su
 let lst2 = [{suit=Heart; value=1};{suit=Heart; value=2};{suit=Club; value=3};{suit=Club; value=4};{suit=Diamond; value=5};{suit=Diamond; value=6}]
 let lst3 = [{suit=Spade; value=1};{suit=Club; value=2};{suit=Club; value=3};{suit=Diamond; value=4};{suit=Diamond; value=5};{suit=Heart; value=6}; {suit=Spade; value=7}; {suit=Club; value=8}; {suit=Diamond; value=9}; {suit=Club; value=10};{suit=Heart; value=11};{suit=Spade; value=12};{suit=Diamond; value=13}]
 let lst4 = [{suit=Heart; value=7};{suit=Heart; value=8};{suit=Club; value=9};{suit=Club; value=10};{suit=Diamond; value=11};{suit=Diamond; value=12}]
-let pool1 = [({suit=Diamond; value=5},1); ({suit=Diamond; value=6},2); ({suit=Spade; value=7},3); ({suit=Spade; value=8},4)]
+let pool1 = [({suit=Diamond; value=5},2); ({suit=Diamond; value=6},3); ({suit=Spade; value=7},4); ({suit=Spade; value=8},1)]
 
 let player_state1 = {
   hand = lst1;
-  round_points = 2;
   game_points = 20;
   ai_level = 0;
   collected_cards = lst2;
@@ -21,17 +20,39 @@ let player_state1 = {
 
 let player_state2 = {
   hand = lst3;
-  round_points = 5;
   game_points = 25;
   ai_level = 0;
   collected_cards = lst4;
   p_num = 2
 }
 
+let player_state3 = {
+  hand = lst3;
+  game_points = 25;
+  ai_level = 0;
+  collected_cards = lst4;
+  p_num = 3
+}
+
+let player_state4 = {
+  hand = lst3;
+  game_points = 25;
+  ai_level = 0;
+  collected_cards = lst4;
+  p_num = 4
+}
+
 let game_state1 = {
   pool = pool1;
-  prs = [player_state1; player_state2];
+  prs = [player_state3; player_state4; player_state1; player_state2];
   phase = Play;
+  round_num = 1
+}
+
+let game_state2 = {
+  pool = pool1;
+  prs = [player_state3; player_state4; player_state1; player_state2];
+  phase = Pass;
   round_num = 1
 }
 
@@ -41,15 +62,39 @@ let card_spacing = 5
 let exit = ref true
 let player_hand = ref []
 
+let f_triple (a,_,_) = a
+let s_triple (_,a,_) = a
+let t_triple (_,_,a) = a
+
 let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in
   let () = open_graph s in
   ()
 
-let click_card w h =
-    let s = wait_next_event [Button_down; Button_up] in
-    if s.button && s.mouse_x < (int_of_float (0.075*.(float w))) && s.mouse_y > (h-(int_of_float (0.025*.(float w)))) then
-      begin close_graph (); exit := false end 
+let card_selection hand index cw ch =
+  let c = List.nth hand index in
+  let () = set_line_width 10 in 
+  let () = set_color yellow in 
+  draw_rect (s_triple c) (t_triple c) cw ch
+
+let click_card hand cw ch = 
+  let s = wait_next_event [Key_pressed] in
+  let tpl = (s.keypressed, s.key) in 
+  match tpl with 
+  |(true, '`') -> card_selection hand 0 cw ch
+  |(true, '1') -> card_selection hand 1 cw ch
+  |(true, '2') -> card_selection hand 2 cw ch
+  |(true, '3') -> card_selection hand 3 cw ch
+  |(true, '4') -> card_selection hand 4 cw ch
+  |(true, '5') -> card_selection hand 5 cw ch
+  |(true, '6') -> card_selection hand 6 cw ch
+  |(true, '7') -> card_selection hand 7 cw ch
+  |(true, '8') -> card_selection hand 8 cw ch
+  |(true, '9') -> card_selection hand 9 cw ch
+  |(true, '0') -> card_selection hand 10 cw ch
+  |(true, '-') -> card_selection hand 11 cw ch
+  |(true, '=') -> card_selection hand 12 cw ch
+  |_ -> failwith "Invalid key option" 
 
 let draw_symbol sym x y = 
   match sym with
@@ -173,7 +218,17 @@ let draw_hand lst w h cw ch=
   for i=0 to (List.length lst) - 1 do
       let xpos = ((int_of_float (0.5*.(float w))) + !delta - (total_len/2)) in
       let ypos = (int_of_float (0.06*.(float h))) in
+      let key = 
+        if i = 0 then "~"
+        else if i = 10 then "0"
+        else if i = 11 then "-"
+        else if i = 12 then "="
+        else string_of_int i
+      in
       draw_card ((List.nth lst i).value) ((List.nth lst i).suit) xpos ypos cw ch;
+      moveto (xpos+(cw/2)) (ypos-20);
+      set_color black;
+      draw_string key;
       player_hand := !player_hand@[(List.nth lst i,xpos,ypos)];
       delta := !delta + (cw + card_spacing);
     done;
@@ -230,15 +285,6 @@ let draw_pool pool w h cw ch =
   done;
   in ()
 
-let draw_player player w h =
-  let () =
-    set_color black;
-    moveto ((int_of_float (0.05*.(float w)))) (int_of_float (0.95*.(float h)));
-    draw_string ("Player " ^ (string_of_int player) ^ "'s turn");
-    moveto ((int_of_float (0.05*.(float w)))) (int_of_float (0.90*.(float h)));
-    draw_string ("Points: " ^ (string_of_int 0))
-  in ()
-
 let draw_quit w h =
   set_color green;
   fill_rect 0 (h-(int_of_float (0.025*.(float w)))) (int_of_float (0.075*.(float w))) (int_of_float (0.025*.(float w)));
@@ -246,27 +292,119 @@ let draw_quit w h =
   moveto ((int_of_float (0.35*.0.075*.(float w)))) (h-(int_of_float (0.6*.0.025*.(float w))));
   draw_string "QUIT"
 
+let draw_play_phase x y = 
+
+  set_line_width 10;
+   
+  moveto x y;
+  lineto x (y+20);
+  lineto (x-10) (y+40);
+  moveto x (y+20);
+  lineto (x+10) (y+40);
+
+  draw_ellipse (x+30) (y+20) 12 20;
+
+  draw_arc (x+65) (y+20) 12 20 180 360;
+  moveto (x+53) (y+20);
+  lineto (x+53) (y+40);
+  moveto (x+77) (y+20);
+  lineto (x+77) (y+40);
+
+  moveto (x+90) y;
+  lineto (x+90) (y+40);
+  draw_arc (x+90) (y+30) 25 10 (-90) 90;
+  moveto (x+90) (y+20);
+  lineto (x+115) y;
+
+  moveto (x+170) y;
+  lineto (x+170) (y+40);
+  moveto (x+150) (y+40);
+  lineto (x+190) (y+40);
+
+  draw_arc (x+210) (y+20) 12 20 180 360;
+  moveto (x+198) (y+20);
+  lineto (x+198) (y+40);
+  moveto (x+222) (y+20);
+  lineto (x+222) (y+40);
+
+  moveto (x+240) y;
+  lineto (x+240) (y+40);
+  draw_arc (x+240) (y+30) 25 10 (-90) 90;
+  moveto (x+240) (y+20);
+  lineto (x+265) y;
+
+  moveto (x+280) y;
+  lineto (x+280) (y+40);
+  lineto (x+310) y;
+  lineto (x+310) (y+40)
+
+let draw_pass_phase x y =
+  set_line_width 10;
+
+  draw_arc (x+15) (y+20) 15 20 45 305;
+
+  moveto (x+40) y;
+  lineto (x+40) (y+40);
+  moveto (x+40) (y+20);
+  lineto (x+60) (y+20);
+  moveto (x+60) y;
+  lineto (x+60) (y+40);
+
+  draw_ellipse (x+85) (y+20) 12 20;
+  draw_ellipse (x+120) (y+20) 12 20;
+
+  draw_arc (x+155) (y+10) 10 10 (-150) 90;
+  draw_arc (x+155) (y+30) 10 10 270 50;
+
+  moveto (x+180) y;
+  lineto (x+180) (y+40);
+  lineto (x+210) (y+40);
+  moveto (x+180) (y+20);
+  lineto (x+200) (y+20);
+  moveto (x+180) y;
+  lineto (x+210) y;
+
+  draw_arc (x+270) (y+30) 10 10 130 (-110);
+  draw_arc (x+270) (y+10) 10 10 110 (-130)
+
+let draw_phase phase x y = 
+  match phase with
+  |Play -> draw_play_phase x y
+  |Pass -> draw_pass_phase x (y-300)
+  |Setup -> draw_pass_phase x (y-300)
+
+let rec find_index lst num acc =
+  match lst with
+  |[] -> acc
+  |h::t -> if h.p_num == num then acc else find_index t num (acc+1)
+
 let draw_board state current_player_state =
   init_window window_width window_height;
   set_window_title "CS 3110 Hearts Game";
   clear_graph ();
-(*   let exit = ref true in *)
   let num = List.length (current_player_state.hand) in
   let player = current_player_state.p_num in
   let lst = current_player_state.hand in 
+  let index = find_index state.prs player 0 in
+  let left_index = (index + 1) mod 4 in 
+  let right_index = (index + 2) mod 4 in 
+  let top_index = (index + 3) mod 4 in 
+  let left_player = "Player " ^ (string_of_int (List.nth state.prs left_index).p_num) in 
+  let right_player = "Player " ^ (string_of_int (List.nth state.prs top_index).p_num) in 
+  let top_player = "Player " ^ (string_of_int (List.nth state.prs right_index).p_num) in 
   let pool = state.pool in 
   let width = size_x () in
   let height = size_y () in
   let card_width = int_of_float ((float width)*.0.046875) in
   let card_height = int_of_float ((float height)*.0.12) in
   draw_quit width height;
-  draw_card_top num ((int_of_float (0.30*.(float width)))) (int_of_float (0.8*.(float height))) width height card_width card_height "player 3";
-  draw_card_side num (int_of_float (0.05*.(float width))) ((int_of_float (0.20*.(float height)))) width height card_width card_height "player 2" true;
-  draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height "player 4" false;
+  draw_phase state.phase (int_of_float (0.375*.(float width))) (int_of_float (0.65*.(float height)));
+  draw_card_top num ((int_of_float (0.30*.(float width)))) (int_of_float (0.8*.(float height))) width height card_width card_height top_player;
+  draw_card_side num (int_of_float (0.05*.(float width))) ((int_of_float (0.20*.(float height)))) width height card_width card_height left_player true;
+  draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height right_player false;
   draw_hand lst width height card_width card_height;
   draw_pool pool width height card_width card_height;
-(*   draw_player player width height; *)
-(*   click_card width height; *)
-  while !exit do (); done
+  let card_chosen = click_card !player_hand card_width card_height in 
+  while true do (); done
 
-let () = draw_board game_state1 player_state1
+let () = draw_board game_state1 player_state2
