@@ -255,6 +255,13 @@ let middle_card_from_short_suit hand =
   | SpadeS _ -> middle_card_from_suit hand Spade (-1) (-1)
   | DiamondS _ -> middle_card_from_suit hand Diamond (-1) (-1)
 
+let low_card_from_short_suit hand =
+  match get_short_suit hand with
+  | HeartS _ -> low_card_from_suit hand Heart (-1) (-1)
+  | ClubS _ -> low_card_from_suit hand Club (-1) (-1)
+  | SpadeS _ -> low_card_from_suit hand Spade (-1) (-1)
+  | DiamondS _ -> low_card_from_suit hand Diamond (-1) (-1)
+
 let highest_card_so_far pool lead_suit =
   match pool with
   | [] -> {suit = Diamond; value = -1}
