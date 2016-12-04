@@ -2,6 +2,7 @@ open Types
 open Human_controller
 open Ai_controller
 open Display_controller
+open Unix
 
 let determine_winner st = 0
 
@@ -87,12 +88,16 @@ let shuffle_deck deck =
 	let sorted = List.sort (fun x1 x2 -> (fst x1) - (fst x2)) weighted in
 	List.map (fun x -> snd x) sorted
 
-let rec get_choices players =
+let rec get_choices st players =
 	match players with
 		| h::t -> begin
-			let _ = print_string ("\n\nPlayer "^(string_of_int h.p_num)^"'s turn - trading\n") in
-			if h.ai_level=0 then let x = Human_controller.pass_cards h in x::(get_choices t)
-					else let x = Ai_controller.pass_cards h in x::(get_choices t)
+			let _ = draw_board st h in
+			(* let _ = print_string ("\n\nPlayer "^(string_of_int h.p_num)^"'s turn - trading\n") in *)
+			let x = if h.ai_level=0 then Display_controller.trade_cards () 
+					else Ai_controller.pass_cards h in
+			let _ = draw_board st h in
+			let _ = Unix.sleep 2 in
+			x::(get_choices st t)
 		end
 		| [] -> []
 
@@ -111,7 +116,7 @@ let remove_cards_players p_states to_remove =
 
 let do_trading st =
 	let p = st.round_num in
-	let traded_cards = get_choices st.prs in
+	let traded_cards = get_choices st st.prs in
 	let t = List.nth traded_cards 0 in
 	let _ = print_string "\nP0 traded these cards ---\n" in
 	let _ = print_cards t in
@@ -123,24 +128,30 @@ let do_trading st =
 	let fin_players = add_cards new_players to_add_cards in
 	{st with prs=fin_players; phase=Play}
 
-let rec build_pool const_ps ps cur_pool data =
+let rec build_pool st const_ps ps cur_pool data =
+	let _ = print_string "\n\n\n\n ENTERED BUILD POOL \n\n\n\n" in
 	match ps with
 		| h::t -> begin
+			let _ = Display_controller.draw_board {st with pool=cur_pool} h in
 			let pool_cards = fst (List.split cur_pool) in
 			let _ = print_string "\n\npool -----\n" in
 			let _ = print_cards pool_cards in
 			let _ = print_string ("\n\nPlayer "^(string_of_int h.p_num)^"'s turn\n") in
-			let card_to_play = if h.ai_level=0 then Human_controller.card_to_play h
+			let card_to_play = if h.ai_level=0 then Display_controller.click_card ()
 						else Ai_controller.guess_turn h pool_cards data in
 			let new_hand = remove_cards h.hand [card_to_play] in
+			let _ = print_string "\nnew hand ---\n" in
+			let _ = print_cards new_hand in			
 			let new_p_state = {h with hand=new_hand} in
 			let _ = fix_ai_data_suits (get_ordered_p_states const_ps) data.players in
-			(card_to_play, new_p_state)::(build_pool const_ps t ((card_to_play,h.p_num)::cur_pool) data)
+			let _ = Display_controller.draw_board {st with pool=cur_pool} h in
+			let _ = if h.ai_level = 0 then () else Unix.sleep 2 in
+			(card_to_play, new_p_state)::(build_pool st const_ps t ((card_to_play,h.p_num)::cur_pool) data)
 		end
 		| [] -> []
 
 let do_round st data =
-	let pool_players = build_pool st.prs st.prs [] data in
+	let pool_players = build_pool st st.prs st.prs [] data in
 	let n_pool = List.map (fun x-> (fst x, (snd x).p_num)) pool_players in
 	let split = List.split pool_players in
 	let n_players = snd split in
@@ -180,9 +191,9 @@ let dole_out_points (players:player_state list) points =
 		players points
 
 let rec repl st (data:stored_data) =
-	let _ = print_game st in
-	(* let () = draw_board st (List.nth (st.prs) 0) in  *)
-	if round_over st then reflush_round st data else
+(* 	let _ = print_game st in
+(*  *)	let () = draw_board st (List.nth (st.prs) 0) in 
+ *)	if round_over st then reflush_round st data else
 	begin
 		if st.phase=Pass then
 								let n_state = do_trading st in
@@ -216,5 +227,5 @@ let main p_lst =
 	let shuffled = shuffle_deck deck in
 	let init_state = initialize_state p_lst shuffled in
 	let ai_data = build_ai_data init_state.prs in
-	let _ = print_cards shuffled in
+	(* let _ = print_cards shuffled in *)
 	repl init_state ai_data
