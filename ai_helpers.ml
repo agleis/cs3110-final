@@ -1,8 +1,12 @@
 open Types
 open Randoms
 
+(* [short_suit] represents a suit, and the parametrized value represents the
+ * number of that suit ina  given hand. *)
 type short_suit = SpadeS of int | ClubS of int | HeartS of int | DiamondS of int
 
+(* [suit_values] gives a list of the values of each card of the four suits
+ * in a given hand. *)
 type suit_values = {
   mutable spade: int list;
   mutable club: int list;

@@ -14,4 +14,4 @@ display:
 	ocamlbuild -pkgs oUnit,graphics display_controller.byte && ./display_controller.byte
 
 setup:
-	ocamlbuild -pkgs graphics,unix setup_controller.byte && ./setup_controller.byte
+	ocamlbuild -pkgs graphics,unix setup_controller.byte && clear && ./setup_controller.byte
