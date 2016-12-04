@@ -390,7 +390,7 @@ let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in
   open_graph s
 
-let draw_symbol sym x y = 
+let draw_symbol sym x y =
   match sym with
   |Heart ->
     set_color red;
@@ -584,22 +584,37 @@ let draw_pool pool =
   done;
   in ()
 
-let draw_play_phase x y =
+let draw_left_arrow () =
+    set_color black;
+    (* code for arrow left*)
 
+let draw_right_arrow () =
+    set_color black;
+(* code for arrow left*)
+
+let draw_across_arrow () =
+    set_color black;
+(* code for arrow left*)
+
+let draw_play_phase x y =
   set_line_width 10;
   set_color black;
   draw_string1 "YOUR TURN" x y
 
-let draw_pass_phase x y =
+let draw_pass_phase round x y =
   set_line_width 10;
   set_color black;
-  draw_string1 "CHOOSE THREE" x y
+  draw_string1 "CHOOSE THREE" x y;
+  let () = match round with
+    | 0 -> draw_left_arrow ()
+    | 1 -> draw_right_arrow ()
+    | _ -> draw_across_arrow ()
 
-let draw_phase phase x y =
+let draw_phase phase roun_num x y =
   match phase with
   |Play -> draw_play_phase (x+60) y
-  |Pass -> draw_pass_phase (x-50) (y-300)
-  |Setup -> draw_pass_phase x (y-300)
+  |Pass -> draw_pass_phase (round_num mod 3) (x-50) (y-300)
+  |Setup -> draw_pass_phase (round_num mod 3) x (y-300)
 
 let rec switch_player () =
   clear_graph ();
@@ -658,7 +673,7 @@ let draw_board state pstate =
   let num_right = List.length ((List.nth state.prs right_index).hand) in
   let num_top = List.length ((List.nth state.prs top_index).hand) in
   if (state.last_human_player = pstate.p_num) then
-  draw_phase state.phase (int_of_float (0.3*.(float window_width))) (int_of_float (0.65*.(float window_height)));
+  draw_phase state.phase state.roun_num (int_of_float (0.3*.(float window_width))) (int_of_float (0.65*.(float window_height)));
   draw_card_top num_top ((int_of_float (0.30*.(float window_width)))) (int_of_float (0.8*.(float window_height))) (player_string state top_index);
   draw_card_side num_left (int_of_float (0.095*.(float window_width))) ((int_of_float (0.20*.(float window_height)))) (player_string state left_index) true;
   draw_card_side num_right ((int_of_float (0.905*.(float window_width))) - card_height) ((int_of_float (0.20*.(float window_height)))) (player_string state right_index) false;
@@ -671,7 +686,7 @@ let draw_board state pstate =
 let () = draw_board game_state1 player_state1 *)
 
 
-let rec find_pos ph c = 
+let rec find_pos ph c =
   match ph with
   |[] -> (-1,-1)
   |h::t -> if (f_triple h) = c then (s_triple h, t_triple h) else find_pos t c
@@ -682,30 +697,30 @@ let card_selection st pstate lst ph =
   if List.length lst = 0 then () else
     begin
       for i=0 to (List.length lst) - 1 do
-        let c = List.nth lst i in 
+        let c = List.nth lst i in
         let () = set_line_width 10 in
-        let () = set_color yellow in 
-        let new_pos = find_pos ph c in 
+        let () = set_color yellow in
+        let new_pos = find_pos ph c in
         draw_rect (fst new_pos) (snd new_pos) card_width card_height
       done
     end
 
 let rec wait_for_enter () =
-  let s = wait_next_event [Key_pressed] in 
+  let s = wait_next_event [Key_pressed] in
   if (s.keypressed && s.key = '\r') then () else wait_for_enter ()
 
-let new_lst c lst num = 
-  if List.mem c lst  then 
-    List.filter (fun x -> x <> c) lst 
+let new_lst c lst num =
+  if List.mem c lst  then
+    List.filter (fun x -> x <> c) lst
   else
-    begin 
-      if List.length lst > num then lst else c::lst 
+    begin
+      if List.length lst > num then lst else c::lst
     end
 
-let index c = 
+let index c =
   match c with
   |'`' ->  0
-  |'1' ->  1 
+  |'1' ->  1
   |'2' ->  2
   |'3' ->  3
   |'4' ->  4
@@ -715,57 +730,42 @@ let index c =
   |'8' ->  8
   |'9' ->  9
   |'0' ->  10
-  |'-' ->  11 
+  |'-' ->  11
   |'=' ->  12
   |'\r' -> (-2)
   |_ -> (-2)
 
 
-let rec click_card lst st pstate = 
+let rec click_card lst st pstate =
   let s = wait_next_event [Key_pressed] in
-  let ph = get_player_hand () in 
-  let c x = f_triple (List.nth ph x) in 
-  let idx = index s.key in 
-  if idx = (-2) then 
+  let ph = get_player_hand () in
+  let c x = f_triple (List.nth ph x) in
+  let idx = index s.key in
+  if idx = (-2) then
     begin
       if List.length lst > 0 then List.hd lst
       else click_card lst st pstate
     end
   else
     begin
-      let n_lst = new_lst (c idx) lst 0 in 
+      let n_lst = new_lst (c idx) lst 0 in
       let () = card_selection st pstate n_lst ph in
       click_card n_lst st pstate
     end
 
-let rec trade_cards lst st pstate = 
+let rec trade_cards lst st pstate =
   let s = wait_next_event [Key_pressed] in
-  let ph = get_player_hand () in 
-  let c x = f_triple (List.nth ph x) in 
-  let idx = index s.key in 
-  if idx = (-2) then 
+  let ph = get_player_hand () in
+  let c x = f_triple (List.nth ph x) in
+  let idx = index s.key in
+  if idx = (-2) then
     begin
       if List.length lst > 2 then lst
       else trade_cards lst st pstate
     end
   else
     begin
-      let n_lst = new_lst (c idx) lst 2 in 
+      let n_lst = new_lst (c idx) lst 2 in
       let () = card_selection st pstate n_lst ph in
-      trade_cards n_lst st pstate 
+      trade_cards n_lst st pstate
     end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
