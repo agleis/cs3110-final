@@ -71,12 +71,16 @@ let get_ordered_p_states players =
 let remove_cards main_list to_remove =
 	List.filter (fun x -> not (List.exists (fun y -> x=y) to_remove)) main_list
 
-let reorder_cards which [c0; c1; c2; c3] =
-	match which with
-		| 0 -> [c1; c2; c3; c0]
-		| 1 -> [c3; c0; c2; c1]
-		| 2 -> [c2; c3; c0; c1]
-		| _ -> [c0; c1; c2; c3]
+let reorder_cards which to_trade =
+	match to_trade with
+		| [c0; c1; c2; c3] -> begin
+			match which with
+				| 0 -> [c1; c2; c3; c0]
+				| 1 -> [c3; c0; c1; c2]
+				| 2 -> [c2; c3; c0; c1;]
+				| _ -> failwith "Invalid trade round type"
+		end
+		| _ -> failwith "Invalid trade option"
 
 let add_cards players cards =
 	List.map2 (fun p c -> {p with hand=(p.hand@c)}) players cards
@@ -148,12 +152,30 @@ let fix_ai_data (crd:card) (ps:player_state list) (dt:stored_data) =
 			else if crd={suit=Spade; value=11} then dt.q_spades_played<-true else () in
 	fix_ai_data_suits ps dt.players
 
+let reset_players_data prs =
+	match prs with
+		| h::t -> begin
+			h.has_clubs <- false;
+			h.has_spades <- false;
+			h.has_diamonds <- false;
+			h.has_hearts <- false;
+			h.shooting_moon <- false;
+			h.tricks <- [];
+			h.round_points <- 0;
+		end
+		| [] -> ()
+
+let reset_ai_data dt =
+	let () = dt.hearts_played<-false in
+	let () = dt.q_spades_played<-false in
+	let () = reset_players_data dt.players in
+	()
 (* Game state init helpers *)
-let rec build_player_states ai_list pnum deck =
-	match ai_list with
-		| h::t -> let p_cards = partition_list deck (pnum*13) 13 in
-				{hand=p_cards; game_points=0; round_points=0;
-				 ai_level=h; collected_cards=[]; p_num=pnum}::(build_player_states t (pnum+1) deck)
+let rec build_player_states ai_name_list pnum deck =
+	match ai_name_list with
+		| (a, n)::t -> let p_cards = partition_list deck (pnum*13) 13 in
+				{hand=p_cards; game_points=0; round_points=0; name=n;
+				 ai_level=a; collected_cards=[]; p_num=pnum}::(build_player_states t (pnum+1) deck)
 		| [] -> []
 
 let build_single_data player =
