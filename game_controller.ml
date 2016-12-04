@@ -166,7 +166,7 @@ and reflush_round (st:game_state) data =
 	let shuffled = shuffle_deck deck in
 	let init_state = initialize_state [0;0;0;0] ["";"";"";""] shuffled in
 	let hands = List.map (fun x -> x.hand) init_state.prs in
-	let f_players = List.map2 (fun p h -> {p with hand=h}) new_players hands in
+	let f_players = List.map2 (fun p h -> {p with hand=h; round_points=0}) new_players hands in
 	let () = reset_ai_data data in
 	let () = fix_ai_data_suits (get_ordered_p_states f_players) data.players in
 	if did_win then () else
