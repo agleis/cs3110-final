@@ -46,6 +46,8 @@ let name_prompt = "Please enter a name for human number "
 
 let ai_prompt = "Please enter the level (1 - 3) for the AI number "
 
+let try_again = "Please enter a valid value.\n\n"
+
 let colon = ": "
 
 let enter = "\n"
@@ -58,12 +60,27 @@ let rec lst_has_name lst name =
   | [] -> false
   | n::t -> if n = name then true else lst_has_name t name
 
+let rec print_with_num str num =
+  print_string str;
+  print_int num;
+  print_string colon;
+  let n = (try read_int () with
+  | _ -> print_string try_again; print_with_num str num) in
+  let _ = Sys.command "clear" in n
+
+let rec print_with_num_get_str str num =
+  print_string str;
+  print_int num;
+  print_string colon;
+  let n = (try read_line () with
+  | _ -> print_string try_again; print_with_num_get_str str num) in
+  let _ = Sys.command "clear" in n
+
 let rec get_names num_humans human_number lst =
   match List.length lst with
   | 4 -> lst
   | _ -> if num_humans > 0
-  then (print_string name_prompt; print_int human_number; print_string colon;
-        let human_name = String.uppercase_ascii (read_line ()) in
+  then (let human_name = print_with_num_get_str name_prompt human_number in
         get_names (num_humans - 1) (human_number + 1) (human_name::lst))
   else (Random.self_init ();
         let ai_length = List.length ai_names in
@@ -78,47 +95,32 @@ let rec get_ai_levels num_humans ai_num lst =
   | 4 -> lst
   | _ -> if num_humans > 0
   then get_ai_levels (num_humans - 1) ai_num (0::lst)
-  else (print_string ai_prompt; print_int ai_num; print_string colon;
-       let ai_level = read_int () in
-       let _ = Sys.command "clear" in
+  else (let ai_level = print_with_num ai_prompt ai_num in
        get_ai_levels num_humans (ai_num + 1) (ai_level::lst))
 
+let rec print str =
+  print_string str;
+  print_string continue;
+  let _ = (try read_line () with
+  | _ -> print_string try_again; print str; "") in
+  let _ = Sys.command "clear" in ()
+
+let rec print_get_int str =
+  print_string str;
+  let n = (try read_int () with
+  | _ -> print_string try_again; print_get_int str) in
+  let _ = Sys.command "clear" in n
+
 let setup =
-  print_string welcome_string;
-  print_string continue;
-  let _ = read_line () in
-  let _ = Sys.command "clear" in
-  print_string rules_intro;
-  print_string continue;
-  let _ = read_line () in
-  let _ = Sys.command "clear" in
-  print_string rule_one;
-  print_string continue;
-  let _ = read_line () in
-  let _ = Sys.command "clear" in
-  print_string rule_two;
-  print_string continue;
-  let _ = read_line () in
-  let _ = Sys.command "clear" in
-  print_string rule_three;
-  print_string continue;
-  let _ = read_line () in
-  let _ = Sys.command "clear" in
-  print_string rule_four;
-  print_string continue;
-  let _ = read_line () in
-  let _ = Sys.command "clear" in
-  print_string rule_five;
-  print_string continue;
-  let _ = read_line () in
-  let _ = Sys.command "clear" in
-  print_string rule_six;
-  print_string continue;
-  let _ = read_line () in
-  let _ = Sys.command "clear" in
-  print_string human_prompt;
-  let num_humans = read_int () in
-  let _ = Sys.command "clear" in
+  print welcome_string;
+  print rules_intro;
+  print rule_one;
+  print rule_two;
+  print rule_three;
+  print rule_four;
+  print rule_five;
+  print rule_six;
+  let num_humans = print_get_int human_prompt in
   let player_lst = get_ai_levels num_humans 1 [] in
   let names_lst = get_names num_humans 1 [] in
   main player_lst names_lst

@@ -14,6 +14,8 @@ type suit_values = {
   mutable diamond: int list;
 }
 
+(* [count_cards_of_suit suit hand i] returns the numbe of cards having
+ * suit [suit] in hand [hand], accumulated in [i]. *)
 let rec count_cards_of_suit suit hand i =
   match hand with
   | [] -> i
@@ -21,25 +23,39 @@ let rec count_cards_of_suit suit hand i =
             then count_cards_of_suit suit t (i + 1)
             else count_cards_of_suit suit t i
 
+(* [cards_of_suit suit hand] returns the number of cards having suit [suit]
+in hand [hand]. *)
 let cards_of_suit suit hand =
   count_cards_of_suit suit hand 0
 
+(* [hand_without_card] removed card [card] from list [hand], if it is
+ * in the list, and returns a new list without the card. If it is not
+ * in the list, it will just return [hand]. *)
 let hand_without_card hand card =
   List.filter (fun c -> c <> card) hand
 
+(* [has_card_of_suit suit hand] returns whether there exists a card
+ * having suit [suit] within list [hand]. It will return [true] if such a
+ * card does exist, and [false] otherwise. *)
 let rec has_card_of_suit suit hand =
   match hand with
   | [] -> false
   | c::t -> if c.suit = suit then true else has_card_of_suit suit t
 
+(* [is_early hand] is [true] if the game is within the first 3 turns,
+ * [false] otherwise. *)
 let is_early hand =
   List.length hand > 10
 
+(* [has_cards p_lst] returns whether the players stored in [p_list]
+ * have cards of each suit. *)
 let rec has_cards = function
   | [] -> true
   | p::t -> p.has_clubs && p.has_spades && p.has_diamonds && p.has_hearts &&
             has_cards t
 
+(* [shorted_suit p_lst] finds the earliest player in [p_lst] that doesn't
+ * have a particular suit of cards, and returns that suit. *)
 let rec shorted_suit = function
   | [] -> DiamondS (-1)
   | p::t -> if not p.has_clubs then ClubS 0
@@ -47,9 +63,12 @@ let rec shorted_suit = function
   else if not p.has_spades then SpadeS 0
   else HeartS 0
 
+(* [no_shorts data] returns [true] if all players have all suits. *)
 let no_shorts data =
   has_cards data.players
 
+(* [has_low_hearts hand] returns [true] if the [hand] has the 2, 3, or 4
+ * of Hearts in it. *)
 let rec has_low_hearts hand =
   match hand with
   | [] -> false
@@ -57,6 +76,8 @@ let rec has_low_hearts hand =
     then true
     else has_low_hearts t
 
+(* [play_low_heart hand] plays one of the low hearts in [hand], or a random
+ * card if no low hearts can be found. *)
 let rec play_low_heart hand =
   let sorted_hand = List.sort (compare_cards false) hand in
   match sorted_hand with
@@ -65,9 +86,13 @@ let rec play_low_heart hand =
     then c
     else play_low_heart t
 
+(* [get_shorted_suit data] returns a suit that some player in the game
+ * doesn't have. *)
 let get_shorted_suit data =
   shorted_suit data.players
 
+(* [find_min_suit c s d h] returns the mathematical minimum of all of the
+  non-zero values in {[c] [s] [d] [h]}. *)
 let find_min_suit c s d h =
   if ((s = 0 || c <= s) &&
       (h = 0 || c <= h) &&
@@ -83,6 +108,7 @@ let find_min_suit c s d h =
           h <> 0) then HeartS h
   else SpadeS s
 
+(* [find_max_suit c s d h] returns the mathematical maximum of the args. *)
 let find_max_suit c s d h =
   if (c >= s && c >= h && c >= d) then ClubS c
   else if (d >= c && d >= h && d >= s) then DiamondS d
@@ -100,9 +126,14 @@ let rec get_num_suit_acc hand f c s d h =
     | Heart -> get_num_suit_acc t f c s d (h + 1)
   end
 
+(* [get_short_suit hand] returns the suit of which there are the least
+ * number of cards in [hand], subject to the condition that the short_suit
+ * cannot have 0 cards in [hand]. *)
 let get_short_suit hand =
   get_num_suit_acc hand find_min_suit 0 0 0 0
 
+(* [get_short_suit hand] returns the suit of which there are the mosr
+ * number of cards in [hand]. *)
 let get_long_suit hand =
   get_num_suit_acc hand find_max_suit 0 0 0 0
 
@@ -121,12 +152,17 @@ let rec rec_get_suit_values hand record =
                  rec_get_suit_values t record
   end
 
+(* [get_suit_values hand] returns a record that holds the number of cards
+ * having each suit in [hand]. *)
 let get_suit_values hand =
   let initial_suit_values = {
     spade = []; heart = []; club = []; diamond = [];
   } in
   rec_get_suit_values hand initial_suit_values
 
+(* [high_card_from_suit hand suit ind1 ind2] returns the highest ranked
+ * card of suit [suit] in list [hand], or a random card, subject to the
+ * condition that the card is not at index [ind1] or [ind2] in [hand]. *)
 let high_card_from_suit hand suit ind1 ind2 =
   let suit_ind = get_suit_values hand in
   match suit with
@@ -155,6 +191,9 @@ let high_card_from_suit hand suit ind1 ind2 =
                value = List.nth (List.sort (Pervasives.compare) (h::t)) (List.length (h::t) - 1)}
   end
 
+(* [middle_card_from_suit hand suit ind1 ind2] returns the middle-ranked
+ * card of suit [suit] in list [hand], or a random card, subject to the
+ * condition that the card is not at index [ind1] or [ind2] in [hand]. *)
 let middle_card_from_suit hand suit ind1 ind2 =
   let suit_ind = get_suit_values hand in
   match suit with
@@ -183,6 +222,9 @@ let middle_card_from_suit hand suit ind1 ind2 =
                value = List.nth (List.sort (Pervasives.compare) (h::t)) ((List.length (h::t)) / 2)}
   end
 
+(* [low_card_from_suit hand suit ind1 ind2] returns the lowest ranked
+ * card of suit [suit] in list [hand], or a random card, subject to the
+ * condition that the card is not at index [ind1] or [ind2] in [hand]. *)
 let low_card_from_suit hand suit ind1 ind2 =
   let suit_ind = get_suit_values hand in
   match suit with
@@ -211,6 +253,9 @@ let low_card_from_suit hand suit ind1 ind2 =
                value = List.hd (List.sort (Pervasives.compare) (h::t))}
   end
 
+(* [high_card_from_suit_not hand suit ind1 ind2] returns the highest ranked
+ * card not of suit [suit] in list [hand], or a random card, subject to the
+ * condition that the card is not at index [ind1] or [ind2] in [hand]. *)
 let high_card_from_suit_not hand suit ind1 ind2 =
   let suit_ind = get_suit_values hand in
   let num_hearts = List.length (suit_ind.heart) in
@@ -228,6 +273,9 @@ let high_card_from_suit_not hand suit ind1 ind2 =
   | SpadeS _ -> high_card_from_suit hand Spade ind1 ind2
   | DiamondS _ -> high_card_from_suit hand Diamond ind1 ind2
 
+(* [middle_card_from_suit_not hand suit ind1 ind2] returns the middle-ranked
+ * card not of suit [suit] in list [hand], or a random card, subject to the
+ * condition that the card is not at index [ind1] or [ind2] in [hand]. *)
 let middle_card_from_suit_not hand suit ind1 ind2 =
   let suit_ind = get_suit_values hand in
   let num_hearts = List.length (suit_ind.heart) in
@@ -245,6 +293,9 @@ let middle_card_from_suit_not hand suit ind1 ind2 =
   | SpadeS _ -> middle_card_from_suit hand Spade ind1 ind2
   | DiamondS _ -> middle_card_from_suit hand Diamond ind1 ind2
 
+(* [low_card_from_suit_not hand suit ind1 ind2] returns the lowest ranked
+ * card not of suit [suit] in list [hand], or a random card, subject to the
+ * condition that the card is not at index [ind1] or [ind2] in [hand]. *)
 let low_card_from_suit_not hand suit ind1 ind2 =
   let suit_ind = get_suit_values hand in
   let num_hearts = List.length (suit_ind.heart) in
@@ -262,6 +313,10 @@ let low_card_from_suit_not hand suit ind1 ind2 =
   | SpadeS _ -> low_card_from_suit hand Spade ind1 ind2
   | DiamondS _ -> low_card_from_suit hand Diamond ind1 ind2
 
+(* [high_card_from_suit hand suit ind1 ind2] returns the highest ranked
+ * card of suit [get_short_suit hand] in list [hand],
+ * or a random card, subject to the condition that the card is
+ * not at index [ind1] or [ind2] in [hand]. *)
 let high_card_from_short_suit hand ind1 ind2 =
   match get_short_suit hand with
   | HeartS _ -> high_card_from_suit hand Heart ind1 ind2
@@ -269,6 +324,10 @@ let high_card_from_short_suit hand ind1 ind2 =
   | SpadeS _ -> high_card_from_suit hand Spade ind1 ind2
   | DiamondS _ -> high_card_from_suit hand Diamond ind1 ind2
 
+(* [middle_card_from_suit hand suit ind1 ind2] returns the middle-ranked
+ * card of suit [get_short_suit hand] in list [hand],
+ * or a random card, subject to the condition that the card is
+ * not at index [ind1] or [ind2] in [hand]. *)
 let middle_card_from_short_suit hand =
   match get_short_suit hand with
   | HeartS _ -> middle_card_from_suit hand Heart (-1) (-1)
@@ -276,6 +335,10 @@ let middle_card_from_short_suit hand =
   | SpadeS _ -> middle_card_from_suit hand Spade (-1) (-1)
   | DiamondS _ -> middle_card_from_suit hand Diamond (-1) (-1)
 
+(* [low_card_from_suit hand suit ind1 ind2] returns the lowest ranked
+ * card of suit [get_short_suit hand] in list [hand],
+ * or a random card, subject to the condition that the card is
+ * not at index [ind1] or [ind2] in [hand]. *)
 let low_card_from_short_suit hand =
   match get_short_suit hand with
   | HeartS _ -> low_card_from_suit hand Heart (-1) (-1)
@@ -283,6 +346,8 @@ let low_card_from_short_suit hand =
   | SpadeS _ -> low_card_from_suit hand Spade (-1) (-1)
   | DiamondS _ -> low_card_from_suit hand Diamond (-1) (-1)
 
+(* [highest_card_so_far pool lead_suit] returns the highest-ranked card
+ * in [pool], given that the lead suit is [lead_suit]. *)
 let highest_card_so_far pool lead_suit =
   match pool with
   | [] -> {suit = Diamond; value = -1}
@@ -299,6 +364,8 @@ let highest_card_so_far pool lead_suit =
                            else c3
   | c::t -> c
 
+(* [beat_card card hand] attempts to select a card from [hand] that is more
+ * highly ranked than [card]. *)
 let rec beat_card card hand =
   match hand with
   | [] -> {suit = Diamond; value = -1}
@@ -306,6 +373,8 @@ let rec beat_card card hand =
             then c
             else beat_card card t
 
+(* [can_lose card hand] returns [true] if [hand] contains a card with a
+ * lower rank than [card]. *)
 let rec can_lose card hand =
   match hand with
   | [] -> false
@@ -313,6 +382,8 @@ let rec can_lose card hand =
             then true
             else can_lose card t
 
+(* [screw_other_player hand lead_suit] will either play a card from [lead_suit]
+ * if it has one, or will play a Heart of the Queen of Spades. *)
 let screw_other_player hand lead_suit =
   if has_card_of_suit lead_suit hand
   then low_card_from_suit hand lead_suit (-1) (-1)
@@ -320,6 +391,8 @@ let screw_other_player hand lead_suit =
   then {suit = Spade; value = 12}
   else high_card_from_suit hand Heart (-1) (-1)
 
+(* [get_losing_card card hand] attempts to return a card from [hand] that has
+ * a lower rank than [card]. *)
 let rec get_losing_card card hand =
   let possible_heart = high_card_from_suit hand Heart (-1) (-1) in
   if possible_heart.value = (-1)
@@ -330,6 +403,8 @@ let rec get_losing_card card hand =
             else get_losing_card card t
   else possible_heart
 
+(* [highest_lower card hand max_val] returns the highest-value card in [hand]
+ * that is still lower-ranked than [card], storing its value in [max_val]. *)
 let rec highest_loser card hand max_val =
   let cards_of_suit = List.filter (fun c -> c.suit = card.suit) hand in
   match cards_of_suit with
@@ -338,6 +413,8 @@ let rec highest_loser card hand max_val =
             then highest_loser card t c.value
             else highest_loser card t max_val
 
+(* [highest_losing_card card hand] returns the highest-value card in [hand]
+ * that is still lower-ranked than [card]. *)
 let highest_losing_card card hand h_played =
   if has_card_of_suit card.suit hand
   then highest_loser card hand (-1)
@@ -347,12 +424,17 @@ let highest_losing_card card hand h_played =
   then {suit = Spade; value = 13}
   else screw_other_player hand card.suit
 
+(* [player_cards_of_suit suit players lst] returns the cards that each player
+ * in [players] has picked up each round of suit [suit], storing the result
+ * in [lst]. *)
 let rec player_cards_of_suit suit players lst =
   match players with
   | [] -> lst
   | p::t -> let new_lst = List.filter (fun c -> c.suit = suit) p.tricks in
     player_cards_of_suit suit t (new_lst@lst)
 
+(* [cards_played suit pool data] returns the cards of suit [suit] that have
+ * been played so far this hand. *)
 let cards_played suit pool data =
   let pool_cards = List.filter (fun c -> c.suit = suit) pool in
   let player_cards = player_cards_of_suit suit data.players [] in
