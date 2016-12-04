@@ -525,11 +525,11 @@ let draw_card_top num x y s =
   let () =
   let delta = ref 0 in
   set_color black;
-  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 30) (y+(int_of_float (0.1*.(float window_height))));
+  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 40) (y+(int_of_float (0.1*.(float window_height))));
   draw_string (f_triple s);
-  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 30) ((y+(int_of_float (0.1*.(float window_height)))) - 20);
+  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 40) ((y+(int_of_float (0.1*.(float window_height)))) - 20);
   draw_string (s_triple s);
-  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 30) ((y+(int_of_float (0.1*.(float window_height)))) - 40);
+  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 40) ((y+(int_of_float (0.1*.(float window_height)))) - 40);
   draw_string (t_triple s);
   for i=1 to num do
     draw_card 0 Spade (x + !delta) y;
@@ -624,7 +624,6 @@ let rec game_points lst =
   clear_graph ();
   set_color black;
   for i = 0 to (List.length lst) - 1 do
-    moveto (window_width/2) ((window_height/2) - (i*20));
     draw_string1 ("PLAYER " ^ (string_of_int i) ^ " HAS " ^ (string_of_int (List.nth lst i)) ^ " POINTS") ((window_width/2)-525) (((3*(window_height/4)) - (i*60)))
   done;
   draw_string1 "PRESS ENTER TO CONTINUE" ((window_width/2) - 575) (80);
@@ -632,7 +631,17 @@ let rec game_points lst =
   if s.keypressed && s.key = '\r' then () else game_points lst
 
 let draw_end_game lst =
-  ()
+  clear_graph ();
+  set_color black;
+  let max = ref (-1) in 
+  let pl = ref "" in 
+  for i = 0 (List.length lst) - 1 do
+    max := if (List.nth lst i).game_points > !max then (List.nth lst i).game_points; pl := (List.nth lst i).name else !max;
+    draw_string1 ((List.nth lst i).name ^ " HAS " ^ (string_of_int ((List.nth lst i).game_points) ^ " POINTS") ((window_width/2)-525) (((3*(window_height/4)) - (i*60)))
+  done;
+  draw_string1 ("WINNER IS " ^ !pl) 100 100  
+
+
 
 let rec find_index lst num acc =
   match lst with
@@ -640,7 +649,8 @@ let rec find_index lst num acc =
   |h::t -> if h.p_num == num then acc else find_index t num (acc+1)
 
 let player_string state idx =
-  let player = "Player " ^ (string_of_int (List.nth state.prs idx).p_num) in
+(*   let player = "Player " ^ (string_of_int (List.nth state.prs idx).p_num) in *)
+  let player = (List.nth state.prs idx).name in 
   let game_points = "Game Points: " ^ (string_of_int (List.nth state.prs idx).game_points) in
   let round_points = "Round Points: " ^ (string_of_int (List.nth state.prs idx).round_points) in
   (player, game_points, round_points)
@@ -664,12 +674,6 @@ let draw_board state pstate =
   draw_card_side num_right ((int_of_float (0.905*.(float window_width))) - card_height) ((int_of_float (0.20*.(float window_height)))) (player_string state right_index) false;
   draw_pool state.pool;
   draw_hand human_pstate.hand (player_string state human_index)
-(*   switch_player (); *)
-(*   game_points [1;2;3;4]; *)
-(*   while true do (); done *)
-(*
-let () = draw_board game_state1 player_state1 *)
-
 
 let rec find_pos ph c = 
   match ph with
@@ -754,18 +758,3 @@ let rec trade_cards lst st pstate =
       let () = card_selection st pstate n_lst ph in
       trade_cards n_lst st pstate 
     end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

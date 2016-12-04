@@ -13,6 +13,6 @@ val winner: Types.game_state -> int -> unit
 
 val game_points: int list -> unit
 
-val draw_end_game: int list -> unit
+val draw_end_game: Types.player_state list -> unit
 
 val draw_string1 : string -> int -> int -> unit
