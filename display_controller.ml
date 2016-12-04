@@ -77,24 +77,29 @@ let card_selection hand index cw ch =
   let () = set_color yellow in 
   draw_rect (s_triple c) (t_triple c) cw ch
 
-let click_card hand cw ch = 
+let click_card () = 
   let s = wait_next_event [Key_pressed] in
+  let cw = 60 in
+  let ch = 90 in 
   let tpl = (s.keypressed, s.key) in 
   match tpl with 
-  |(true, '`') -> card_selection hand 0 cw ch
-  |(true, '1') -> card_selection hand 1 cw ch
-  |(true, '2') -> card_selection hand 2 cw ch
-  |(true, '3') -> card_selection hand 3 cw ch
-  |(true, '4') -> card_selection hand 4 cw ch
-  |(true, '5') -> card_selection hand 5 cw ch
-  |(true, '6') -> card_selection hand 6 cw ch
-  |(true, '7') -> card_selection hand 7 cw ch
-  |(true, '8') -> card_selection hand 8 cw ch
-  |(true, '9') -> card_selection hand 9 cw ch
-  |(true, '0') -> card_selection hand 10 cw ch
-  |(true, '-') -> card_selection hand 11 cw ch
-  |(true, '=') -> card_selection hand 12 cw ch
+  |(true, '`') -> card_selection !player_hand 0 cw ch; f_triple (List.nth !player_hand 0) 
+  |(true, '1') -> card_selection !player_hand 1 cw ch; f_triple (List.nth !player_hand 1) 
+  |(true, '2') -> card_selection !player_hand 2 cw ch; f_triple (List.nth !player_hand 2) 
+  |(true, '3') -> card_selection !player_hand 3 cw ch; f_triple (List.nth !player_hand 3) 
+  |(true, '4') -> card_selection !player_hand 4 cw ch; f_triple (List.nth !player_hand 4)
+  |(true, '5') -> card_selection !player_hand 5 cw ch; f_triple (List.nth !player_hand 5)
+  |(true, '6') -> card_selection !player_hand 6 cw ch; f_triple (List.nth !player_hand 6)
+  |(true, '7') -> card_selection !player_hand 7 cw ch; f_triple (List.nth !player_hand 7)
+  |(true, '8') -> card_selection !player_hand 8 cw ch; f_triple (List.nth !player_hand 8)
+  |(true, '9') -> card_selection !player_hand 9 cw ch; f_triple (List.nth !player_hand 9)
+  |(true, '0') -> card_selection !player_hand 10 cw ch; f_triple (List.nth !player_hand 10)
+  |(true, '-') -> card_selection !player_hand 11 cw ch; f_triple (List.nth !player_hand 11)
+  |(true, '=') -> card_selection !player_hand 12 cw ch; f_triple (List.nth !player_hand 12)
   |_ -> failwith "Invalid key option" 
+
+let trade_cards () = 
+  [click_card (); click_card(); click_card()]
 
 let draw_symbol sym x y = 
   match sym with
@@ -210,7 +215,11 @@ let draw_card num suit x y cw ch =
     in 
     ()
 
-let draw_hand lst w h cw ch=
+let draw_hand lst =
+  let w = window_width in 
+  let h = window_height in 
+  let cw = 60 in 
+  let ch = 90 in 
   let delta = ref 0 in
   let len = List.length lst in
   let total_len = (len * (cw + card_spacing)) in
@@ -269,7 +278,11 @@ let draw_card_side num x y w h cw ch s side =
   done;
   in ()
 
-let draw_pool pool w h cw ch =
+let draw_pool pool =
+  let w = window_width in 
+  let h = window_height in 
+  let cw = 60 in 
+  let ch = 90 in 
   let delta = ref 0 in
   let len = List.length pool in
   let total_len = (len * (cw + card_spacing)) in
@@ -340,6 +353,7 @@ let draw_play_phase x y =
 
 let draw_pass_phase x y =
   set_line_width 10;
+  set_color black;
 
   draw_arc (x+15) (y+20) 15 20 45 305;
 
@@ -397,14 +411,12 @@ let draw_board state current_player_state =
   let height = size_y () in
   let card_width = int_of_float ((float width)*.0.046875) in
   let card_height = int_of_float ((float height)*.0.12) in
-  draw_quit width height;
+(*   draw_quit width height; *)
   draw_phase state.phase (int_of_float (0.375*.(float width))) (int_of_float (0.65*.(float height)));
   draw_card_top num ((int_of_float (0.30*.(float width)))) (int_of_float (0.8*.(float height))) width height card_width card_height top_player;
   draw_card_side num (int_of_float (0.05*.(float width))) ((int_of_float (0.20*.(float height)))) width height card_width card_height left_player true;
   draw_card_side num ((int_of_float (0.95*.(float width))) - card_height) ((int_of_float (0.20*.(float height)))) width height card_width card_height right_player false;
-  draw_hand lst width height card_width card_height;
-  draw_pool pool width height card_width card_height;
-(*   let card_chosen =  *)click_card !player_hand card_width card_height (* in  *)
-(*   while true do (); done *)
+  draw_pool pool;
+  draw_hand lst
 
 (* let () = draw_board game_state1 player_state2 *)

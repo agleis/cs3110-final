@@ -6,7 +6,7 @@ let welcome_string = "Hello! Welcome to Hearts, a game of chance, skill, and "^
 
 let human_prompt = "Please enter the number of human players: "
 
-let ai_prompt = "Please enter the level for the AI number "
+let ai_prompt = "Please enter the level (1 - 3) for the AI number "
 
 let colon = ": "
 

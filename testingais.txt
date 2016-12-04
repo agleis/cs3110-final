@@ -1,0 +1,12440 @@
+ocamlbuild -pkgs graphics setup_controller.byte && ./setup_controller.byte
+/home/agleis/.opam/4.03.0/bin/ocamlc.opt -c -I /home/agleis/.opam/4.03.0/lib/ocaml -o types.cmi types.mli
+/home/agleis/.opam/4.03.0/bin/ocamlc.opt -c -I /home/agleis/.opam/4.03.0/lib/ocaml -o ai_controller.cmi ai_controller.mli
+/home/agleis/.opam/4.03.0/bin/ocamlc.opt -c -I /home/agleis/.opam/4.03.0/lib/ocaml -o types.cmo types.ml
+/home/agleis/.opam/4.03.0/bin/ocamlc.opt -c -I /home/agleis/.opam/4.03.0/lib/ocaml -o randoms.cmi randoms.mli
+/home/agleis/.opam/4.03.0/bin/ocamlc.opt -c -I /home/agleis/.opam/4.03.0/lib/ocaml -o ai_helpers.cmo ai_helpers.ml
+/home/agleis/.opam/4.03.0/bin/ocamlc.opt -c -I /home/agleis/.opam/4.03.0/lib/ocaml -o ai_pass.cmo ai_pass.ml
+/home/agleis/.opam/4.03.0/bin/ocamlc.opt -c -I /home/agleis/.opam/4.03.0/lib/ocaml -o ai_controller.cmo ai_controller.ml
+/home/agleis/.opam/4.03.0/bin/ocamlc.opt -c -I /home/agleis/.opam/4.03.0/lib/ocaml -o randoms.cmo randoms.ml
+/home/agleis/.opam/4.03.0/bin/ocamlc.opt -I /home/agleis/.opam/4.03.0/lib/ocaml graphics.cma types.cmo randoms.cmo ai_helpers.cmo ai_pass.cmo ai_controller.cmo display_controller.cmo human_controller.cmo game_controller.cmo setup_controller.cmo -o setup_controller.byte
+Hello! Welcome to Hearts, a game of chance, skill, and ruthless backstabbing. We hope you enjoy!
+Please enter the number of human players: 
+Please enter the level (1 - 3) for the AI number 1: Please enter the level (1 - 3) for the AI number 2: Please enter the level (1 - 3) for the AI number 3: Please enter the level (1 - 3) for the AI number 4: 12 of Diamonds
+3 of Spades
+10 of Clubs
+14 of Hearts
+2 of Hearts
+4 of Diamonds
+13 of Diamonds
+6 of Clubs
+4 of Clubs
+13 of Spades
+2 of Spades
+6 of Diamonds
+11 of Spades
+10 of Hearts
+9 of Spades
+14 of Diamonds
+10 of Spades
+3 of Hearts
+5 of Spades
+11 of Diamonds
+8 of Hearts
+8 of Spades
+7 of Clubs
+11 of Hearts
+5 of Diamonds
+12 of Clubs
+12 of Spades
+4 of Hearts
+2 of Clubs
+10 of Diamonds
+5 of Hearts
+13 of Clubs
+7 of Spades
+6 of Spades
+11 of Clubs
+8 of Diamonds
+7 of Hearts
+8 of Clubs
+7 of Diamonds
+4 of Spades
+13 of Hearts
+9 of Hearts
+9 of Diamonds
+14 of Clubs
+9 of Clubs
+14 of Spades
+3 of Diamonds
+12 of Hearts
+5 of Clubs
+2 of Diamonds
+6 of Hearts
+3 of Clubs
+pool:
+
+Player 0 ----- 0 pts
+12 of Diamonds
+3 of Spades
+10 of Clubs
+14 of Hearts
+2 of Hearts
+4 of Diamonds
+13 of Diamonds
+6 of Clubs
+4 of Clubs
+13 of Spades
+2 of Spades
+6 of Diamonds
+11 of Spades
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+14 of Diamonds
+10 of Spades
+3 of Hearts
+5 of Spades
+11 of Diamonds
+8 of Hearts
+8 of Spades
+7 of Clubs
+11 of Hearts
+5 of Diamonds
+12 of Clubs
+
+Player 2 ----- 0 pts
+12 of Spades
+4 of Hearts
+2 of Clubs
+10 of Diamonds
+5 of Hearts
+13 of Clubs
+7 of Spades
+6 of Spades
+11 of Clubs
+8 of Diamonds
+7 of Hearts
+8 of Clubs
+7 of Diamonds
+
+Player 3 ----- 0 pts
+4 of Spades
+13 of Hearts
+9 of Hearts
+9 of Diamonds
+14 of Clubs
+9 of Clubs
+14 of Spades
+3 of Diamonds
+12 of Hearts
+5 of Clubs
+2 of Diamonds
+6 of Hearts
+3 of Clubs
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+13 of Spades
+2 of Hearts
+10 of Clubs
+
+P0 hand ---
+12 of Diamonds
+3 of Spades
+14 of Hearts
+4 of Diamonds
+13 of Diamonds
+6 of Clubs
+4 of Clubs
+2 of Spades
+6 of Diamonds
+11 of Spades
+pool:
+
+Player 0 ----- 0 pts
+12 of Diamonds
+3 of Spades
+14 of Hearts
+4 of Diamonds
+13 of Diamonds
+6 of Clubs
+4 of Clubs
+2 of Spades
+6 of Diamonds
+11 of Spades
+14 of Spades
+14 of Clubs
+9 of Clubs
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+10 of Spades
+3 of Hearts
+5 of Spades
+8 of Hearts
+8 of Spades
+7 of Clubs
+11 of Hearts
+5 of Diamonds
+12 of Spades
+2 of Clubs
+13 of Clubs
+
+Player 2 ----- 0 pts
+4 of Hearts
+10 of Diamonds
+5 of Hearts
+7 of Spades
+6 of Spades
+11 of Clubs
+8 of Diamonds
+7 of Hearts
+8 of Clubs
+7 of Diamonds
+12 of Clubs
+14 of Diamonds
+11 of Diamonds
+
+Player 3 ----- 0 pts
+4 of Spades
+13 of Hearts
+9 of Hearts
+9 of Diamonds
+3 of Diamonds
+12 of Hearts
+5 of Clubs
+2 of Diamonds
+6 of Hearts
+3 of Clubs
+13 of Spades
+2 of Hearts
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+11 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+10 of Spades
+11 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+7 of Spades
+10 of Spades
+11 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Diamonds
+3 of Spades
+14 of Hearts
+4 of Diamonds
+13 of Diamonds
+6 of Clubs
+4 of Clubs
+2 of Spades
+6 of Diamonds
+14 of Spades
+14 of Clubs
+9 of Clubs
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+3 of Hearts
+5 of Spades
+8 of Hearts
+8 of Spades
+7 of Clubs
+11 of Hearts
+5 of Diamonds
+12 of Spades
+2 of Clubs
+13 of Clubs
+
+Player 2 ----- 0 pts
+4 of Hearts
+10 of Diamonds
+5 of Hearts
+6 of Spades
+11 of Clubs
+8 of Diamonds
+7 of Hearts
+8 of Clubs
+7 of Diamonds
+12 of Clubs
+14 of Diamonds
+11 of Diamonds
+
+Player 3 ----- 0 pts
+13 of Hearts
+9 of Hearts
+9 of Diamonds
+3 of Diamonds
+12 of Hearts
+5 of Clubs
+2 of Diamonds
+6 of Hearts
+3 of Clubs
+13 of Spades
+2 of Hearts
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+5 of Spades
+3 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+6 of Spades
+5 of Spades
+3 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Diamonds
+14 of Hearts
+4 of Diamonds
+13 of Diamonds
+6 of Clubs
+4 of Clubs
+2 of Spades
+6 of Diamonds
+14 of Spades
+14 of Clubs
+9 of Clubs
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+3 of Hearts
+8 of Hearts
+8 of Spades
+7 of Clubs
+11 of Hearts
+5 of Diamonds
+12 of Spades
+2 of Clubs
+13 of Clubs
+
+Player 2 ----- 0 pts
+4 of Hearts
+10 of Diamonds
+5 of Hearts
+11 of Clubs
+8 of Diamonds
+7 of Hearts
+8 of Clubs
+7 of Diamonds
+12 of Clubs
+14 of Diamonds
+11 of Diamonds
+
+Player 3 ----- 0 pts
+13 of Hearts
+9 of Hearts
+9 of Diamonds
+3 of Diamonds
+12 of Hearts
+5 of Clubs
+2 of Diamonds
+6 of Hearts
+3 of Clubs
+2 of Hearts
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+8 of Spades
+2 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+7 of Hearts
+8 of Spades
+2 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Diamonds
+14 of Hearts
+4 of Diamonds
+13 of Diamonds
+6 of Clubs
+4 of Clubs
+6 of Diamonds
+14 of Spades
+14 of Clubs
+9 of Clubs
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+3 of Hearts
+8 of Hearts
+7 of Clubs
+11 of Hearts
+5 of Diamonds
+12 of Spades
+2 of Clubs
+13 of Clubs
+
+Player 2 ----- 0 pts
+4 of Hearts
+10 of Diamonds
+5 of Hearts
+11 of Clubs
+8 of Diamonds
+8 of Clubs
+7 of Diamonds
+12 of Clubs
+14 of Diamonds
+11 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Hearts
+9 of Diamonds
+3 of Diamonds
+12 of Hearts
+5 of Clubs
+2 of Diamonds
+6 of Hearts
+3 of Clubs
+2 of Hearts
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+14 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+13 of Clubs
+14 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Clubs
+13 of Clubs
+14 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Diamonds
+14 of Hearts
+4 of Diamonds
+13 of Diamonds
+6 of Clubs
+4 of Clubs
+6 of Diamonds
+14 of Spades
+9 of Clubs
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+3 of Hearts
+8 of Hearts
+7 of Clubs
+11 of Hearts
+5 of Diamonds
+12 of Spades
+2 of Clubs
+
+Player 2 ----- 0 pts
+4 of Hearts
+10 of Diamonds
+5 of Hearts
+11 of Clubs
+8 of Diamonds
+8 of Clubs
+7 of Diamonds
+14 of Diamonds
+11 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Hearts
+9 of Diamonds
+3 of Diamonds
+12 of Hearts
+5 of Clubs
+2 of Diamonds
+6 of Hearts
+2 of Hearts
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+7 of Clubs
+9 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+8 of Clubs
+7 of Clubs
+9 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Diamonds
+14 of Hearts
+4 of Diamonds
+13 of Diamonds
+6 of Clubs
+4 of Clubs
+6 of Diamonds
+14 of Spades
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+3 of Hearts
+8 of Hearts
+11 of Hearts
+5 of Diamonds
+12 of Spades
+2 of Clubs
+
+Player 2 ----- 0 pts
+4 of Hearts
+10 of Diamonds
+5 of Hearts
+11 of Clubs
+8 of Diamonds
+7 of Diamonds
+14 of Diamonds
+11 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Hearts
+9 of Diamonds
+3 of Diamonds
+12 of Hearts
+2 of Diamonds
+6 of Hearts
+2 of Hearts
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+2 of Clubs
+6 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+11 of Clubs
+2 of Clubs
+6 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Diamonds
+14 of Hearts
+4 of Diamonds
+13 of Diamonds
+4 of Clubs
+6 of Diamonds
+14 of Spades
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+3 of Hearts
+8 of Hearts
+11 of Hearts
+5 of Diamonds
+12 of Spades
+
+Player 2 ----- 0 pts
+4 of Hearts
+10 of Diamonds
+5 of Hearts
+8 of Diamonds
+7 of Diamonds
+14 of Diamonds
+11 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Hearts
+9 of Diamonds
+3 of Diamonds
+12 of Hearts
+2 of Diamonds
+6 of Hearts
+2 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Spades
+4 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+5 of Hearts
+12 of Spades
+4 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Diamonds
+14 of Hearts
+4 of Diamonds
+13 of Diamonds
+6 of Diamonds
+14 of Spades
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+3 of Hearts
+8 of Hearts
+11 of Hearts
+5 of Diamonds
+
+Player 2 ----- 0 pts
+4 of Hearts
+10 of Diamonds
+8 of Diamonds
+7 of Diamonds
+14 of Diamonds
+11 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Hearts
+9 of Diamonds
+3 of Diamonds
+2 of Diamonds
+6 of Hearts
+2 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+5 of Diamonds
+13 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+11 of Diamonds
+5 of Diamonds
+13 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Diamonds
+14 of Hearts
+4 of Diamonds
+6 of Diamonds
+14 of Spades
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+3 of Hearts
+8 of Hearts
+11 of Hearts
+
+Player 2 ----- 0 pts
+4 of Hearts
+10 of Diamonds
+8 of Diamonds
+7 of Diamonds
+14 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Hearts
+9 of Diamonds
+3 of Diamonds
+6 of Hearts
+2 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+11 of Hearts
+12 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+10 of Diamonds
+11 of Hearts
+12 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+14 of Hearts
+4 of Diamonds
+6 of Diamonds
+14 of Spades
+
+Player 1 ----- 0 pts
+10 of Hearts
+9 of Spades
+3 of Hearts
+8 of Hearts
+
+Player 2 ----- 0 pts
+4 of Hearts
+8 of Diamonds
+7 of Diamonds
+14 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Hearts
+9 of Diamonds
+6 of Hearts
+2 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+10 of Hearts
+6 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+7 of Diamonds
+10 of Hearts
+6 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+14 of Hearts
+4 of Diamonds
+14 of Spades
+
+Player 1 ----- 0 pts
+9 of Spades
+3 of Hearts
+8 of Hearts
+
+Player 2 ----- 0 pts
+4 of Hearts
+8 of Diamonds
+14 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Hearts
+6 of Hearts
+2 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+8 of Hearts
+4 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+8 of Diamonds
+8 of Hearts
+4 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+14 of Hearts
+14 of Spades
+
+Player 1 ----- 0 pts
+9 of Spades
+3 of Hearts
+
+Player 2 ----- 0 pts
+4 of Hearts
+14 of Diamonds
+
+Player 3 ----- 0 pts
+6 of Hearts
+2 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+14 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+9 of Spades
+14 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+4 of Hearts
+9 of Spades
+14 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+14 of Hearts
+
+Player 1 ----- 0 pts
+3 of Hearts
+
+Player 2 ----- 0 pts
+14 of Diamonds
+
+Player 3 ----- 0 pts
+2 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+14 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+3 of Hearts
+14 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+14 of Diamonds
+3 of Hearts
+14 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 0 pts
+
+Player 2 ----- 0 pts
+
+Player 3 ----- 0 pts
+pts: 0
+pts: 4
+pts: 22
+pts: 0
+points: 0
+points: 4
+points: 22
+points: 0
+pool:
+
+Player 0 ----- 0 pts
+11 of Clubs
+9 of Hearts
+9 of Clubs
+5 of Spades
+4 of Diamonds
+5 of Clubs
+7 of Spades
+7 of Diamonds
+2 of Clubs
+10 of Clubs
+6 of Clubs
+7 of Hearts
+7 of Clubs
+
+Player 1 ----- 4 pts
+14 of Hearts
+3 of Spades
+8 of Spades
+2 of Diamonds
+4 of Hearts
+14 of Spades
+4 of Spades
+10 of Spades
+10 of Hearts
+14 of Clubs
+2 of Spades
+12 of Hearts
+4 of Clubs
+
+Player 2 ----- 22 pts
+11 of Hearts
+11 of Spades
+6 of Hearts
+13 of Spades
+3 of Diamonds
+6 of Spades
+12 of Spades
+8 of Diamonds
+13 of Diamonds
+8 of Clubs
+3 of Clubs
+2 of Hearts
+12 of Clubs
+
+Player 3 ----- 0 pts
+9 of Spades
+14 of Diamonds
+8 of Hearts
+9 of Diamonds
+13 of Clubs
+11 of Diamonds
+12 of Diamonds
+13 of Hearts
+6 of Diamonds
+3 of Hearts
+5 of Diamonds
+5 of Hearts
+10 of Diamonds
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+2 of Clubs
+7 of Diamonds
+4 of Diamonds
+
+P0 hand ---
+11 of Clubs
+9 of Hearts
+9 of Clubs
+5 of Spades
+5 of Clubs
+7 of Spades
+10 of Clubs
+6 of Clubs
+7 of Hearts
+7 of Clubs
+pool:
+
+Player 0 ----- 0 pts
+11 of Clubs
+9 of Hearts
+9 of Clubs
+5 of Spades
+5 of Clubs
+7 of Spades
+10 of Clubs
+6 of Clubs
+7 of Hearts
+7 of Clubs
+14 of Diamonds
+12 of Diamonds
+11 of Diamonds
+
+Player 1 ----- 4 pts
+14 of Hearts
+3 of Spades
+8 of Spades
+4 of Hearts
+4 of Spades
+10 of Spades
+10 of Hearts
+2 of Spades
+12 of Hearts
+4 of Clubs
+13 of Spades
+12 of Clubs
+8 of Clubs
+
+Player 2 ----- 22 pts
+11 of Hearts
+11 of Spades
+6 of Hearts
+3 of Diamonds
+6 of Spades
+12 of Spades
+8 of Diamonds
+13 of Diamonds
+3 of Clubs
+2 of Hearts
+14 of Spades
+2 of Diamonds
+14 of Clubs
+
+Player 3 ----- 0 pts
+9 of Spades
+8 of Hearts
+9 of Diamonds
+13 of Clubs
+13 of Hearts
+6 of Diamonds
+3 of Hearts
+5 of Diamonds
+5 of Hearts
+10 of Diamonds
+2 of Clubs
+7 of Diamonds
+4 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+4 of Spades
+7 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+6 of Spades
+4 of Spades
+7 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+11 of Clubs
+9 of Hearts
+9 of Clubs
+5 of Spades
+5 of Clubs
+10 of Clubs
+6 of Clubs
+7 of Hearts
+7 of Clubs
+14 of Diamonds
+12 of Diamonds
+11 of Diamonds
+
+Player 1 ----- 4 pts
+14 of Hearts
+3 of Spades
+8 of Spades
+4 of Hearts
+10 of Spades
+10 of Hearts
+2 of Spades
+12 of Hearts
+4 of Clubs
+13 of Spades
+12 of Clubs
+8 of Clubs
+
+Player 2 ----- 22 pts
+11 of Hearts
+11 of Spades
+6 of Hearts
+3 of Diamonds
+12 of Spades
+8 of Diamonds
+13 of Diamonds
+3 of Clubs
+2 of Hearts
+14 of Spades
+2 of Diamonds
+14 of Clubs
+
+Player 3 ----- 0 pts
+8 of Hearts
+9 of Diamonds
+13 of Clubs
+13 of Hearts
+6 of Diamonds
+3 of Hearts
+5 of Diamonds
+5 of Hearts
+10 of Diamonds
+2 of Clubs
+7 of Diamonds
+4 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+14 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+14 of Hearts
+14 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+13 of Diamonds
+14 of Hearts
+14 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+11 of Clubs
+9 of Hearts
+9 of Clubs
+5 of Spades
+5 of Clubs
+10 of Clubs
+6 of Clubs
+7 of Hearts
+7 of Clubs
+12 of Diamonds
+11 of Diamonds
+
+Player 1 ----- 4 pts
+3 of Spades
+8 of Spades
+4 of Hearts
+10 of Spades
+10 of Hearts
+2 of Spades
+12 of Hearts
+4 of Clubs
+13 of Spades
+12 of Clubs
+8 of Clubs
+
+Player 2 ----- 22 pts
+11 of Hearts
+11 of Spades
+6 of Hearts
+3 of Diamonds
+12 of Spades
+8 of Diamonds
+3 of Clubs
+2 of Hearts
+14 of Spades
+2 of Diamonds
+14 of Clubs
+
+Player 3 ----- 0 pts
+8 of Hearts
+9 of Diamonds
+13 of Clubs
+13 of Hearts
+6 of Diamonds
+3 of Hearts
+5 of Diamonds
+5 of Hearts
+10 of Diamonds
+2 of Clubs
+7 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+12 of Hearts
+12 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+8 of Diamonds
+12 of Hearts
+12 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+11 of Clubs
+9 of Hearts
+9 of Clubs
+5 of Spades
+5 of Clubs
+10 of Clubs
+6 of Clubs
+7 of Hearts
+7 of Clubs
+11 of Diamonds
+
+Player 1 ----- 4 pts
+3 of Spades
+8 of Spades
+4 of Hearts
+10 of Spades
+10 of Hearts
+2 of Spades
+4 of Clubs
+13 of Spades
+12 of Clubs
+8 of Clubs
+
+Player 2 ----- 22 pts
+11 of Hearts
+11 of Spades
+6 of Hearts
+3 of Diamonds
+12 of Spades
+3 of Clubs
+2 of Hearts
+14 of Spades
+2 of Diamonds
+14 of Clubs
+
+Player 3 ----- 0 pts
+8 of Hearts
+9 of Diamonds
+13 of Clubs
+13 of Hearts
+6 of Diamonds
+3 of Hearts
+5 of Hearts
+10 of Diamonds
+2 of Clubs
+7 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+11 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+10 of Hearts
+11 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+3 of Diamonds
+10 of Hearts
+11 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+11 of Clubs
+9 of Hearts
+9 of Clubs
+5 of Spades
+5 of Clubs
+10 of Clubs
+6 of Clubs
+7 of Hearts
+7 of Clubs
+
+Player 1 ----- 4 pts
+3 of Spades
+8 of Spades
+4 of Hearts
+10 of Spades
+2 of Spades
+4 of Clubs
+13 of Spades
+12 of Clubs
+8 of Clubs
+
+Player 2 ----- 22 pts
+11 of Hearts
+11 of Spades
+6 of Hearts
+12 of Spades
+3 of Clubs
+2 of Hearts
+14 of Spades
+2 of Diamonds
+14 of Clubs
+
+Player 3 ----- 0 pts
+8 of Hearts
+9 of Diamonds
+13 of Clubs
+13 of Hearts
+3 of Hearts
+5 of Hearts
+10 of Diamonds
+2 of Clubs
+7 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+11 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+8 of Clubs
+11 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+3 of Clubs
+8 of Clubs
+11 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Hearts
+9 of Clubs
+5 of Spades
+5 of Clubs
+10 of Clubs
+6 of Clubs
+7 of Hearts
+7 of Clubs
+
+Player 1 ----- 4 pts
+3 of Spades
+8 of Spades
+4 of Hearts
+10 of Spades
+2 of Spades
+4 of Clubs
+13 of Spades
+12 of Clubs
+
+Player 2 ----- 22 pts
+11 of Hearts
+11 of Spades
+6 of Hearts
+12 of Spades
+2 of Hearts
+14 of Spades
+2 of Diamonds
+14 of Clubs
+
+Player 3 ----- 0 pts
+8 of Hearts
+9 of Diamonds
+13 of Clubs
+13 of Hearts
+3 of Hearts
+5 of Hearts
+10 of Diamonds
+7 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+10 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+4 of Clubs
+10 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+14 of Clubs
+4 of Clubs
+10 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Hearts
+9 of Clubs
+5 of Spades
+5 of Clubs
+6 of Clubs
+7 of Hearts
+7 of Clubs
+
+Player 1 ----- 4 pts
+3 of Spades
+8 of Spades
+4 of Hearts
+10 of Spades
+2 of Spades
+13 of Spades
+12 of Clubs
+
+Player 2 ----- 22 pts
+11 of Hearts
+11 of Spades
+6 of Hearts
+12 of Spades
+2 of Hearts
+14 of Spades
+2 of Diamonds
+
+Player 3 ----- 0 pts
+8 of Hearts
+9 of Diamonds
+13 of Hearts
+3 of Hearts
+5 of Hearts
+10 of Diamonds
+7 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Clubs
+9 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Spades
+12 of Clubs
+9 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Hearts
+5 of Spades
+5 of Clubs
+6 of Clubs
+7 of Hearts
+7 of Clubs
+
+Player 1 ----- 4 pts
+3 of Spades
+8 of Spades
+4 of Hearts
+10 of Spades
+2 of Spades
+13 of Spades
+
+Player 2 ----- 22 pts
+11 of Hearts
+11 of Spades
+6 of Hearts
+2 of Hearts
+14 of Spades
+2 of Diamonds
+
+Player 3 ----- 0 pts
+8 of Hearts
+9 of Diamonds
+3 of Hearts
+5 of Hearts
+10 of Diamonds
+7 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+4 of Hearts
+7 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+11 of Hearts
+4 of Hearts
+7 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Hearts
+5 of Spades
+5 of Clubs
+6 of Clubs
+7 of Hearts
+
+Player 1 ----- 4 pts
+3 of Spades
+8 of Spades
+10 of Spades
+2 of Spades
+13 of Spades
+
+Player 2 ----- 22 pts
+11 of Spades
+6 of Hearts
+2 of Hearts
+14 of Spades
+2 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Diamonds
+3 of Hearts
+5 of Hearts
+10 of Diamonds
+7 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+3 of Spades
+6 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+6 of Hearts
+3 of Spades
+6 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Hearts
+5 of Spades
+5 of Clubs
+7 of Hearts
+
+Player 1 ----- 4 pts
+8 of Spades
+10 of Spades
+2 of Spades
+13 of Spades
+
+Player 2 ----- 22 pts
+11 of Spades
+2 of Hearts
+14 of Spades
+2 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Diamonds
+3 of Hearts
+10 of Diamonds
+7 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+2 of Spades
+5 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+2 of Hearts
+2 of Spades
+5 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Hearts
+5 of Spades
+7 of Hearts
+
+Player 1 ----- 4 pts
+8 of Spades
+10 of Spades
+13 of Spades
+
+Player 2 ----- 22 pts
+11 of Spades
+14 of Spades
+2 of Diamonds
+
+Player 3 ----- 0 pts
+9 of Diamonds
+10 of Diamonds
+7 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+8 of Spades
+5 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+11 of Spades
+8 of Spades
+5 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Hearts
+7 of Hearts
+
+Player 1 ----- 4 pts
+10 of Spades
+13 of Spades
+
+Player 2 ----- 22 pts
+14 of Spades
+2 of Diamonds
+
+Player 3 ----- 0 pts
+10 of Diamonds
+7 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+13 of Spades
+9 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+14 of Spades
+13 of Spades
+9 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+7 of Hearts
+
+Player 1 ----- 4 pts
+10 of Spades
+
+Player 2 ----- 22 pts
+2 of Diamonds
+
+Player 3 ----- 0 pts
+10 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+10 of Spades
+7 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+2 of Diamonds
+10 of Spades
+7 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 4 pts
+
+Player 2 ----- 22 pts
+
+Player 3 ----- 0 pts
+pts: 0
+pts: 14
+pts: 37
+pts: 1
+points: 0
+points: 14
+points: 37
+points: 1
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+14 of Clubs
+13 of Diamonds
+14 of Spades
+9 of Hearts
+6 of Spades
+10 of Diamonds
+13 of Clubs
+7 of Hearts
+5 of Spades
+5 of Diamonds
+7 of Diamonds
+9 of Diamonds
+
+Player 1 ----- 18 pts
+8 of Clubs
+10 of Hearts
+2 of Clubs
+3 of Clubs
+7 of Clubs
+13 of Spades
+9 of Clubs
+5 of Hearts
+10 of Spades
+11 of Diamonds
+3 of Hearts
+14 of Diamonds
+12 of Diamonds
+
+Player 2 ----- 59 pts
+4 of Spades
+5 of Clubs
+12 of Clubs
+4 of Diamonds
+6 of Diamonds
+3 of Diamonds
+2 of Diamonds
+4 of Clubs
+7 of Spades
+9 of Spades
+8 of Spades
+13 of Hearts
+2 of Hearts
+
+Player 3 ----- 1 pts
+11 of Hearts
+14 of Hearts
+2 of Spades
+8 of Diamonds
+10 of Clubs
+11 of Spades
+12 of Hearts
+11 of Clubs
+6 of Clubs
+12 of Spades
+4 of Hearts
+6 of Hearts
+3 of Spades
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+14 of Spades
+14 of Clubs
+13 of Diamonds
+
+P0 hand ---
+8 of Hearts
+9 of Hearts
+6 of Spades
+10 of Diamonds
+13 of Clubs
+7 of Hearts
+5 of Spades
+5 of Diamonds
+7 of Diamonds
+9 of Diamonds
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+6 of Spades
+10 of Diamonds
+13 of Clubs
+7 of Hearts
+5 of Spades
+5 of Diamonds
+7 of Diamonds
+9 of Diamonds
+12 of Spades
+8 of Diamonds
+11 of Clubs
+
+Player 1 ----- 18 pts
+8 of Clubs
+10 of Hearts
+3 of Clubs
+7 of Clubs
+5 of Hearts
+10 of Spades
+11 of Diamonds
+3 of Hearts
+14 of Diamonds
+12 of Diamonds
+13 of Hearts
+2 of Hearts
+12 of Clubs
+
+Player 2 ----- 59 pts
+4 of Spades
+5 of Clubs
+4 of Diamonds
+6 of Diamonds
+3 of Diamonds
+2 of Diamonds
+4 of Clubs
+7 of Spades
+9 of Spades
+8 of Spades
+13 of Spades
+2 of Clubs
+9 of Clubs
+
+Player 3 ----- 1 pts
+11 of Hearts
+14 of Hearts
+2 of Spades
+10 of Clubs
+11 of Spades
+12 of Hearts
+6 of Clubs
+4 of Hearts
+6 of Hearts
+3 of Spades
+14 of Spades
+14 of Clubs
+13 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Clubs
+13 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+9 of Clubs
+12 of Clubs
+13 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+6 of Spades
+10 of Diamonds
+7 of Hearts
+5 of Spades
+5 of Diamonds
+7 of Diamonds
+9 of Diamonds
+12 of Spades
+8 of Diamonds
+11 of Clubs
+
+Player 1 ----- 18 pts
+8 of Clubs
+10 of Hearts
+3 of Clubs
+7 of Clubs
+5 of Hearts
+10 of Spades
+11 of Diamonds
+3 of Hearts
+14 of Diamonds
+12 of Diamonds
+13 of Hearts
+2 of Hearts
+
+Player 2 ----- 59 pts
+4 of Spades
+5 of Clubs
+4 of Diamonds
+6 of Diamonds
+3 of Diamonds
+2 of Diamonds
+4 of Clubs
+7 of Spades
+9 of Spades
+8 of Spades
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+11 of Hearts
+14 of Hearts
+2 of Spades
+10 of Clubs
+11 of Spades
+12 of Hearts
+4 of Hearts
+6 of Hearts
+3 of Spades
+14 of Spades
+14 of Clubs
+13 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+11 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+8 of Clubs
+11 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+5 of Clubs
+8 of Clubs
+11 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+6 of Spades
+10 of Diamonds
+7 of Hearts
+5 of Spades
+5 of Diamonds
+7 of Diamonds
+9 of Diamonds
+12 of Spades
+8 of Diamonds
+
+Player 1 ----- 18 pts
+10 of Hearts
+3 of Clubs
+7 of Clubs
+5 of Hearts
+10 of Spades
+11 of Diamonds
+3 of Hearts
+14 of Diamonds
+12 of Diamonds
+13 of Hearts
+2 of Hearts
+
+Player 2 ----- 59 pts
+4 of Spades
+4 of Diamonds
+6 of Diamonds
+3 of Diamonds
+2 of Diamonds
+4 of Clubs
+7 of Spades
+9 of Spades
+8 of Spades
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+11 of Hearts
+14 of Hearts
+2 of Spades
+11 of Spades
+12 of Hearts
+4 of Hearts
+6 of Hearts
+3 of Spades
+14 of Spades
+14 of Clubs
+13 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+10 of Spades
+12 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+9 of Spades
+10 of Spades
+12 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+6 of Spades
+10 of Diamonds
+7 of Hearts
+5 of Spades
+5 of Diamonds
+7 of Diamonds
+9 of Diamonds
+8 of Diamonds
+
+Player 1 ----- 18 pts
+10 of Hearts
+3 of Clubs
+7 of Clubs
+5 of Hearts
+11 of Diamonds
+3 of Hearts
+14 of Diamonds
+12 of Diamonds
+13 of Hearts
+2 of Hearts
+
+Player 2 ----- 59 pts
+4 of Spades
+4 of Diamonds
+6 of Diamonds
+3 of Diamonds
+2 of Diamonds
+4 of Clubs
+7 of Spades
+8 of Spades
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+11 of Hearts
+14 of Hearts
+11 of Spades
+12 of Hearts
+4 of Hearts
+6 of Hearts
+3 of Spades
+14 of Spades
+14 of Clubs
+13 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+10 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+11 of Diamonds
+10 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+6 of Diamonds
+11 of Diamonds
+10 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+6 of Spades
+7 of Hearts
+5 of Spades
+5 of Diamonds
+7 of Diamonds
+9 of Diamonds
+8 of Diamonds
+
+Player 1 ----- 18 pts
+10 of Hearts
+3 of Clubs
+7 of Clubs
+5 of Hearts
+3 of Hearts
+14 of Diamonds
+12 of Diamonds
+13 of Hearts
+2 of Hearts
+
+Player 2 ----- 59 pts
+4 of Spades
+4 of Diamonds
+3 of Diamonds
+2 of Diamonds
+4 of Clubs
+7 of Spades
+8 of Spades
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+11 of Hearts
+14 of Hearts
+11 of Spades
+12 of Hearts
+4 of Hearts
+6 of Hearts
+3 of Spades
+14 of Spades
+14 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+12 of Diamonds
+9 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+4 of Diamonds
+12 of Diamonds
+9 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+6 of Spades
+7 of Hearts
+5 of Spades
+5 of Diamonds
+7 of Diamonds
+8 of Diamonds
+
+Player 1 ----- 18 pts
+10 of Hearts
+3 of Clubs
+7 of Clubs
+5 of Hearts
+3 of Hearts
+14 of Diamonds
+13 of Hearts
+2 of Hearts
+
+Player 2 ----- 59 pts
+4 of Spades
+3 of Diamonds
+2 of Diamonds
+4 of Clubs
+7 of Spades
+8 of Spades
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+11 of Hearts
+11 of Spades
+12 of Hearts
+4 of Hearts
+6 of Hearts
+3 of Spades
+14 of Spades
+14 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+14 of Diamonds
+8 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+3 of Diamonds
+14 of Diamonds
+8 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+6 of Spades
+7 of Hearts
+5 of Spades
+5 of Diamonds
+7 of Diamonds
+
+Player 1 ----- 18 pts
+10 of Hearts
+3 of Clubs
+7 of Clubs
+5 of Hearts
+3 of Hearts
+13 of Hearts
+2 of Hearts
+
+Player 2 ----- 59 pts
+4 of Spades
+2 of Diamonds
+4 of Clubs
+7 of Spades
+8 of Spades
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+11 of Hearts
+11 of Spades
+4 of Hearts
+6 of Hearts
+3 of Spades
+14 of Spades
+14 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+13 of Hearts
+7 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+2 of Diamonds
+13 of Hearts
+7 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+6 of Spades
+7 of Hearts
+5 of Spades
+5 of Diamonds
+
+Player 1 ----- 18 pts
+10 of Hearts
+3 of Clubs
+7 of Clubs
+5 of Hearts
+3 of Hearts
+2 of Hearts
+
+Player 2 ----- 59 pts
+4 of Spades
+4 of Clubs
+7 of Spades
+8 of Spades
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+11 of Spades
+4 of Hearts
+6 of Hearts
+3 of Spades
+14 of Spades
+14 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+10 of Hearts
+5 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+4 of Clubs
+10 of Hearts
+5 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+6 of Spades
+7 of Hearts
+5 of Spades
+
+Player 1 ----- 18 pts
+3 of Clubs
+7 of Clubs
+5 of Hearts
+3 of Hearts
+2 of Hearts
+
+Player 2 ----- 59 pts
+4 of Spades
+7 of Spades
+8 of Spades
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+11 of Spades
+4 of Hearts
+3 of Spades
+14 of Spades
+14 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+5 of Hearts
+5 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+4 of Spades
+5 of Hearts
+5 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+6 of Spades
+7 of Hearts
+
+Player 1 ----- 18 pts
+3 of Clubs
+7 of Clubs
+3 of Hearts
+2 of Hearts
+
+Player 2 ----- 59 pts
+7 of Spades
+8 of Spades
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+11 of Spades
+4 of Hearts
+14 of Spades
+14 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+3 of Hearts
+6 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+7 of Spades
+3 of Hearts
+6 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+9 of Hearts
+7 of Hearts
+
+Player 1 ----- 18 pts
+3 of Clubs
+7 of Clubs
+2 of Hearts
+
+Player 2 ----- 59 pts
+8 of Spades
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+4 of Hearts
+14 of Spades
+14 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+2 of Hearts
+9 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+8 of Spades
+2 of Hearts
+9 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+7 of Hearts
+
+Player 1 ----- 18 pts
+3 of Clubs
+7 of Clubs
+
+Player 2 ----- 59 pts
+13 of Spades
+2 of Clubs
+
+Player 3 ----- 1 pts
+14 of Spades
+14 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+3 of Clubs
+8 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+13 of Spades
+3 of Clubs
+8 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+7 of Hearts
+
+Player 1 ----- 18 pts
+7 of Clubs
+
+Player 2 ----- 59 pts
+2 of Clubs
+
+Player 3 ----- 1 pts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+7 of Clubs
+7 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+2 of Clubs
+7 of Clubs
+7 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 18 pts
+
+Player 2 ----- 59 pts
+
+Player 3 ----- 1 pts
+pts: 0
+pts: 17
+pts: 43
+pts: 18
+points: 0
+points: 17
+points: 43
+points: 18
+pool:
+
+Player 0 ----- 0 pts
+8 of Diamonds
+4 of Hearts
+10 of Hearts
+10 of Diamonds
+8 of Hearts
+3 of Diamonds
+3 of Clubs
+14 of Spades
+7 of Clubs
+12 of Clubs
+4 of Diamonds
+7 of Spades
+13 of Diamonds
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+10 of Clubs
+2 of Diamonds
+4 of Clubs
+7 of Diamonds
+12 of Spades
+9 of Hearts
+13 of Spades
+9 of Diamonds
+9 of Spades
+13 of Hearts
+11 of Clubs
+
+Player 2 ----- 102 pts
+6 of Clubs
+2 of Spades
+14 of Clubs
+7 of Hearts
+6 of Hearts
+5 of Diamonds
+12 of Hearts
+8 of Clubs
+11 of Hearts
+10 of Spades
+5 of Hearts
+9 of Clubs
+11 of Spades
+
+Player 3 ----- 19 pts
+14 of Hearts
+14 of Diamonds
+11 of Diamonds
+2 of Clubs
+6 of Spades
+6 of Diamonds
+13 of Clubs
+12 of Diamonds
+8 of Spades
+4 of Spades
+5 of Clubs
+2 of Hearts
+3 of Spades
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+14 of Spades
+12 of Clubs
+7 of Clubs
+
+P0 hand ---
+8 of Diamonds
+4 of Hearts
+10 of Hearts
+10 of Diamonds
+8 of Hearts
+3 of Diamonds
+3 of Clubs
+4 of Diamonds
+7 of Spades
+13 of Diamonds
+pool:
+
+Player 0 ----- 0 pts
+8 of Diamonds
+4 of Hearts
+10 of Hearts
+10 of Diamonds
+8 of Hearts
+3 of Diamonds
+3 of Clubs
+4 of Diamonds
+7 of Spades
+13 of Diamonds
+2 of Clubs
+13 of Clubs
+14 of Diamonds
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+2 of Diamonds
+4 of Clubs
+7 of Diamonds
+12 of Spades
+9 of Hearts
+9 of Diamonds
+9 of Spades
+13 of Hearts
+5 of Diamonds
+14 of Clubs
+9 of Clubs
+
+Player 2 ----- 102 pts
+6 of Clubs
+2 of Spades
+7 of Hearts
+6 of Hearts
+12 of Hearts
+8 of Clubs
+11 of Hearts
+10 of Spades
+5 of Hearts
+11 of Spades
+13 of Spades
+11 of Clubs
+10 of Clubs
+
+Player 3 ----- 19 pts
+14 of Hearts
+11 of Diamonds
+6 of Spades
+6 of Diamonds
+12 of Diamonds
+8 of Spades
+4 of Spades
+5 of Clubs
+2 of Hearts
+3 of Spades
+14 of Spades
+12 of Clubs
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+4 of Clubs
+2 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+6 of Clubs
+4 of Clubs
+2 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Diamonds
+4 of Hearts
+10 of Hearts
+10 of Diamonds
+8 of Hearts
+3 of Diamonds
+3 of Clubs
+4 of Diamonds
+7 of Spades
+13 of Diamonds
+13 of Clubs
+14 of Diamonds
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+2 of Diamonds
+7 of Diamonds
+12 of Spades
+9 of Hearts
+9 of Diamonds
+9 of Spades
+13 of Hearts
+5 of Diamonds
+14 of Clubs
+9 of Clubs
+
+Player 2 ----- 102 pts
+2 of Spades
+7 of Hearts
+6 of Hearts
+12 of Hearts
+8 of Clubs
+11 of Hearts
+10 of Spades
+5 of Hearts
+11 of Spades
+13 of Spades
+11 of Clubs
+10 of Clubs
+
+Player 3 ----- 19 pts
+14 of Hearts
+11 of Diamonds
+6 of Spades
+6 of Diamonds
+12 of Diamonds
+8 of Spades
+4 of Spades
+2 of Hearts
+3 of Spades
+14 of Spades
+12 of Clubs
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+14 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+9 of Diamonds
+14 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+12 of Hearts
+9 of Diamonds
+14 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Diamonds
+4 of Hearts
+10 of Hearts
+10 of Diamonds
+8 of Hearts
+3 of Diamonds
+3 of Clubs
+4 of Diamonds
+7 of Spades
+13 of Diamonds
+13 of Clubs
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+2 of Diamonds
+7 of Diamonds
+12 of Spades
+9 of Hearts
+9 of Spades
+13 of Hearts
+5 of Diamonds
+14 of Clubs
+9 of Clubs
+
+Player 2 ----- 102 pts
+2 of Spades
+7 of Hearts
+6 of Hearts
+8 of Clubs
+11 of Hearts
+10 of Spades
+5 of Hearts
+11 of Spades
+13 of Spades
+11 of Clubs
+10 of Clubs
+
+Player 3 ----- 19 pts
+14 of Hearts
+11 of Diamonds
+6 of Spades
+12 of Diamonds
+8 of Spades
+4 of Spades
+2 of Hearts
+3 of Spades
+14 of Spades
+12 of Clubs
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+7 of Diamonds
+13 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+11 of Hearts
+7 of Diamonds
+13 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Diamonds
+4 of Hearts
+10 of Hearts
+10 of Diamonds
+8 of Hearts
+3 of Diamonds
+3 of Clubs
+4 of Diamonds
+7 of Spades
+13 of Clubs
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+2 of Diamonds
+12 of Spades
+9 of Hearts
+9 of Spades
+13 of Hearts
+5 of Diamonds
+14 of Clubs
+9 of Clubs
+
+Player 2 ----- 102 pts
+2 of Spades
+7 of Hearts
+6 of Hearts
+8 of Clubs
+10 of Spades
+5 of Hearts
+11 of Spades
+13 of Spades
+11 of Clubs
+10 of Clubs
+
+Player 3 ----- 19 pts
+14 of Hearts
+6 of Spades
+12 of Diamonds
+8 of Spades
+4 of Spades
+2 of Hearts
+3 of Spades
+14 of Spades
+12 of Clubs
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+10 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+5 of Diamonds
+10 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+7 of Hearts
+5 of Diamonds
+10 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Diamonds
+4 of Hearts
+10 of Hearts
+8 of Hearts
+3 of Diamonds
+3 of Clubs
+4 of Diamonds
+7 of Spades
+13 of Clubs
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+2 of Diamonds
+12 of Spades
+9 of Hearts
+9 of Spades
+13 of Hearts
+14 of Clubs
+9 of Clubs
+
+Player 2 ----- 102 pts
+2 of Spades
+6 of Hearts
+8 of Clubs
+10 of Spades
+5 of Hearts
+11 of Spades
+13 of Spades
+11 of Clubs
+10 of Clubs
+
+Player 3 ----- 19 pts
+14 of Hearts
+6 of Spades
+8 of Spades
+4 of Spades
+2 of Hearts
+3 of Spades
+14 of Spades
+12 of Clubs
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+2 of Diamonds
+8 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+6 of Hearts
+2 of Diamonds
+8 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+4 of Hearts
+10 of Hearts
+8 of Hearts
+3 of Diamonds
+3 of Clubs
+4 of Diamonds
+7 of Spades
+13 of Clubs
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+12 of Spades
+9 of Hearts
+9 of Spades
+13 of Hearts
+14 of Clubs
+9 of Clubs
+
+Player 2 ----- 102 pts
+2 of Spades
+8 of Clubs
+10 of Spades
+5 of Hearts
+11 of Spades
+13 of Spades
+11 of Clubs
+10 of Clubs
+
+Player 3 ----- 19 pts
+6 of Spades
+8 of Spades
+4 of Spades
+2 of Hearts
+3 of Spades
+14 of Spades
+12 of Clubs
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+12 of Spades
+4 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+5 of Hearts
+12 of Spades
+4 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+4 of Hearts
+10 of Hearts
+8 of Hearts
+3 of Diamonds
+3 of Clubs
+7 of Spades
+13 of Clubs
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+9 of Hearts
+9 of Spades
+13 of Hearts
+14 of Clubs
+9 of Clubs
+
+Player 2 ----- 102 pts
+2 of Spades
+8 of Clubs
+10 of Spades
+11 of Spades
+13 of Spades
+11 of Clubs
+10 of Clubs
+
+Player 3 ----- 19 pts
+6 of Spades
+8 of Spades
+4 of Spades
+3 of Spades
+14 of Spades
+12 of Clubs
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+13 of Hearts
+3 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+2 of Spades
+13 of Hearts
+3 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+4 of Hearts
+10 of Hearts
+8 of Hearts
+3 of Clubs
+7 of Spades
+13 of Clubs
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+9 of Hearts
+9 of Spades
+14 of Clubs
+9 of Clubs
+
+Player 2 ----- 102 pts
+8 of Clubs
+10 of Spades
+11 of Spades
+13 of Spades
+11 of Clubs
+10 of Clubs
+
+Player 3 ----- 19 pts
+6 of Spades
+8 of Spades
+4 of Spades
+14 of Spades
+12 of Clubs
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+9 of Clubs
+13 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+11 of Clubs
+9 of Clubs
+13 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+4 of Hearts
+10 of Hearts
+8 of Hearts
+3 of Clubs
+7 of Spades
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+9 of Hearts
+9 of Spades
+14 of Clubs
+
+Player 2 ----- 102 pts
+8 of Clubs
+10 of Spades
+11 of Spades
+13 of Spades
+10 of Clubs
+
+Player 3 ----- 19 pts
+6 of Spades
+8 of Spades
+4 of Spades
+14 of Spades
+12 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+14 of Clubs
+3 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+10 of Clubs
+14 of Clubs
+3 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+4 of Hearts
+10 of Hearts
+8 of Hearts
+7 of Spades
+
+Player 1 ----- 35 pts
+5 of Spades
+3 of Hearts
+9 of Hearts
+9 of Spades
+
+Player 2 ----- 102 pts
+8 of Clubs
+10 of Spades
+11 of Spades
+13 of Spades
+
+Player 3 ----- 19 pts
+6 of Spades
+8 of Spades
+4 of Spades
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+5 of Spades
+7 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+10 of Spades
+5 of Spades
+7 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+4 of Hearts
+10 of Hearts
+8 of Hearts
+
+Player 1 ----- 35 pts
+3 of Hearts
+9 of Hearts
+9 of Spades
+
+Player 2 ----- 102 pts
+8 of Clubs
+11 of Spades
+13 of Spades
+
+Player 3 ----- 19 pts
+6 of Spades
+8 of Spades
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+3 of Hearts
+8 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+11 of Spades
+3 of Hearts
+8 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+4 of Hearts
+10 of Hearts
+
+Player 1 ----- 35 pts
+9 of Hearts
+9 of Spades
+
+Player 2 ----- 102 pts
+8 of Clubs
+13 of Spades
+
+Player 3 ----- 19 pts
+6 of Spades
+8 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+10 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+9 of Hearts
+10 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+13 of Spades
+9 of Hearts
+10 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+4 of Hearts
+
+Player 1 ----- 35 pts
+9 of Spades
+
+Player 2 ----- 102 pts
+8 of Clubs
+
+Player 3 ----- 19 pts
+8 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+9 of Spades
+4 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+8 of Clubs
+9 of Spades
+4 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 35 pts
+
+Player 2 ----- 102 pts
+
+Player 3 ----- 19 pts
+pts: 0
+pts: 17
+pts: 52
+pts: 35
+points: 0
+points: 17
+points: 52
+points: 35
+pool:
+
+Player 0 ----- 0 pts
+14 of Clubs
+11 of Spades
+13 of Hearts
+3 of Hearts
+8 of Spades
+11 of Diamonds
+3 of Diamonds
+7 of Spades
+2 of Diamonds
+5 of Hearts
+12 of Diamonds
+6 of Clubs
+12 of Hearts
+
+Player 1 ----- 52 pts
+6 of Diamonds
+2 of Hearts
+4 of Hearts
+9 of Hearts
+7 of Hearts
+4 of Clubs
+5 of Clubs
+10 of Hearts
+4 of Diamonds
+8 of Hearts
+2 of Clubs
+6 of Hearts
+5 of Diamonds
+
+Player 2 ----- 154 pts
+13 of Clubs
+8 of Diamonds
+6 of Spades
+11 of Clubs
+12 of Clubs
+4 of Spades
+10 of Clubs
+9 of Clubs
+9 of Diamonds
+7 of Diamonds
+2 of Spades
+12 of Spades
+5 of Spades
+
+Player 3 ----- 54 pts
+13 of Spades
+8 of Clubs
+14 of Hearts
+9 of Spades
+13 of Diamonds
+7 of Clubs
+10 of Diamonds
+10 of Spades
+3 of Spades
+3 of Clubs
+14 of Spades
+14 of Diamonds
+11 of Hearts
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+14 of Clubs
+12 of Diamonds
+11 of Diamonds
+
+P0 hand ---
+11 of Spades
+13 of Hearts
+3 of Hearts
+8 of Spades
+3 of Diamonds
+7 of Spades
+2 of Diamonds
+5 of Hearts
+6 of Clubs
+12 of Hearts
+pool:
+
+Player 0 ----- 0 pts
+11 of Spades
+13 of Hearts
+3 of Hearts
+8 of Spades
+3 of Diamonds
+7 of Spades
+2 of Diamonds
+5 of Hearts
+6 of Clubs
+12 of Hearts
+14 of Spades
+13 of Spades
+11 of Hearts
+
+Player 1 ----- 52 pts
+2 of Hearts
+4 of Hearts
+9 of Hearts
+7 of Hearts
+4 of Clubs
+10 of Hearts
+4 of Diamonds
+8 of Hearts
+6 of Hearts
+5 of Diamonds
+12 of Spades
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+13 of Clubs
+6 of Spades
+11 of Clubs
+12 of Clubs
+4 of Spades
+10 of Clubs
+9 of Clubs
+7 of Diamonds
+2 of Spades
+5 of Spades
+2 of Clubs
+5 of Clubs
+6 of Diamonds
+
+Player 3 ----- 54 pts
+8 of Clubs
+14 of Hearts
+9 of Spades
+13 of Diamonds
+7 of Clubs
+10 of Diamonds
+10 of Spades
+3 of Spades
+3 of Clubs
+14 of Diamonds
+14 of Clubs
+12 of Diamonds
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+4 of Clubs
+6 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+5 of Clubs
+4 of Clubs
+6 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+11 of Spades
+13 of Hearts
+3 of Hearts
+8 of Spades
+3 of Diamonds
+7 of Spades
+2 of Diamonds
+5 of Hearts
+12 of Hearts
+14 of Spades
+13 of Spades
+11 of Hearts
+
+Player 1 ----- 52 pts
+2 of Hearts
+4 of Hearts
+9 of Hearts
+7 of Hearts
+10 of Hearts
+4 of Diamonds
+8 of Hearts
+6 of Hearts
+5 of Diamonds
+12 of Spades
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+13 of Clubs
+6 of Spades
+11 of Clubs
+12 of Clubs
+4 of Spades
+10 of Clubs
+9 of Clubs
+7 of Diamonds
+2 of Spades
+5 of Spades
+2 of Clubs
+6 of Diamonds
+
+Player 3 ----- 54 pts
+8 of Clubs
+14 of Hearts
+9 of Spades
+13 of Diamonds
+7 of Clubs
+10 of Diamonds
+10 of Spades
+3 of Spades
+14 of Diamonds
+14 of Clubs
+12 of Diamonds
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+4 of Diamonds
+3 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+6 of Diamonds
+4 of Diamonds
+3 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+11 of Spades
+13 of Hearts
+3 of Hearts
+8 of Spades
+7 of Spades
+2 of Diamonds
+5 of Hearts
+12 of Hearts
+14 of Spades
+13 of Spades
+11 of Hearts
+
+Player 1 ----- 52 pts
+2 of Hearts
+4 of Hearts
+9 of Hearts
+7 of Hearts
+10 of Hearts
+8 of Hearts
+6 of Hearts
+5 of Diamonds
+12 of Spades
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+13 of Clubs
+6 of Spades
+11 of Clubs
+12 of Clubs
+4 of Spades
+10 of Clubs
+9 of Clubs
+7 of Diamonds
+2 of Spades
+5 of Spades
+2 of Clubs
+
+Player 3 ----- 54 pts
+8 of Clubs
+14 of Hearts
+9 of Spades
+13 of Diamonds
+7 of Clubs
+10 of Spades
+3 of Spades
+14 of Diamonds
+14 of Clubs
+12 of Diamonds
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+5 of Diamonds
+2 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+7 of Diamonds
+5 of Diamonds
+2 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+11 of Spades
+13 of Hearts
+3 of Hearts
+8 of Spades
+7 of Spades
+5 of Hearts
+12 of Hearts
+14 of Spades
+13 of Spades
+11 of Hearts
+
+Player 1 ----- 52 pts
+2 of Hearts
+4 of Hearts
+9 of Hearts
+7 of Hearts
+10 of Hearts
+8 of Hearts
+6 of Hearts
+12 of Spades
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+13 of Clubs
+6 of Spades
+11 of Clubs
+12 of Clubs
+4 of Spades
+10 of Clubs
+9 of Clubs
+2 of Spades
+5 of Spades
+2 of Clubs
+
+Player 3 ----- 54 pts
+8 of Clubs
+14 of Hearts
+9 of Spades
+13 of Diamonds
+7 of Clubs
+10 of Spades
+3 of Spades
+14 of Diamonds
+14 of Clubs
+12 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+12 of Spades
+7 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+6 of Spades
+12 of Spades
+7 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+11 of Spades
+13 of Hearts
+3 of Hearts
+8 of Spades
+5 of Hearts
+12 of Hearts
+14 of Spades
+13 of Spades
+11 of Hearts
+
+Player 1 ----- 52 pts
+2 of Hearts
+4 of Hearts
+9 of Hearts
+7 of Hearts
+10 of Hearts
+8 of Hearts
+6 of Hearts
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+13 of Clubs
+11 of Clubs
+12 of Clubs
+4 of Spades
+10 of Clubs
+9 of Clubs
+2 of Spades
+5 of Spades
+2 of Clubs
+
+Player 3 ----- 54 pts
+8 of Clubs
+14 of Hearts
+9 of Spades
+13 of Diamonds
+7 of Clubs
+10 of Spades
+14 of Diamonds
+14 of Clubs
+12 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+10 of Hearts
+8 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+5 of Spades
+10 of Hearts
+8 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+11 of Spades
+13 of Hearts
+3 of Hearts
+5 of Hearts
+12 of Hearts
+14 of Spades
+13 of Spades
+11 of Hearts
+
+Player 1 ----- 52 pts
+2 of Hearts
+4 of Hearts
+9 of Hearts
+7 of Hearts
+8 of Hearts
+6 of Hearts
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+13 of Clubs
+11 of Clubs
+12 of Clubs
+4 of Spades
+10 of Clubs
+9 of Clubs
+2 of Spades
+2 of Clubs
+
+Player 3 ----- 54 pts
+8 of Clubs
+14 of Hearts
+13 of Diamonds
+7 of Clubs
+10 of Spades
+14 of Diamonds
+14 of Clubs
+12 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+11 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+9 of Hearts
+11 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+4 of Spades
+9 of Hearts
+11 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+13 of Hearts
+3 of Hearts
+5 of Hearts
+12 of Hearts
+14 of Spades
+13 of Spades
+11 of Hearts
+
+Player 1 ----- 52 pts
+2 of Hearts
+4 of Hearts
+7 of Hearts
+8 of Hearts
+6 of Hearts
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+13 of Clubs
+11 of Clubs
+12 of Clubs
+10 of Clubs
+9 of Clubs
+2 of Spades
+2 of Clubs
+
+Player 3 ----- 54 pts
+8 of Clubs
+14 of Hearts
+13 of Diamonds
+7 of Clubs
+14 of Diamonds
+14 of Clubs
+12 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+11 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+8 of Hearts
+11 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+13 of Clubs
+8 of Hearts
+11 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+13 of Hearts
+3 of Hearts
+5 of Hearts
+12 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 52 pts
+2 of Hearts
+4 of Hearts
+7 of Hearts
+6 of Hearts
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+11 of Clubs
+12 of Clubs
+10 of Clubs
+9 of Clubs
+2 of Spades
+2 of Clubs
+
+Player 3 ----- 54 pts
+8 of Clubs
+13 of Diamonds
+7 of Clubs
+14 of Diamonds
+14 of Clubs
+12 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+7 of Hearts
+13 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+2 of Clubs
+7 of Hearts
+13 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Hearts
+5 of Hearts
+12 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 52 pts
+2 of Hearts
+4 of Hearts
+6 of Hearts
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+11 of Clubs
+12 of Clubs
+10 of Clubs
+9 of Clubs
+2 of Spades
+
+Player 3 ----- 54 pts
+8 of Clubs
+13 of Diamonds
+7 of Clubs
+14 of Diamonds
+14 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+6 of Hearts
+12 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+9 of Clubs
+6 of Hearts
+12 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Hearts
+5 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 52 pts
+2 of Hearts
+4 of Hearts
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+11 of Clubs
+12 of Clubs
+10 of Clubs
+2 of Spades
+
+Player 3 ----- 54 pts
+8 of Clubs
+13 of Diamonds
+7 of Clubs
+14 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+4 of Hearts
+5 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+10 of Clubs
+4 of Hearts
+5 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 52 pts
+2 of Hearts
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+11 of Clubs
+12 of Clubs
+2 of Spades
+
+Player 3 ----- 54 pts
+8 of Clubs
+13 of Diamonds
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+2 of Hearts
+3 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+11 of Clubs
+2 of Hearts
+3 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 52 pts
+9 of Diamonds
+8 of Diamonds
+
+Player 2 ----- 154 pts
+12 of Clubs
+2 of Spades
+
+Player 3 ----- 54 pts
+8 of Clubs
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+9 of Diamonds
+13 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+2 of Spades
+9 of Diamonds
+13 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+14 of Spades
+
+Player 1 ----- 52 pts
+8 of Diamonds
+
+Player 2 ----- 154 pts
+12 of Clubs
+
+Player 3 ----- 54 pts
+7 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+14 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+8 of Diamonds
+14 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+12 of Clubs
+8 of Diamonds
+14 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 52 pts
+
+Player 2 ----- 154 pts
+
+Player 3 ----- 54 pts
+pts: 0
+pts: 19
+pts: 63
+pts: 48
+points: 0
+points: 19
+points: 63
+points: 48
+pool:
+
+Player 0 ----- 0 pts
+2 of Clubs
+3 of Spades
+5 of Clubs
+12 of Clubs
+14 of Spades
+10 of Clubs
+5 of Hearts
+8 of Clubs
+6 of Spades
+10 of Diamonds
+4 of Clubs
+8 of Hearts
+5 of Diamonds
+
+Player 1 ----- 71 pts
+12 of Hearts
+10 of Hearts
+8 of Diamonds
+11 of Clubs
+14 of Hearts
+9 of Clubs
+7 of Diamonds
+3 of Diamonds
+2 of Diamonds
+13 of Hearts
+13 of Spades
+7 of Clubs
+14 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+11 of Diamonds
+7 of Hearts
+2 of Spades
+8 of Spades
+6 of Clubs
+12 of Spades
+10 of Spades
+13 of Diamonds
+2 of Hearts
+13 of Clubs
+9 of Hearts
+3 of Clubs
+
+Player 3 ----- 102 pts
+6 of Diamonds
+14 of Clubs
+6 of Hearts
+9 of Diamonds
+5 of Spades
+7 of Spades
+12 of Diamonds
+11 of Hearts
+11 of Spades
+4 of Hearts
+4 of Diamonds
+3 of Hearts
+4 of Spades
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+14 of Spades
+2 of Clubs
+10 of Diamonds
+
+P0 hand ---
+3 of Spades
+5 of Clubs
+12 of Clubs
+10 of Clubs
+5 of Hearts
+8 of Clubs
+6 of Spades
+4 of Clubs
+8 of Hearts
+5 of Diamonds
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Clubs
+12 of Clubs
+10 of Clubs
+5 of Hearts
+8 of Clubs
+6 of Spades
+4 of Clubs
+8 of Hearts
+5 of Diamonds
+12 of Diamonds
+9 of Diamonds
+6 of Diamonds
+
+Player 1 ----- 71 pts
+12 of Hearts
+10 of Hearts
+8 of Diamonds
+14 of Hearts
+7 of Diamonds
+3 of Diamonds
+2 of Diamonds
+13 of Hearts
+7 of Clubs
+14 of Diamonds
+12 of Spades
+13 of Diamonds
+11 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+7 of Hearts
+2 of Spades
+8 of Spades
+6 of Clubs
+10 of Spades
+2 of Hearts
+13 of Clubs
+9 of Hearts
+3 of Clubs
+13 of Spades
+11 of Clubs
+9 of Clubs
+
+Player 3 ----- 102 pts
+14 of Clubs
+6 of Hearts
+5 of Spades
+7 of Spades
+11 of Hearts
+11 of Spades
+4 of Hearts
+4 of Diamonds
+3 of Hearts
+4 of Spades
+14 of Spades
+2 of Clubs
+10 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+12 of Spades
+6 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+10 of Spades
+12 of Spades
+6 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Clubs
+12 of Clubs
+10 of Clubs
+5 of Hearts
+8 of Clubs
+4 of Clubs
+8 of Hearts
+5 of Diamonds
+12 of Diamonds
+9 of Diamonds
+6 of Diamonds
+
+Player 1 ----- 71 pts
+12 of Hearts
+10 of Hearts
+8 of Diamonds
+14 of Hearts
+7 of Diamonds
+3 of Diamonds
+2 of Diamonds
+13 of Hearts
+7 of Clubs
+14 of Diamonds
+13 of Diamonds
+11 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+7 of Hearts
+2 of Spades
+8 of Spades
+6 of Clubs
+2 of Hearts
+13 of Clubs
+9 of Hearts
+3 of Clubs
+13 of Spades
+11 of Clubs
+9 of Clubs
+
+Player 3 ----- 102 pts
+14 of Clubs
+6 of Hearts
+5 of Spades
+7 of Spades
+11 of Hearts
+11 of Spades
+4 of Hearts
+4 of Diamonds
+3 of Hearts
+14 of Spades
+2 of Clubs
+10 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+11 of Diamonds
+12 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+9 of Hearts
+11 of Diamonds
+12 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Clubs
+12 of Clubs
+10 of Clubs
+5 of Hearts
+8 of Clubs
+4 of Clubs
+8 of Hearts
+5 of Diamonds
+9 of Diamonds
+6 of Diamonds
+
+Player 1 ----- 71 pts
+12 of Hearts
+10 of Hearts
+8 of Diamonds
+14 of Hearts
+7 of Diamonds
+3 of Diamonds
+2 of Diamonds
+13 of Hearts
+7 of Clubs
+14 of Diamonds
+13 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+7 of Hearts
+2 of Spades
+8 of Spades
+6 of Clubs
+2 of Hearts
+13 of Clubs
+3 of Clubs
+13 of Spades
+11 of Clubs
+9 of Clubs
+
+Player 3 ----- 102 pts
+14 of Clubs
+6 of Hearts
+5 of Spades
+7 of Spades
+11 of Hearts
+11 of Spades
+4 of Hearts
+3 of Hearts
+14 of Spades
+2 of Clubs
+10 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+8 of Diamonds
+9 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+7 of Hearts
+8 of Diamonds
+9 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Clubs
+12 of Clubs
+10 of Clubs
+5 of Hearts
+8 of Clubs
+4 of Clubs
+8 of Hearts
+5 of Diamonds
+6 of Diamonds
+
+Player 1 ----- 71 pts
+12 of Hearts
+10 of Hearts
+14 of Hearts
+7 of Diamonds
+3 of Diamonds
+2 of Diamonds
+13 of Hearts
+7 of Clubs
+14 of Diamonds
+13 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+2 of Spades
+8 of Spades
+6 of Clubs
+2 of Hearts
+13 of Clubs
+3 of Clubs
+13 of Spades
+11 of Clubs
+9 of Clubs
+
+Player 3 ----- 102 pts
+14 of Clubs
+6 of Hearts
+5 of Spades
+7 of Spades
+11 of Hearts
+11 of Spades
+4 of Hearts
+3 of Hearts
+14 of Spades
+2 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+3 of Diamonds
+6 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+2 of Hearts
+3 of Diamonds
+6 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Clubs
+12 of Clubs
+10 of Clubs
+5 of Hearts
+8 of Clubs
+4 of Clubs
+8 of Hearts
+5 of Diamonds
+
+Player 1 ----- 71 pts
+12 of Hearts
+10 of Hearts
+14 of Hearts
+7 of Diamonds
+2 of Diamonds
+13 of Hearts
+7 of Clubs
+14 of Diamonds
+13 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+2 of Spades
+8 of Spades
+6 of Clubs
+13 of Clubs
+3 of Clubs
+13 of Spades
+11 of Clubs
+9 of Clubs
+
+Player 3 ----- 102 pts
+14 of Clubs
+6 of Hearts
+5 of Spades
+7 of Spades
+11 of Spades
+4 of Hearts
+3 of Hearts
+14 of Spades
+2 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+2 of Diamonds
+5 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+8 of Spades
+2 of Diamonds
+5 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Clubs
+12 of Clubs
+10 of Clubs
+5 of Hearts
+8 of Clubs
+4 of Clubs
+8 of Hearts
+
+Player 1 ----- 71 pts
+12 of Hearts
+10 of Hearts
+14 of Hearts
+7 of Diamonds
+13 of Hearts
+7 of Clubs
+14 of Diamonds
+13 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+2 of Spades
+6 of Clubs
+13 of Clubs
+3 of Clubs
+13 of Spades
+11 of Clubs
+9 of Clubs
+
+Player 3 ----- 102 pts
+14 of Clubs
+5 of Spades
+7 of Spades
+11 of Spades
+4 of Hearts
+3 of Hearts
+14 of Spades
+2 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+7 of Clubs
+12 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+11 of Clubs
+7 of Clubs
+12 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Clubs
+10 of Clubs
+5 of Hearts
+8 of Clubs
+4 of Clubs
+8 of Hearts
+
+Player 1 ----- 71 pts
+12 of Hearts
+10 of Hearts
+14 of Hearts
+7 of Diamonds
+13 of Hearts
+14 of Diamonds
+13 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+2 of Spades
+6 of Clubs
+13 of Clubs
+3 of Clubs
+13 of Spades
+9 of Clubs
+
+Player 3 ----- 102 pts
+14 of Clubs
+5 of Spades
+7 of Spades
+11 of Spades
+4 of Hearts
+3 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+10 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+14 of Hearts
+10 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+9 of Clubs
+14 of Hearts
+10 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Clubs
+5 of Hearts
+8 of Clubs
+4 of Clubs
+8 of Hearts
+
+Player 1 ----- 71 pts
+12 of Hearts
+10 of Hearts
+7 of Diamonds
+13 of Hearts
+14 of Diamonds
+13 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+2 of Spades
+6 of Clubs
+13 of Clubs
+3 of Clubs
+13 of Spades
+
+Player 3 ----- 102 pts
+5 of Spades
+7 of Spades
+11 of Spades
+4 of Hearts
+3 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+13 of Hearts
+8 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+6 of Clubs
+13 of Hearts
+8 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Clubs
+5 of Hearts
+4 of Clubs
+8 of Hearts
+
+Player 1 ----- 71 pts
+12 of Hearts
+10 of Hearts
+7 of Diamonds
+14 of Diamonds
+13 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+2 of Spades
+13 of Clubs
+3 of Clubs
+13 of Spades
+
+Player 3 ----- 102 pts
+5 of Spades
+7 of Spades
+11 of Spades
+3 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Hearts
+5 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+3 of Clubs
+12 of Hearts
+5 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Hearts
+4 of Clubs
+8 of Hearts
+
+Player 1 ----- 71 pts
+10 of Hearts
+7 of Diamonds
+14 of Diamonds
+13 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+2 of Spades
+13 of Clubs
+13 of Spades
+
+Player 3 ----- 102 pts
+5 of Spades
+7 of Spades
+11 of Spades
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+10 of Hearts
+4 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+13 of Clubs
+10 of Hearts
+4 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+5 of Hearts
+8 of Hearts
+
+Player 1 ----- 71 pts
+7 of Diamonds
+14 of Diamonds
+13 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+2 of Spades
+13 of Spades
+
+Player 3 ----- 102 pts
+5 of Spades
+7 of Spades
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+14 of Diamonds
+3 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+2 of Spades
+14 of Diamonds
+3 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+5 of Hearts
+8 of Hearts
+
+Player 1 ----- 71 pts
+7 of Diamonds
+13 of Diamonds
+
+Player 2 ----- 217 pts
+9 of Spades
+13 of Spades
+
+Player 3 ----- 102 pts
+7 of Spades
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+7 of Diamonds
+8 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+9 of Spades
+7 of Diamonds
+8 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+5 of Hearts
+
+Player 1 ----- 71 pts
+13 of Diamonds
+
+Player 2 ----- 217 pts
+13 of Spades
+
+Player 3 ----- 102 pts
+7 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+13 of Diamonds
+5 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+13 of Spades
+13 of Diamonds
+5 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 71 pts
+
+Player 2 ----- 217 pts
+
+Player 3 ----- 102 pts
+pts: 0
+pts: 22
+pts: 67
+pts: 67
+points: 0
+points: 22
+points: 67
+points: 67
+pool:
+
+Player 0 ----- 0 pts
+2 of Diamonds
+4 of Clubs
+3 of Spades
+10 of Clubs
+9 of Diamonds
+8 of Hearts
+4 of Hearts
+9 of Hearts
+5 of Hearts
+3 of Clubs
+3 of Diamonds
+4 of Diamonds
+2 of Hearts
+
+Player 1 ----- 93 pts
+7 of Hearts
+13 of Clubs
+6 of Diamonds
+13 of Diamonds
+7 of Spades
+11 of Hearts
+6 of Hearts
+12 of Spades
+3 of Hearts
+8 of Clubs
+9 of Spades
+11 of Spades
+10 of Diamonds
+
+Player 2 ----- 284 pts
+5 of Spades
+5 of Diamonds
+14 of Clubs
+14 of Diamonds
+9 of Clubs
+10 of Spades
+5 of Clubs
+14 of Hearts
+12 of Clubs
+12 of Diamonds
+10 of Hearts
+8 of Spades
+11 of Clubs
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+2 of Spades
+2 of Clubs
+8 of Diamonds
+7 of Diamonds
+6 of Clubs
+13 of Hearts
+12 of Hearts
+6 of Spades
+13 of Spades
+4 of Spades
+14 of Spades
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+10 of Clubs
+4 of Clubs
+9 of Diamonds
+
+P0 hand ---
+2 of Diamonds
+3 of Spades
+8 of Hearts
+4 of Hearts
+9 of Hearts
+5 of Hearts
+3 of Clubs
+3 of Diamonds
+4 of Diamonds
+2 of Hearts
+pool:
+
+Player 0 ----- 0 pts
+2 of Diamonds
+3 of Spades
+8 of Hearts
+4 of Hearts
+9 of Hearts
+5 of Hearts
+3 of Clubs
+3 of Diamonds
+4 of Diamonds
+2 of Hearts
+14 of Spades
+13 of Spades
+2 of Clubs
+
+Player 1 ----- 93 pts
+7 of Hearts
+6 of Diamonds
+7 of Spades
+11 of Hearts
+6 of Hearts
+3 of Hearts
+8 of Clubs
+9 of Spades
+11 of Spades
+10 of Diamonds
+10 of Hearts
+14 of Clubs
+12 of Clubs
+
+Player 2 ----- 284 pts
+5 of Spades
+5 of Diamonds
+14 of Diamonds
+9 of Clubs
+10 of Spades
+5 of Clubs
+14 of Hearts
+12 of Diamonds
+8 of Spades
+11 of Clubs
+12 of Spades
+13 of Clubs
+13 of Diamonds
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+2 of Spades
+8 of Diamonds
+7 of Diamonds
+6 of Clubs
+13 of Hearts
+12 of Hearts
+6 of Spades
+4 of Spades
+10 of Clubs
+4 of Clubs
+9 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+8 of Clubs
+2 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+5 of Clubs
+8 of Clubs
+2 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+2 of Diamonds
+3 of Spades
+8 of Hearts
+4 of Hearts
+9 of Hearts
+5 of Hearts
+3 of Clubs
+3 of Diamonds
+4 of Diamonds
+2 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+7 of Hearts
+6 of Diamonds
+7 of Spades
+11 of Hearts
+6 of Hearts
+3 of Hearts
+9 of Spades
+11 of Spades
+10 of Diamonds
+10 of Hearts
+14 of Clubs
+12 of Clubs
+
+Player 2 ----- 284 pts
+5 of Spades
+5 of Diamonds
+14 of Diamonds
+9 of Clubs
+10 of Spades
+14 of Hearts
+12 of Diamonds
+8 of Spades
+11 of Clubs
+12 of Spades
+13 of Clubs
+13 of Diamonds
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+2 of Spades
+8 of Diamonds
+7 of Diamonds
+6 of Clubs
+13 of Hearts
+12 of Hearts
+6 of Spades
+4 of Spades
+10 of Clubs
+9 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Clubs
+3 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+11 of Clubs
+12 of Clubs
+3 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+2 of Diamonds
+3 of Spades
+8 of Hearts
+4 of Hearts
+9 of Hearts
+5 of Hearts
+3 of Diamonds
+4 of Diamonds
+2 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+7 of Hearts
+6 of Diamonds
+7 of Spades
+11 of Hearts
+6 of Hearts
+3 of Hearts
+9 of Spades
+11 of Spades
+10 of Diamonds
+10 of Hearts
+14 of Clubs
+
+Player 2 ----- 284 pts
+5 of Spades
+5 of Diamonds
+14 of Diamonds
+9 of Clubs
+10 of Spades
+14 of Hearts
+12 of Diamonds
+8 of Spades
+12 of Spades
+13 of Clubs
+13 of Diamonds
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+2 of Spades
+8 of Diamonds
+7 of Diamonds
+13 of Hearts
+12 of Hearts
+6 of Spades
+4 of Spades
+10 of Clubs
+9 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+6 of Diamonds
+4 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+5 of Diamonds
+6 of Diamonds
+4 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+2 of Diamonds
+3 of Spades
+8 of Hearts
+4 of Hearts
+9 of Hearts
+5 of Hearts
+3 of Diamonds
+2 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+7 of Hearts
+7 of Spades
+11 of Hearts
+6 of Hearts
+3 of Hearts
+9 of Spades
+11 of Spades
+10 of Diamonds
+10 of Hearts
+14 of Clubs
+
+Player 2 ----- 284 pts
+5 of Spades
+14 of Diamonds
+9 of Clubs
+10 of Spades
+14 of Hearts
+12 of Diamonds
+8 of Spades
+12 of Spades
+13 of Clubs
+13 of Diamonds
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+2 of Spades
+8 of Diamonds
+13 of Hearts
+12 of Hearts
+6 of Spades
+4 of Spades
+10 of Clubs
+9 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+10 of Diamonds
+3 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+12 of Diamonds
+10 of Diamonds
+3 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+2 of Diamonds
+3 of Spades
+8 of Hearts
+4 of Hearts
+9 of Hearts
+5 of Hearts
+2 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+7 of Hearts
+7 of Spades
+11 of Hearts
+6 of Hearts
+3 of Hearts
+9 of Spades
+11 of Spades
+10 of Hearts
+14 of Clubs
+
+Player 2 ----- 284 pts
+5 of Spades
+14 of Diamonds
+9 of Clubs
+10 of Spades
+14 of Hearts
+8 of Spades
+12 of Spades
+13 of Clubs
+13 of Diamonds
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+2 of Spades
+13 of Hearts
+12 of Hearts
+6 of Spades
+4 of Spades
+10 of Clubs
+9 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+11 of Hearts
+2 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+13 of Diamonds
+11 of Hearts
+2 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Spades
+8 of Hearts
+4 of Hearts
+9 of Hearts
+5 of Hearts
+2 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+7 of Hearts
+7 of Spades
+6 of Hearts
+3 of Hearts
+9 of Spades
+11 of Spades
+10 of Hearts
+14 of Clubs
+
+Player 2 ----- 284 pts
+5 of Spades
+14 of Diamonds
+9 of Clubs
+10 of Spades
+14 of Hearts
+8 of Spades
+12 of Spades
+13 of Clubs
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+2 of Spades
+13 of Hearts
+12 of Hearts
+6 of Spades
+4 of Spades
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+7 of Spades
+3 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+5 of Spades
+7 of Spades
+3 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+4 of Hearts
+9 of Hearts
+5 of Hearts
+2 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+7 of Hearts
+6 of Hearts
+3 of Hearts
+9 of Spades
+11 of Spades
+10 of Hearts
+14 of Clubs
+
+Player 2 ----- 284 pts
+14 of Diamonds
+9 of Clubs
+10 of Spades
+14 of Hearts
+8 of Spades
+12 of Spades
+13 of Clubs
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+13 of Hearts
+12 of Hearts
+6 of Spades
+4 of Spades
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+7 of Hearts
+8 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+14 of Hearts
+7 of Hearts
+8 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+4 of Hearts
+9 of Hearts
+5 of Hearts
+2 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+6 of Hearts
+3 of Hearts
+9 of Spades
+11 of Spades
+10 of Hearts
+14 of Clubs
+
+Player 2 ----- 284 pts
+14 of Diamonds
+9 of Clubs
+10 of Spades
+8 of Spades
+12 of Spades
+13 of Clubs
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+13 of Hearts
+6 of Spades
+4 of Spades
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+3 of Hearts
+5 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+12 of Spades
+3 of Hearts
+5 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+4 of Hearts
+9 of Hearts
+2 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+6 of Hearts
+9 of Spades
+11 of Spades
+10 of Hearts
+14 of Clubs
+
+Player 2 ----- 284 pts
+14 of Diamonds
+9 of Clubs
+10 of Spades
+8 of Spades
+13 of Clubs
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+6 of Spades
+4 of Spades
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+6 of Hearts
+4 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+8 of Spades
+6 of Hearts
+4 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Hearts
+2 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+9 of Spades
+11 of Spades
+10 of Hearts
+14 of Clubs
+
+Player 2 ----- 284 pts
+14 of Diamonds
+9 of Clubs
+10 of Spades
+13 of Clubs
+
+Player 3 ----- 169 pts
+7 of Clubs
+11 of Diamonds
+6 of Spades
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+10 of Hearts
+9 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+14 of Diamonds
+10 of Hearts
+9 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+2 of Hearts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+9 of Spades
+11 of Spades
+14 of Clubs
+
+Player 2 ----- 284 pts
+9 of Clubs
+10 of Spades
+13 of Clubs
+
+Player 3 ----- 169 pts
+11 of Diamonds
+6 of Spades
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+11 of Spades
+2 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+13 of Clubs
+11 of Spades
+2 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+14 of Spades
+13 of Spades
+
+Player 1 ----- 93 pts
+9 of Spades
+14 of Clubs
+
+Player 2 ----- 284 pts
+9 of Clubs
+10 of Spades
+
+Player 3 ----- 169 pts
+6 of Spades
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+9 of Spades
+13 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+10 of Spades
+9 of Spades
+13 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+14 of Spades
+
+Player 1 ----- 93 pts
+14 of Clubs
+
+Player 2 ----- 284 pts
+9 of Clubs
+
+Player 3 ----- 169 pts
+10 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+14 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+14 of Clubs
+14 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+9 of Clubs
+14 of Clubs
+14 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 93 pts
+
+Player 2 ----- 284 pts
+
+Player 3 ----- 169 pts
+pts: 0
+pts: 28
+pts: 83
+pts: 71
+points: 0
+points: 28
+points: 83
+points: 71
+pool:
+
+Player 0 ----- 0 pts
+13 of Diamonds
+9 of Clubs
+13 of Clubs
+6 of Diamonds
+12 of Spades
+4 of Spades
+14 of Spades
+7 of Spades
+5 of Diamonds
+2 of Spades
+7 of Clubs
+6 of Spades
+10 of Clubs
+
+Player 1 ----- 121 pts
+10 of Diamonds
+2 of Diamonds
+10 of Spades
+7 of Hearts
+4 of Hearts
+12 of Hearts
+9 of Diamonds
+11 of Hearts
+11 of Clubs
+8 of Clubs
+3 of Hearts
+12 of Clubs
+11 of Diamonds
+
+Player 2 ----- 367 pts
+14 of Clubs
+13 of Spades
+6 of Clubs
+2 of Clubs
+3 of Clubs
+9 of Spades
+14 of Diamonds
+12 of Diamonds
+3 of Spades
+5 of Clubs
+8 of Hearts
+7 of Diamonds
+4 of Diamonds
+
+Player 3 ----- 240 pts
+8 of Diamonds
+13 of Hearts
+5 of Hearts
+11 of Spades
+3 of Diamonds
+5 of Spades
+2 of Hearts
+4 of Clubs
+9 of Hearts
+8 of Spades
+6 of Hearts
+10 of Hearts
+14 of Hearts
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+14 of Spades
+13 of Diamonds
+6 of Diamonds
+
+P0 hand ---
+9 of Clubs
+13 of Clubs
+12 of Spades
+4 of Spades
+7 of Spades
+5 of Diamonds
+2 of Spades
+7 of Clubs
+6 of Spades
+10 of Clubs
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+13 of Clubs
+12 of Spades
+4 of Spades
+7 of Spades
+5 of Diamonds
+2 of Spades
+7 of Clubs
+6 of Spades
+10 of Clubs
+8 of Diamonds
+3 of Diamonds
+-1 of Diamonds
+
+Player 1 ----- 121 pts
+10 of Diamonds
+2 of Diamonds
+10 of Spades
+7 of Hearts
+4 of Hearts
+12 of Hearts
+9 of Diamonds
+11 of Hearts
+8 of Clubs
+3 of Hearts
+13 of Spades
+2 of Clubs
+8 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+6 of Clubs
+3 of Clubs
+9 of Spades
+14 of Diamonds
+12 of Diamonds
+3 of Spades
+5 of Clubs
+7 of Diamonds
+4 of Diamonds
+12 of Clubs
+11 of Clubs
+11 of Diamonds
+
+Player 3 ----- 240 pts
+13 of Hearts
+5 of Hearts
+11 of Spades
+5 of Spades
+2 of Hearts
+4 of Clubs
+9 of Hearts
+8 of Spades
+6 of Hearts
+10 of Hearts
+14 of Hearts
+14 of Spades
+13 of Diamonds
+6 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+8 of Clubs
+13 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Clubs
+8 of Clubs
+13 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Spades
+4 of Spades
+7 of Spades
+5 of Diamonds
+2 of Spades
+7 of Clubs
+6 of Spades
+10 of Clubs
+8 of Diamonds
+3 of Diamonds
+-1 of Diamonds
+
+Player 1 ----- 121 pts
+10 of Diamonds
+2 of Diamonds
+10 of Spades
+7 of Hearts
+4 of Hearts
+12 of Hearts
+9 of Diamonds
+11 of Hearts
+3 of Hearts
+13 of Spades
+2 of Clubs
+8 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+6 of Clubs
+3 of Clubs
+9 of Spades
+14 of Diamonds
+12 of Diamonds
+3 of Spades
+5 of Clubs
+7 of Diamonds
+4 of Diamonds
+11 of Clubs
+11 of Diamonds
+
+Player 3 ----- 240 pts
+13 of Hearts
+5 of Hearts
+11 of Spades
+5 of Spades
+2 of Hearts
+9 of Hearts
+8 of Spades
+6 of Hearts
+10 of Hearts
+14 of Hearts
+14 of Spades
+13 of Diamonds
+6 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+10 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+2 of Clubs
+10 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+6 of Clubs
+2 of Clubs
+10 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Spades
+4 of Spades
+7 of Spades
+5 of Diamonds
+2 of Spades
+7 of Clubs
+6 of Spades
+8 of Diamonds
+3 of Diamonds
+-1 of Diamonds
+
+Player 1 ----- 121 pts
+10 of Diamonds
+2 of Diamonds
+10 of Spades
+7 of Hearts
+4 of Hearts
+12 of Hearts
+9 of Diamonds
+11 of Hearts
+3 of Hearts
+13 of Spades
+8 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+3 of Clubs
+9 of Spades
+14 of Diamonds
+12 of Diamonds
+3 of Spades
+5 of Clubs
+7 of Diamonds
+4 of Diamonds
+11 of Clubs
+11 of Diamonds
+
+Player 3 ----- 240 pts
+13 of Hearts
+5 of Hearts
+11 of Spades
+5 of Spades
+2 of Hearts
+9 of Hearts
+8 of Spades
+6 of Hearts
+10 of Hearts
+14 of Spades
+13 of Diamonds
+6 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Hearts
+9 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+5 of Clubs
+12 of Hearts
+9 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Spades
+4 of Spades
+7 of Spades
+5 of Diamonds
+2 of Spades
+7 of Clubs
+6 of Spades
+8 of Diamonds
+3 of Diamonds
+-1 of Diamonds
+
+Player 1 ----- 121 pts
+10 of Diamonds
+2 of Diamonds
+10 of Spades
+7 of Hearts
+4 of Hearts
+9 of Diamonds
+11 of Hearts
+3 of Hearts
+13 of Spades
+8 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+3 of Clubs
+9 of Spades
+14 of Diamonds
+12 of Diamonds
+3 of Spades
+7 of Diamonds
+4 of Diamonds
+11 of Clubs
+11 of Diamonds
+
+Player 3 ----- 240 pts
+5 of Hearts
+11 of Spades
+5 of Spades
+2 of Hearts
+9 of Hearts
+8 of Spades
+6 of Hearts
+10 of Hearts
+14 of Spades
+13 of Diamonds
+6 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+11 of Hearts
+7 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+3 of Clubs
+11 of Hearts
+7 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Spades
+4 of Spades
+7 of Spades
+5 of Diamonds
+2 of Spades
+6 of Spades
+8 of Diamonds
+3 of Diamonds
+-1 of Diamonds
+
+Player 1 ----- 121 pts
+10 of Diamonds
+2 of Diamonds
+10 of Spades
+7 of Hearts
+4 of Hearts
+9 of Diamonds
+3 of Hearts
+13 of Spades
+8 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+9 of Spades
+14 of Diamonds
+12 of Diamonds
+3 of Spades
+7 of Diamonds
+4 of Diamonds
+11 of Clubs
+11 of Diamonds
+
+Player 3 ----- 240 pts
+5 of Hearts
+11 of Spades
+5 of Spades
+2 of Hearts
+9 of Hearts
+8 of Spades
+6 of Hearts
+14 of Spades
+13 of Diamonds
+6 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+2 of Diamonds
+8 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+7 of Diamonds
+2 of Diamonds
+8 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Spades
+4 of Spades
+7 of Spades
+5 of Diamonds
+2 of Spades
+6 of Spades
+3 of Diamonds
+-1 of Diamonds
+
+Player 1 ----- 121 pts
+10 of Diamonds
+10 of Spades
+7 of Hearts
+4 of Hearts
+9 of Diamonds
+3 of Hearts
+13 of Spades
+8 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+9 of Spades
+14 of Diamonds
+12 of Diamonds
+3 of Spades
+4 of Diamonds
+11 of Clubs
+11 of Diamonds
+
+Player 3 ----- 240 pts
+5 of Hearts
+11 of Spades
+5 of Spades
+2 of Hearts
+9 of Hearts
+8 of Spades
+6 of Hearts
+14 of Spades
+13 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+9 of Diamonds
+5 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+4 of Diamonds
+9 of Diamonds
+5 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Spades
+4 of Spades
+7 of Spades
+2 of Spades
+6 of Spades
+3 of Diamonds
+-1 of Diamonds
+
+Player 1 ----- 121 pts
+10 of Diamonds
+10 of Spades
+7 of Hearts
+4 of Hearts
+3 of Hearts
+13 of Spades
+8 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+9 of Spades
+14 of Diamonds
+12 of Diamonds
+3 of Spades
+11 of Clubs
+11 of Diamonds
+
+Player 3 ----- 240 pts
+5 of Hearts
+11 of Spades
+5 of Spades
+2 of Hearts
+9 of Hearts
+8 of Spades
+6 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+10 of Diamonds
+3 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+11 of Diamonds
+10 of Diamonds
+3 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Spades
+4 of Spades
+7 of Spades
+2 of Spades
+6 of Spades
+-1 of Diamonds
+
+Player 1 ----- 121 pts
+10 of Spades
+7 of Hearts
+4 of Hearts
+3 of Hearts
+13 of Spades
+8 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+9 of Spades
+14 of Diamonds
+12 of Diamonds
+3 of Spades
+11 of Clubs
+
+Player 3 ----- 240 pts
+5 of Hearts
+11 of Spades
+5 of Spades
+2 of Hearts
+8 of Spades
+6 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+-1 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+8 of Hearts
+-1 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+12 of Diamonds
+8 of Hearts
+-1 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Spades
+4 of Spades
+7 of Spades
+2 of Spades
+6 of Spades
+
+Player 1 ----- 121 pts
+10 of Spades
+7 of Hearts
+4 of Hearts
+3 of Hearts
+13 of Spades
+
+Player 2 ----- 367 pts
+14 of Clubs
+9 of Spades
+14 of Diamonds
+3 of Spades
+11 of Clubs
+
+Player 3 ----- 240 pts
+5 of Hearts
+11 of Spades
+5 of Spades
+2 of Hearts
+8 of Spades
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+10 of Spades
+2 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+9 of Spades
+10 of Spades
+2 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Spades
+4 of Spades
+7 of Spades
+6 of Spades
+
+Player 1 ----- 121 pts
+7 of Hearts
+4 of Hearts
+3 of Hearts
+13 of Spades
+
+Player 2 ----- 367 pts
+14 of Clubs
+14 of Diamonds
+3 of Spades
+11 of Clubs
+
+Player 3 ----- 240 pts
+5 of Hearts
+11 of Spades
+2 of Hearts
+8 of Spades
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+13 of Spades
+4 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+3 of Spades
+13 of Spades
+4 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Spades
+7 of Spades
+6 of Spades
+
+Player 1 ----- 121 pts
+7 of Hearts
+4 of Hearts
+3 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+14 of Diamonds
+11 of Clubs
+
+Player 3 ----- 240 pts
+5 of Hearts
+11 of Spades
+2 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+7 of Hearts
+6 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+14 of Diamonds
+7 of Hearts
+6 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Spades
+7 of Spades
+
+Player 1 ----- 121 pts
+4 of Hearts
+3 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+11 of Clubs
+
+Player 3 ----- 240 pts
+5 of Hearts
+2 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+4 of Hearts
+7 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+11 of Clubs
+4 of Hearts
+7 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Spades
+
+Player 1 ----- 121 pts
+3 of Hearts
+
+Player 2 ----- 367 pts
+14 of Clubs
+
+Player 3 ----- 240 pts
+5 of Hearts
+2 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+3 of Hearts
+12 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+14 of Clubs
+3 of Hearts
+12 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 121 pts
+
+Player 2 ----- 367 pts
+
+Player 3 ----- 240 pts
+2 of Hearts
+pts: 0
+pts: 47
+pts: 83
+pts: 77
+points: 0
+points: 47
+points: 83
+points: 77
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Spades
+12 of Hearts
+10 of Spades
+2 of Spades
+13 of Spades
+6 of Hearts
+11 of Diamonds
+3 of Clubs
+10 of Diamonds
+3 of Spades
+4 of Clubs
+14 of Spades
+
+Player 1 ----- 168 pts
+9 of Spades
+8 of Hearts
+5 of Hearts
+9 of Hearts
+4 of Spades
+8 of Clubs
+4 of Hearts
+2 of Clubs
+6 of Diamonds
+10 of Hearts
+7 of Spades
+7 of Hearts
+6 of Clubs
+
+Player 2 ----- 450 pts
+5 of Spades
+14 of Clubs
+11 of Hearts
+3 of Diamonds
+8 of Spades
+7 of Diamonds
+11 of Clubs
+10 of Clubs
+7 of Clubs
+5 of Diamonds
+13 of Hearts
+14 of Diamonds
+6 of Spades
+
+Player 3 ----- 317 pts
+11 of Spades
+13 of Diamonds
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+4 of Diamonds
+14 of Hearts
+3 of Hearts
+13 of Clubs
+12 of Clubs
+5 of Clubs
+2 of Diamonds
+2 of Hearts
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+14 of Spades
+13 of Spades
+11 of Diamonds
+
+P0 hand ---
+9 of Clubs
+12 of Spades
+12 of Hearts
+10 of Spades
+2 of Spades
+6 of Hearts
+3 of Clubs
+10 of Diamonds
+3 of Spades
+4 of Clubs
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Spades
+12 of Hearts
+10 of Spades
+2 of Spades
+6 of Hearts
+3 of Clubs
+10 of Diamonds
+3 of Spades
+4 of Clubs
+13 of Clubs
+12 of Clubs
+13 of Diamonds
+
+Player 1 ----- 168 pts
+9 of Spades
+8 of Hearts
+5 of Hearts
+9 of Hearts
+4 of Spades
+4 of Hearts
+10 of Hearts
+7 of Spades
+7 of Hearts
+6 of Clubs
+13 of Hearts
+11 of Hearts
+14 of Clubs
+
+Player 2 ----- 450 pts
+5 of Spades
+3 of Diamonds
+8 of Spades
+7 of Diamonds
+11 of Clubs
+10 of Clubs
+7 of Clubs
+5 of Diamonds
+14 of Diamonds
+6 of Spades
+2 of Clubs
+6 of Diamonds
+8 of Clubs
+
+Player 3 ----- 317 pts
+11 of Spades
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+4 of Diamonds
+14 of Hearts
+3 of Hearts
+5 of Clubs
+2 of Diamonds
+2 of Hearts
+14 of Spades
+13 of Spades
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+13 of Hearts
+13 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+7 of Diamonds
+13 of Hearts
+13 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Spades
+12 of Hearts
+10 of Spades
+2 of Spades
+6 of Hearts
+3 of Clubs
+10 of Diamonds
+3 of Spades
+4 of Clubs
+13 of Clubs
+12 of Clubs
+
+Player 1 ----- 168 pts
+9 of Spades
+8 of Hearts
+5 of Hearts
+9 of Hearts
+4 of Spades
+4 of Hearts
+10 of Hearts
+7 of Spades
+7 of Hearts
+6 of Clubs
+11 of Hearts
+14 of Clubs
+
+Player 2 ----- 450 pts
+5 of Spades
+3 of Diamonds
+8 of Spades
+11 of Clubs
+10 of Clubs
+7 of Clubs
+5 of Diamonds
+14 of Diamonds
+6 of Spades
+2 of Clubs
+6 of Diamonds
+8 of Clubs
+
+Player 3 ----- 317 pts
+11 of Spades
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+4 of Diamonds
+14 of Hearts
+3 of Hearts
+5 of Clubs
+2 of Hearts
+14 of Spades
+13 of Spades
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+10 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+11 of Hearts
+10 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+6 of Diamonds
+11 of Hearts
+10 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Spades
+12 of Hearts
+10 of Spades
+2 of Spades
+6 of Hearts
+3 of Clubs
+3 of Spades
+4 of Clubs
+13 of Clubs
+12 of Clubs
+
+Player 1 ----- 168 pts
+9 of Spades
+8 of Hearts
+5 of Hearts
+9 of Hearts
+4 of Spades
+4 of Hearts
+10 of Hearts
+7 of Spades
+7 of Hearts
+6 of Clubs
+14 of Clubs
+
+Player 2 ----- 450 pts
+5 of Spades
+3 of Diamonds
+8 of Spades
+11 of Clubs
+10 of Clubs
+7 of Clubs
+5 of Diamonds
+14 of Diamonds
+6 of Spades
+2 of Clubs
+8 of Clubs
+
+Player 3 ----- 317 pts
+11 of Spades
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+14 of Hearts
+3 of Hearts
+5 of Clubs
+2 of Hearts
+14 of Spades
+13 of Spades
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+9 of Spades
+12 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+8 of Spades
+9 of Spades
+12 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Hearts
+10 of Spades
+2 of Spades
+6 of Hearts
+3 of Clubs
+3 of Spades
+4 of Clubs
+13 of Clubs
+12 of Clubs
+
+Player 1 ----- 168 pts
+8 of Hearts
+5 of Hearts
+9 of Hearts
+4 of Spades
+4 of Hearts
+10 of Hearts
+7 of Spades
+7 of Hearts
+6 of Clubs
+14 of Clubs
+
+Player 2 ----- 450 pts
+5 of Spades
+3 of Diamonds
+11 of Clubs
+10 of Clubs
+7 of Clubs
+5 of Diamonds
+14 of Diamonds
+6 of Spades
+2 of Clubs
+8 of Clubs
+
+Player 3 ----- 317 pts
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+14 of Hearts
+3 of Hearts
+5 of Clubs
+2 of Hearts
+14 of Spades
+13 of Spades
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+10 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+7 of Spades
+10 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+6 of Spades
+7 of Spades
+10 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Hearts
+2 of Spades
+6 of Hearts
+3 of Clubs
+3 of Spades
+4 of Clubs
+13 of Clubs
+12 of Clubs
+
+Player 1 ----- 168 pts
+8 of Hearts
+5 of Hearts
+9 of Hearts
+4 of Spades
+4 of Hearts
+10 of Hearts
+7 of Hearts
+6 of Clubs
+14 of Clubs
+
+Player 2 ----- 450 pts
+5 of Spades
+3 of Diamonds
+11 of Clubs
+10 of Clubs
+7 of Clubs
+5 of Diamonds
+14 of Diamonds
+2 of Clubs
+8 of Clubs
+
+Player 3 ----- 317 pts
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+14 of Hearts
+3 of Hearts
+5 of Clubs
+2 of Hearts
+14 of Spades
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+4 of Spades
+3 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+5 of Spades
+4 of Spades
+3 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Hearts
+2 of Spades
+6 of Hearts
+3 of Clubs
+4 of Clubs
+13 of Clubs
+12 of Clubs
+
+Player 1 ----- 168 pts
+8 of Hearts
+5 of Hearts
+9 of Hearts
+4 of Hearts
+10 of Hearts
+7 of Hearts
+6 of Clubs
+14 of Clubs
+
+Player 2 ----- 450 pts
+3 of Diamonds
+11 of Clubs
+10 of Clubs
+7 of Clubs
+5 of Diamonds
+14 of Diamonds
+2 of Clubs
+8 of Clubs
+
+Player 3 ----- 317 pts
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+14 of Hearts
+3 of Hearts
+5 of Clubs
+2 of Hearts
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+6 of Clubs
+13 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+11 of Clubs
+6 of Clubs
+13 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Hearts
+2 of Spades
+6 of Hearts
+3 of Clubs
+4 of Clubs
+12 of Clubs
+
+Player 1 ----- 168 pts
+8 of Hearts
+5 of Hearts
+9 of Hearts
+4 of Hearts
+10 of Hearts
+7 of Hearts
+14 of Clubs
+
+Player 2 ----- 450 pts
+3 of Diamonds
+10 of Clubs
+7 of Clubs
+5 of Diamonds
+14 of Diamonds
+2 of Clubs
+8 of Clubs
+
+Player 3 ----- 317 pts
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+14 of Hearts
+3 of Hearts
+2 of Hearts
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+14 of Clubs
+12 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+10 of Clubs
+14 of Clubs
+12 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Clubs
+12 of Hearts
+2 of Spades
+6 of Hearts
+3 of Clubs
+4 of Clubs
+
+Player 1 ----- 168 pts
+8 of Hearts
+5 of Hearts
+9 of Hearts
+4 of Hearts
+10 of Hearts
+7 of Hearts
+
+Player 2 ----- 450 pts
+3 of Diamonds
+7 of Clubs
+5 of Diamonds
+14 of Diamonds
+2 of Clubs
+8 of Clubs
+
+Player 3 ----- 317 pts
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+3 of Hearts
+2 of Hearts
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+10 of Hearts
+9 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+8 of Clubs
+10 of Hearts
+9 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Hearts
+2 of Spades
+6 of Hearts
+3 of Clubs
+4 of Clubs
+
+Player 1 ----- 168 pts
+8 of Hearts
+5 of Hearts
+9 of Hearts
+4 of Hearts
+7 of Hearts
+
+Player 2 ----- 450 pts
+3 of Diamonds
+7 of Clubs
+5 of Diamonds
+14 of Diamonds
+2 of Clubs
+
+Player 3 ----- 317 pts
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+2 of Hearts
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+9 of Hearts
+4 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+2 of Clubs
+9 of Hearts
+4 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Hearts
+2 of Spades
+6 of Hearts
+3 of Clubs
+
+Player 1 ----- 168 pts
+8 of Hearts
+5 of Hearts
+4 of Hearts
+7 of Hearts
+
+Player 2 ----- 450 pts
+3 of Diamonds
+7 of Clubs
+5 of Diamonds
+14 of Diamonds
+
+Player 3 ----- 317 pts
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+11 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+8 of Hearts
+3 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+7 of Clubs
+8 of Hearts
+3 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Hearts
+2 of Spades
+6 of Hearts
+
+Player 1 ----- 168 pts
+5 of Hearts
+4 of Hearts
+7 of Hearts
+
+Player 2 ----- 450 pts
+3 of Diamonds
+5 of Diamonds
+14 of Diamonds
+
+Player 3 ----- 317 pts
+9 of Diamonds
+12 of Diamonds
+8 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+7 of Hearts
+2 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+14 of Diamonds
+7 of Hearts
+2 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Hearts
+6 of Hearts
+
+Player 1 ----- 168 pts
+5 of Hearts
+4 of Hearts
+
+Player 2 ----- 450 pts
+3 of Diamonds
+5 of Diamonds
+
+Player 3 ----- 317 pts
+12 of Diamonds
+8 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+5 of Hearts
+6 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+5 of Diamonds
+5 of Hearts
+6 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+12 of Hearts
+
+Player 1 ----- 168 pts
+4 of Hearts
+
+Player 2 ----- 450 pts
+3 of Diamonds
+
+Player 3 ----- 317 pts
+12 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+4 of Hearts
+12 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+3 of Diamonds
+4 of Hearts
+12 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 168 pts
+
+Player 2 ----- 450 pts
+
+Player 3 ----- 317 pts
+pts: 0
+pts: 51
+pts: 100
+pts: 82
+points: 0
+points: 51
+points: 100
+points: 82
+pool:
+
+Player 0 ----- 0 pts
+13 of Clubs
+6 of Hearts
+14 of Spades
+3 of Clubs
+9 of Diamonds
+9 of Spades
+11 of Spades
+7 of Hearts
+11 of Clubs
+2 of Hearts
+5 of Diamonds
+12 of Spades
+4 of Diamonds
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+10 of Clubs
+7 of Clubs
+14 of Diamonds
+10 of Hearts
+3 of Spades
+13 of Diamonds
+7 of Diamonds
+8 of Hearts
+8 of Spades
+9 of Clubs
+
+Player 2 ----- 550 pts
+11 of Hearts
+12 of Clubs
+5 of Spades
+2 of Clubs
+6 of Spades
+10 of Diamonds
+4 of Spades
+4 of Clubs
+8 of Clubs
+11 of Diamonds
+2 of Diamonds
+6 of Diamonds
+12 of Hearts
+
+Player 3 ----- 399 pts
+7 of Spades
+12 of Diamonds
+3 of Diamonds
+2 of Spades
+5 of Clubs
+13 of Spades
+14 of Clubs
+13 of Hearts
+8 of Diamonds
+9 of Hearts
+6 of Clubs
+10 of Spades
+14 of Hearts
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+14 of Spades
+13 of Clubs
+11 of Clubs
+
+P0 hand ---
+6 of Hearts
+3 of Clubs
+9 of Diamonds
+9 of Spades
+11 of Spades
+7 of Hearts
+2 of Hearts
+5 of Diamonds
+12 of Spades
+4 of Diamonds
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+3 of Clubs
+9 of Diamonds
+9 of Spades
+11 of Spades
+7 of Hearts
+2 of Hearts
+5 of Diamonds
+12 of Spades
+4 of Diamonds
+13 of Spades
+14 of Clubs
+6 of Clubs
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+7 of Clubs
+10 of Hearts
+3 of Spades
+13 of Diamonds
+7 of Diamonds
+8 of Hearts
+8 of Spades
+2 of Clubs
+12 of Hearts
+11 of Hearts
+
+Player 2 ----- 550 pts
+12 of Clubs
+5 of Spades
+6 of Spades
+10 of Diamonds
+4 of Spades
+4 of Clubs
+8 of Clubs
+11 of Diamonds
+2 of Diamonds
+6 of Diamonds
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+7 of Spades
+12 of Diamonds
+3 of Diamonds
+2 of Spades
+5 of Clubs
+13 of Hearts
+8 of Diamonds
+9 of Hearts
+10 of Spades
+14 of Hearts
+14 of Spades
+13 of Clubs
+11 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+14 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+7 of Clubs
+14 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Clubs
+7 of Clubs
+14 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+3 of Clubs
+9 of Diamonds
+9 of Spades
+11 of Spades
+7 of Hearts
+2 of Hearts
+5 of Diamonds
+12 of Spades
+4 of Diamonds
+13 of Spades
+6 of Clubs
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+10 of Hearts
+3 of Spades
+13 of Diamonds
+7 of Diamonds
+8 of Hearts
+8 of Spades
+2 of Clubs
+12 of Hearts
+11 of Hearts
+
+Player 2 ----- 550 pts
+5 of Spades
+6 of Spades
+10 of Diamonds
+4 of Spades
+4 of Clubs
+8 of Clubs
+11 of Diamonds
+2 of Diamonds
+6 of Diamonds
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+7 of Spades
+12 of Diamonds
+3 of Diamonds
+2 of Spades
+13 of Hearts
+8 of Diamonds
+9 of Hearts
+10 of Spades
+14 of Hearts
+14 of Spades
+13 of Clubs
+11 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+2 of Clubs
+6 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+4 of Clubs
+2 of Clubs
+6 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+3 of Clubs
+9 of Diamonds
+9 of Spades
+11 of Spades
+7 of Hearts
+2 of Hearts
+5 of Diamonds
+12 of Spades
+4 of Diamonds
+13 of Spades
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+10 of Hearts
+3 of Spades
+13 of Diamonds
+7 of Diamonds
+8 of Hearts
+8 of Spades
+12 of Hearts
+11 of Hearts
+
+Player 2 ----- 550 pts
+5 of Spades
+6 of Spades
+10 of Diamonds
+4 of Spades
+8 of Clubs
+11 of Diamonds
+2 of Diamonds
+6 of Diamonds
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+7 of Spades
+12 of Diamonds
+3 of Diamonds
+2 of Spades
+13 of Hearts
+8 of Diamonds
+9 of Hearts
+10 of Spades
+14 of Hearts
+14 of Spades
+13 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Hearts
+3 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+8 of Clubs
+12 of Hearts
+3 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+9 of Diamonds
+9 of Spades
+11 of Spades
+7 of Hearts
+2 of Hearts
+5 of Diamonds
+12 of Spades
+4 of Diamonds
+13 of Spades
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+10 of Hearts
+3 of Spades
+13 of Diamonds
+7 of Diamonds
+8 of Hearts
+8 of Spades
+11 of Hearts
+
+Player 2 ----- 550 pts
+5 of Spades
+6 of Spades
+10 of Diamonds
+4 of Spades
+11 of Diamonds
+2 of Diamonds
+6 of Diamonds
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+7 of Spades
+12 of Diamonds
+3 of Diamonds
+2 of Spades
+13 of Hearts
+8 of Diamonds
+9 of Hearts
+10 of Spades
+14 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+7 of Diamonds
+9 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+6 of Diamonds
+7 of Diamonds
+9 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+9 of Spades
+11 of Spades
+7 of Hearts
+2 of Hearts
+5 of Diamonds
+12 of Spades
+4 of Diamonds
+13 of Spades
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+10 of Hearts
+3 of Spades
+13 of Diamonds
+8 of Hearts
+8 of Spades
+11 of Hearts
+
+Player 2 ----- 550 pts
+5 of Spades
+6 of Spades
+10 of Diamonds
+4 of Spades
+11 of Diamonds
+2 of Diamonds
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+7 of Spades
+12 of Diamonds
+2 of Spades
+13 of Hearts
+8 of Diamonds
+9 of Hearts
+10 of Spades
+14 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+13 of Diamonds
+5 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+11 of Diamonds
+13 of Diamonds
+5 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+9 of Spades
+11 of Spades
+7 of Hearts
+2 of Hearts
+12 of Spades
+4 of Diamonds
+13 of Spades
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+10 of Hearts
+3 of Spades
+8 of Hearts
+8 of Spades
+11 of Hearts
+
+Player 2 ----- 550 pts
+5 of Spades
+6 of Spades
+10 of Diamonds
+4 of Spades
+2 of Diamonds
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+7 of Spades
+12 of Diamonds
+2 of Spades
+13 of Hearts
+9 of Hearts
+10 of Spades
+14 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+11 of Hearts
+4 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+2 of Diamonds
+11 of Hearts
+4 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+9 of Spades
+11 of Spades
+7 of Hearts
+2 of Hearts
+12 of Spades
+13 of Spades
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+10 of Hearts
+3 of Spades
+8 of Hearts
+8 of Spades
+
+Player 2 ----- 550 pts
+5 of Spades
+6 of Spades
+10 of Diamonds
+4 of Spades
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+7 of Spades
+2 of Spades
+13 of Hearts
+9 of Hearts
+10 of Spades
+14 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+8 of Spades
+13 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+6 of Spades
+8 of Spades
+13 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+9 of Spades
+11 of Spades
+7 of Hearts
+2 of Hearts
+12 of Spades
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+10 of Hearts
+3 of Spades
+8 of Hearts
+
+Player 2 ----- 550 pts
+5 of Spades
+10 of Diamonds
+4 of Spades
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+7 of Spades
+13 of Hearts
+9 of Hearts
+10 of Spades
+14 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+3 of Spades
+12 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+5 of Spades
+3 of Spades
+12 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+9 of Spades
+11 of Spades
+7 of Hearts
+2 of Hearts
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+10 of Hearts
+8 of Hearts
+
+Player 2 ----- 550 pts
+10 of Diamonds
+4 of Spades
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+13 of Hearts
+9 of Hearts
+10 of Spades
+14 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+10 of Hearts
+9 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+4 of Spades
+10 of Hearts
+9 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+11 of Spades
+7 of Hearts
+2 of Hearts
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+8 of Hearts
+
+Player 2 ----- 550 pts
+10 of Diamonds
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+13 of Hearts
+9 of Hearts
+14 of Hearts
+14 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+11 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+8 of Hearts
+11 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+10 of Diamonds
+8 of Hearts
+11 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+7 of Hearts
+2 of Hearts
+
+Player 1 ----- 219 pts
+5 of Hearts
+3 of Hearts
+4 of Hearts
+
+Player 2 ----- 550 pts
+10 of Clubs
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+13 of Hearts
+9 of Hearts
+14 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+5 of Hearts
+7 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+10 of Clubs
+5 of Hearts
+7 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+2 of Hearts
+
+Player 1 ----- 219 pts
+3 of Hearts
+4 of Hearts
+
+Player 2 ----- 550 pts
+9 of Clubs
+14 of Diamonds
+
+Player 3 ----- 399 pts
+13 of Hearts
+14 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+3 of Hearts
+2 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+14 of Diamonds
+3 of Hearts
+2 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Hearts
+
+Player 1 ----- 219 pts
+4 of Hearts
+
+Player 2 ----- 550 pts
+9 of Clubs
+
+Player 3 ----- 399 pts
+14 of Hearts
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+4 of Hearts
+6 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+9 of Clubs
+4 of Hearts
+6 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 219 pts
+
+Player 2 ----- 550 pts
+
+Player 3 ----- 399 pts
+pts: 0
+pts: 68
+pts: 109
+pts: 82
+points: 0
+points: 68
+points: 109
+points: 82
+pool:
+
+Player 0 ----- 0 pts
+6 of Spades
+7 of Clubs
+9 of Hearts
+4 of Spades
+3 of Hearts
+13 of Clubs
+13 of Spades
+4 of Hearts
+8 of Hearts
+9 of Clubs
+2 of Diamonds
+13 of Hearts
+7 of Spades
+
+Player 1 ----- 287 pts
+7 of Hearts
+12 of Clubs
+3 of Clubs
+10 of Diamonds
+5 of Diamonds
+14 of Spades
+8 of Clubs
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+11 of Hearts
+6 of Hearts
+9 of Spades
+
+Player 2 ----- 659 pts
+5 of Spades
+11 of Clubs
+4 of Clubs
+11 of Diamonds
+7 of Diamonds
+5 of Clubs
+10 of Clubs
+12 of Spades
+12 of Diamonds
+11 of Spades
+13 of Diamonds
+5 of Hearts
+4 of Diamonds
+
+Player 3 ----- 481 pts
+2 of Spades
+12 of Hearts
+2 of Hearts
+10 of Hearts
+14 of Hearts
+6 of Clubs
+8 of Diamonds
+10 of Spades
+14 of Diamonds
+14 of Clubs
+3 of Spades
+8 of Spades
+2 of Clubs
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+13 of Spades
+2 of Diamonds
+13 of Clubs
+
+P0 hand ---
+6 of Spades
+7 of Clubs
+9 of Hearts
+4 of Spades
+3 of Hearts
+4 of Hearts
+8 of Hearts
+9 of Clubs
+13 of Hearts
+7 of Spades
+pool:
+
+Player 0 ----- 0 pts
+6 of Spades
+7 of Clubs
+9 of Hearts
+4 of Spades
+3 of Hearts
+4 of Hearts
+8 of Hearts
+9 of Clubs
+13 of Hearts
+7 of Spades
+2 of Clubs
+14 of Clubs
+14 of Diamonds
+
+Player 1 ----- 287 pts
+7 of Hearts
+3 of Clubs
+10 of Diamonds
+5 of Diamonds
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+11 of Hearts
+6 of Hearts
+9 of Spades
+12 of Spades
+5 of Hearts
+11 of Clubs
+
+Player 2 ----- 659 pts
+5 of Spades
+4 of Clubs
+11 of Diamonds
+7 of Diamonds
+5 of Clubs
+10 of Clubs
+12 of Diamonds
+11 of Spades
+13 of Diamonds
+4 of Diamonds
+14 of Spades
+12 of Clubs
+8 of Clubs
+
+Player 3 ----- 481 pts
+2 of Spades
+12 of Hearts
+2 of Hearts
+10 of Hearts
+14 of Hearts
+6 of Clubs
+8 of Diamonds
+10 of Spades
+3 of Spades
+8 of Spades
+13 of Spades
+2 of Diamonds
+13 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+3 of Clubs
+2 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+4 of Clubs
+3 of Clubs
+2 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Spades
+7 of Clubs
+9 of Hearts
+4 of Spades
+3 of Hearts
+4 of Hearts
+8 of Hearts
+9 of Clubs
+13 of Hearts
+7 of Spades
+14 of Clubs
+14 of Diamonds
+
+Player 1 ----- 287 pts
+7 of Hearts
+10 of Diamonds
+5 of Diamonds
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+11 of Hearts
+6 of Hearts
+9 of Spades
+12 of Spades
+5 of Hearts
+11 of Clubs
+
+Player 2 ----- 659 pts
+5 of Spades
+11 of Diamonds
+7 of Diamonds
+5 of Clubs
+10 of Clubs
+12 of Diamonds
+11 of Spades
+13 of Diamonds
+4 of Diamonds
+14 of Spades
+12 of Clubs
+8 of Clubs
+
+Player 3 ----- 481 pts
+2 of Spades
+12 of Hearts
+2 of Hearts
+10 of Hearts
+14 of Hearts
+8 of Diamonds
+10 of Spades
+3 of Spades
+8 of Spades
+13 of Spades
+2 of Diamonds
+13 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+14 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+10 of Diamonds
+14 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+13 of Diamonds
+10 of Diamonds
+14 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Spades
+7 of Clubs
+9 of Hearts
+4 of Spades
+3 of Hearts
+4 of Hearts
+8 of Hearts
+9 of Clubs
+13 of Hearts
+7 of Spades
+14 of Clubs
+
+Player 1 ----- 287 pts
+7 of Hearts
+5 of Diamonds
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+11 of Hearts
+6 of Hearts
+9 of Spades
+12 of Spades
+5 of Hearts
+11 of Clubs
+
+Player 2 ----- 659 pts
+5 of Spades
+11 of Diamonds
+7 of Diamonds
+5 of Clubs
+10 of Clubs
+12 of Diamonds
+11 of Spades
+4 of Diamonds
+14 of Spades
+12 of Clubs
+8 of Clubs
+
+Player 3 ----- 481 pts
+2 of Spades
+12 of Hearts
+2 of Hearts
+10 of Hearts
+14 of Hearts
+8 of Diamonds
+10 of Spades
+3 of Spades
+8 of Spades
+13 of Spades
+13 of Clubs
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+14 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+11 of Clubs
+14 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Clubs
+11 of Clubs
+14 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Spades
+7 of Clubs
+9 of Hearts
+4 of Spades
+3 of Hearts
+4 of Hearts
+8 of Hearts
+9 of Clubs
+13 of Hearts
+7 of Spades
+
+Player 1 ----- 287 pts
+7 of Hearts
+5 of Diamonds
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+11 of Hearts
+6 of Hearts
+9 of Spades
+12 of Spades
+5 of Hearts
+
+Player 2 ----- 659 pts
+5 of Spades
+11 of Diamonds
+7 of Diamonds
+5 of Clubs
+10 of Clubs
+12 of Diamonds
+11 of Spades
+4 of Diamonds
+14 of Spades
+8 of Clubs
+
+Player 3 ----- 481 pts
+2 of Spades
+12 of Hearts
+2 of Hearts
+10 of Hearts
+14 of Hearts
+8 of Diamonds
+10 of Spades
+3 of Spades
+8 of Spades
+13 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+12 of Spades
+9 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+8 of Clubs
+12 of Spades
+9 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Spades
+7 of Clubs
+9 of Hearts
+4 of Spades
+3 of Hearts
+4 of Hearts
+8 of Hearts
+13 of Hearts
+7 of Spades
+
+Player 1 ----- 287 pts
+7 of Hearts
+5 of Diamonds
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+11 of Hearts
+6 of Hearts
+9 of Spades
+5 of Hearts
+
+Player 2 ----- 659 pts
+5 of Spades
+11 of Diamonds
+7 of Diamonds
+5 of Clubs
+10 of Clubs
+12 of Diamonds
+11 of Spades
+4 of Diamonds
+14 of Spades
+
+Player 3 ----- 481 pts
+2 of Spades
+12 of Hearts
+2 of Hearts
+10 of Hearts
+8 of Diamonds
+10 of Spades
+3 of Spades
+8 of Spades
+13 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+11 of Hearts
+7 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+5 of Clubs
+11 of Hearts
+7 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Spades
+9 of Hearts
+4 of Spades
+3 of Hearts
+4 of Hearts
+8 of Hearts
+13 of Hearts
+7 of Spades
+
+Player 1 ----- 287 pts
+7 of Hearts
+5 of Diamonds
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+6 of Hearts
+9 of Spades
+5 of Hearts
+
+Player 2 ----- 659 pts
+5 of Spades
+11 of Diamonds
+7 of Diamonds
+10 of Clubs
+12 of Diamonds
+11 of Spades
+4 of Diamonds
+14 of Spades
+
+Player 3 ----- 481 pts
+2 of Spades
+2 of Hearts
+10 of Hearts
+8 of Diamonds
+10 of Spades
+3 of Spades
+8 of Spades
+13 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+9 of Spades
+4 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+5 of Spades
+9 of Spades
+4 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+6 of Spades
+9 of Hearts
+3 of Hearts
+4 of Hearts
+8 of Hearts
+13 of Hearts
+7 of Spades
+
+Player 1 ----- 287 pts
+7 of Hearts
+5 of Diamonds
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+6 of Hearts
+5 of Hearts
+
+Player 2 ----- 659 pts
+11 of Diamonds
+7 of Diamonds
+10 of Clubs
+12 of Diamonds
+11 of Spades
+4 of Diamonds
+14 of Spades
+
+Player 3 ----- 481 pts
+2 of Hearts
+10 of Hearts
+8 of Diamonds
+10 of Spades
+3 of Spades
+8 of Spades
+13 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+7 of Hearts
+6 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+11 of Spades
+7 of Hearts
+6 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Hearts
+3 of Hearts
+4 of Hearts
+8 of Hearts
+13 of Hearts
+7 of Spades
+
+Player 1 ----- 287 pts
+5 of Diamonds
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+6 of Hearts
+5 of Hearts
+
+Player 2 ----- 659 pts
+11 of Diamonds
+7 of Diamonds
+10 of Clubs
+12 of Diamonds
+4 of Diamonds
+14 of Spades
+
+Player 3 ----- 481 pts
+2 of Hearts
+10 of Hearts
+8 of Diamonds
+10 of Spades
+8 of Spades
+13 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+6 of Hearts
+7 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+14 of Spades
+6 of Hearts
+7 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+9 of Hearts
+3 of Hearts
+4 of Hearts
+8 of Hearts
+13 of Hearts
+
+Player 1 ----- 287 pts
+5 of Diamonds
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+5 of Hearts
+
+Player 2 ----- 659 pts
+11 of Diamonds
+7 of Diamonds
+10 of Clubs
+12 of Diamonds
+4 of Diamonds
+
+Player 3 ----- 481 pts
+2 of Hearts
+10 of Hearts
+8 of Diamonds
+10 of Spades
+13 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+9 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+5 of Hearts
+9 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+11 of Diamonds
+5 of Hearts
+9 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Hearts
+4 of Hearts
+8 of Hearts
+13 of Hearts
+
+Player 1 ----- 287 pts
+5 of Diamonds
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+
+Player 2 ----- 659 pts
+7 of Diamonds
+10 of Clubs
+12 of Diamonds
+4 of Diamonds
+
+Player 3 ----- 481 pts
+10 of Hearts
+8 of Diamonds
+10 of Spades
+13 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+4 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+5 of Diamonds
+4 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+12 of Diamonds
+5 of Diamonds
+4 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Hearts
+8 of Hearts
+13 of Hearts
+
+Player 1 ----- 287 pts
+9 of Diamonds
+3 of Diamonds
+6 of Diamonds
+
+Player 2 ----- 659 pts
+7 of Diamonds
+10 of Clubs
+4 of Diamonds
+
+Player 3 ----- 481 pts
+8 of Diamonds
+10 of Spades
+13 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+6 of Diamonds
+8 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+10 of Clubs
+6 of Diamonds
+8 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Hearts
+13 of Hearts
+
+Player 1 ----- 287 pts
+9 of Diamonds
+3 of Diamonds
+
+Player 2 ----- 659 pts
+7 of Diamonds
+4 of Diamonds
+
+Player 3 ----- 481 pts
+8 of Diamonds
+10 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+3 of Diamonds
+13 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+4 of Diamonds
+3 of Diamonds
+13 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+3 of Hearts
+
+Player 1 ----- 287 pts
+9 of Diamonds
+
+Player 2 ----- 659 pts
+7 of Diamonds
+
+Player 3 ----- 481 pts
+10 of Spades
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+9 of Diamonds
+3 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+7 of Diamonds
+9 of Diamonds
+3 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 287 pts
+
+Player 2 ----- 659 pts
+
+Player 3 ----- 481 pts
+pts: 0
+pts: 90
+pts: 113
+pts: 82
+points: 0
+points: 90
+points: 113
+points: 82
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+7 of Spades
+7 of Clubs
+12 of Clubs
+6 of Spades
+10 of Spades
+5 of Diamonds
+14 of Diamonds
+9 of Diamonds
+3 of Hearts
+12 of Hearts
+8 of Hearts
+6 of Diamonds
+
+Player 1 ----- 377 pts
+7 of Diamonds
+2 of Diamonds
+2 of Spades
+14 of Hearts
+14 of Clubs
+8 of Diamonds
+3 of Clubs
+9 of Spades
+8 of Clubs
+5 of Hearts
+5 of Spades
+13 of Diamonds
+3 of Spades
+
+Player 2 ----- 772 pts
+4 of Clubs
+9 of Clubs
+14 of Spades
+11 of Diamonds
+7 of Hearts
+11 of Clubs
+5 of Clubs
+3 of Diamonds
+6 of Clubs
+4 of Diamonds
+13 of Hearts
+2 of Hearts
+8 of Spades
+
+Player 3 ----- 563 pts
+13 of Clubs
+9 of Hearts
+2 of Clubs
+10 of Clubs
+11 of Spades
+4 of Spades
+12 of Diamonds
+12 of Spades
+10 of Diamonds
+6 of Hearts
+11 of Hearts
+13 of Spades
+4 of Hearts
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+12 of Clubs
+14 of Diamonds
+9 of Diamonds
+
+P0 hand ---
+10 of Hearts
+7 of Spades
+7 of Clubs
+6 of Spades
+10 of Spades
+5 of Diamonds
+3 of Hearts
+12 of Hearts
+8 of Hearts
+6 of Diamonds
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+7 of Spades
+7 of Clubs
+6 of Spades
+10 of Spades
+5 of Diamonds
+3 of Hearts
+12 of Hearts
+8 of Hearts
+6 of Diamonds
+13 of Spades
+2 of Clubs
+13 of Clubs
+
+Player 1 ----- 377 pts
+7 of Diamonds
+2 of Diamonds
+2 of Spades
+14 of Hearts
+8 of Diamonds
+3 of Clubs
+9 of Spades
+5 of Spades
+13 of Diamonds
+3 of Spades
+14 of Spades
+11 of Clubs
+9 of Clubs
+
+Player 2 ----- 772 pts
+4 of Clubs
+11 of Diamonds
+7 of Hearts
+5 of Clubs
+3 of Diamonds
+6 of Clubs
+4 of Diamonds
+13 of Hearts
+2 of Hearts
+8 of Spades
+5 of Hearts
+14 of Clubs
+8 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+10 of Clubs
+11 of Spades
+4 of Spades
+12 of Diamonds
+12 of Spades
+10 of Diamonds
+6 of Hearts
+11 of Hearts
+4 of Hearts
+12 of Clubs
+14 of Diamonds
+9 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+2 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+3 of Clubs
+2 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+4 of Clubs
+3 of Clubs
+2 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+7 of Spades
+7 of Clubs
+6 of Spades
+10 of Spades
+5 of Diamonds
+3 of Hearts
+12 of Hearts
+8 of Hearts
+6 of Diamonds
+13 of Spades
+13 of Clubs
+
+Player 1 ----- 377 pts
+7 of Diamonds
+2 of Diamonds
+2 of Spades
+14 of Hearts
+8 of Diamonds
+9 of Spades
+5 of Spades
+13 of Diamonds
+3 of Spades
+14 of Spades
+11 of Clubs
+9 of Clubs
+
+Player 2 ----- 772 pts
+11 of Diamonds
+7 of Hearts
+5 of Clubs
+3 of Diamonds
+6 of Clubs
+4 of Diamonds
+13 of Hearts
+2 of Hearts
+8 of Spades
+5 of Hearts
+14 of Clubs
+8 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+11 of Spades
+4 of Spades
+12 of Diamonds
+12 of Spades
+10 of Diamonds
+6 of Hearts
+11 of Hearts
+4 of Hearts
+12 of Clubs
+14 of Diamonds
+9 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+11 of Clubs
+13 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+8 of Clubs
+11 of Clubs
+13 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+7 of Spades
+7 of Clubs
+6 of Spades
+10 of Spades
+5 of Diamonds
+3 of Hearts
+12 of Hearts
+8 of Hearts
+6 of Diamonds
+13 of Spades
+
+Player 1 ----- 377 pts
+7 of Diamonds
+2 of Diamonds
+2 of Spades
+14 of Hearts
+8 of Diamonds
+9 of Spades
+5 of Spades
+13 of Diamonds
+3 of Spades
+14 of Spades
+9 of Clubs
+
+Player 2 ----- 772 pts
+11 of Diamonds
+7 of Hearts
+5 of Clubs
+3 of Diamonds
+6 of Clubs
+4 of Diamonds
+13 of Hearts
+2 of Hearts
+8 of Spades
+5 of Hearts
+14 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+11 of Spades
+4 of Spades
+12 of Diamonds
+12 of Spades
+10 of Diamonds
+6 of Hearts
+11 of Hearts
+4 of Hearts
+14 of Diamonds
+9 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Clubs
+
+
+Player 1's turn
+Current lead suit (lose): Club
+
+
+pool -----
+9 of Clubs
+7 of Clubs
+
+
+Player 2's turn
+Current lead suit (lose): Club
+
+
+pool -----
+6 of Clubs
+9 of Clubs
+7 of Clubs
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+7 of Spades
+6 of Spades
+10 of Spades
+5 of Diamonds
+3 of Hearts
+12 of Hearts
+8 of Hearts
+6 of Diamonds
+13 of Spades
+
+Player 1 ----- 377 pts
+7 of Diamonds
+2 of Diamonds
+2 of Spades
+14 of Hearts
+8 of Diamonds
+9 of Spades
+5 of Spades
+13 of Diamonds
+3 of Spades
+14 of Spades
+
+Player 2 ----- 772 pts
+11 of Diamonds
+7 of Hearts
+5 of Clubs
+3 of Diamonds
+4 of Diamonds
+13 of Hearts
+2 of Hearts
+8 of Spades
+5 of Hearts
+14 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+11 of Spades
+4 of Spades
+12 of Diamonds
+10 of Diamonds
+6 of Hearts
+11 of Hearts
+4 of Hearts
+14 of Diamonds
+9 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+2 of Diamonds
+6 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+4 of Diamonds
+2 of Diamonds
+6 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+7 of Spades
+6 of Spades
+10 of Spades
+5 of Diamonds
+3 of Hearts
+12 of Hearts
+8 of Hearts
+13 of Spades
+
+Player 1 ----- 377 pts
+7 of Diamonds
+2 of Spades
+14 of Hearts
+8 of Diamonds
+9 of Spades
+5 of Spades
+13 of Diamonds
+3 of Spades
+14 of Spades
+
+Player 2 ----- 772 pts
+11 of Diamonds
+7 of Hearts
+5 of Clubs
+3 of Diamonds
+13 of Hearts
+2 of Hearts
+8 of Spades
+5 of Hearts
+14 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+11 of Spades
+4 of Spades
+12 of Diamonds
+10 of Diamonds
+6 of Hearts
+11 of Hearts
+4 of Hearts
+14 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+5 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+7 of Diamonds
+5 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+3 of Diamonds
+7 of Diamonds
+5 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+7 of Spades
+6 of Spades
+10 of Spades
+3 of Hearts
+12 of Hearts
+8 of Hearts
+13 of Spades
+
+Player 1 ----- 377 pts
+2 of Spades
+14 of Hearts
+8 of Diamonds
+9 of Spades
+5 of Spades
+13 of Diamonds
+3 of Spades
+14 of Spades
+
+Player 2 ----- 772 pts
+11 of Diamonds
+7 of Hearts
+5 of Clubs
+13 of Hearts
+2 of Hearts
+8 of Spades
+5 of Hearts
+14 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+11 of Spades
+4 of Spades
+12 of Diamonds
+6 of Hearts
+11 of Hearts
+4 of Hearts
+14 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+5 of Spades
+6 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+8 of Spades
+5 of Spades
+6 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+7 of Spades
+10 of Spades
+3 of Hearts
+12 of Hearts
+8 of Hearts
+13 of Spades
+
+Player 1 ----- 377 pts
+2 of Spades
+14 of Hearts
+8 of Diamonds
+9 of Spades
+13 of Diamonds
+3 of Spades
+14 of Spades
+
+Player 2 ----- 772 pts
+11 of Diamonds
+7 of Hearts
+5 of Clubs
+13 of Hearts
+2 of Hearts
+5 of Hearts
+14 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+11 of Spades
+12 of Diamonds
+6 of Hearts
+11 of Hearts
+4 of Hearts
+14 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+7 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+3 of Spades
+7 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+13 of Hearts
+3 of Spades
+7 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+10 of Spades
+3 of Hearts
+12 of Hearts
+8 of Hearts
+13 of Spades
+
+Player 1 ----- 377 pts
+2 of Spades
+14 of Hearts
+8 of Diamonds
+9 of Spades
+13 of Diamonds
+14 of Spades
+
+Player 2 ----- 772 pts
+11 of Diamonds
+7 of Hearts
+5 of Clubs
+2 of Hearts
+5 of Hearts
+14 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+12 of Diamonds
+6 of Hearts
+11 of Hearts
+4 of Hearts
+14 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+10 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+9 of Spades
+10 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+7 of Hearts
+9 of Spades
+10 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+3 of Hearts
+12 of Hearts
+8 of Hearts
+13 of Spades
+
+Player 1 ----- 377 pts
+2 of Spades
+14 of Hearts
+8 of Diamonds
+13 of Diamonds
+14 of Spades
+
+Player 2 ----- 772 pts
+11 of Diamonds
+5 of Clubs
+2 of Hearts
+5 of Hearts
+14 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+12 of Diamonds
+6 of Hearts
+4 of Hearts
+14 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+14 of Hearts
+3 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+5 of Hearts
+14 of Hearts
+3 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+12 of Hearts
+8 of Hearts
+13 of Spades
+
+Player 1 ----- 377 pts
+2 of Spades
+8 of Diamonds
+13 of Diamonds
+14 of Spades
+
+Player 2 ----- 772 pts
+11 of Diamonds
+5 of Clubs
+2 of Hearts
+14 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+12 of Diamonds
+6 of Hearts
+14 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+12 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+8 of Diamonds
+12 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+2 of Hearts
+8 of Diamonds
+12 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+10 of Hearts
+8 of Hearts
+13 of Spades
+
+Player 1 ----- 377 pts
+2 of Spades
+13 of Diamonds
+14 of Spades
+
+Player 2 ----- 772 pts
+11 of Diamonds
+5 of Clubs
+14 of Clubs
+
+Player 3 ----- 563 pts
+9 of Hearts
+12 of Diamonds
+14 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+10 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+2 of Spades
+10 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+14 of Clubs
+2 of Spades
+10 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+13 of Spades
+
+Player 1 ----- 377 pts
+13 of Diamonds
+14 of Spades
+
+Player 2 ----- 772 pts
+11 of Diamonds
+5 of Clubs
+
+Player 3 ----- 563 pts
+12 of Diamonds
+14 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+13 of Spades
+
+
+Player 1's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+14 of Spades
+13 of Spades
+
+
+Player 2's turn
+Current lead suit (lose): Spade
+
+
+pool -----
+11 of Diamonds
+14 of Spades
+13 of Spades
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+8 of Hearts
+
+Player 1 ----- 377 pts
+13 of Diamonds
+
+Player 2 ----- 772 pts
+5 of Clubs
+
+Player 3 ----- 563 pts
+12 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+8 of Hearts
+
+
+Player 1's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+13 of Diamonds
+8 of Hearts
+
+
+Player 2's turn
+Current lead suit (lose): Heart
+
+
+pool -----
+5 of Clubs
+13 of Diamonds
+8 of Hearts
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 0 pts
+
+Player 1 ----- 377 pts
+
+Player 2 ----- 772 pts
+
+Player 3 ----- 563 pts
+pts: 4
+pts: 95
+pts: 117
+pts: 95
+points: 4
+points: 95
+points: 117
+points: 95
+pool:
+
+Player 0 ----- 4 pts
+4 of Hearts
+6 of Diamonds
+9 of Spades
+3 of Spades
+11 of Spades
+10 of Hearts
+14 of Clubs
+14 of Diamonds
+6 of Clubs
+3 of Diamonds
+14 of Spades
+7 of Spades
+11 of Hearts
+
+Player 1 ----- 472 pts
+10 of Spades
+7 of Hearts
+6 of Hearts
+5 of Clubs
+13 of Diamonds
+13 of Clubs
+2 of Diamonds
+13 of Spades
+10 of Diamonds
+12 of Diamonds
+6 of Spades
+3 of Hearts
+7 of Clubs
+
+Player 2 ----- 889 pts
+2 of Hearts
+4 of Spades
+9 of Clubs
+5 of Spades
+9 of Hearts
+5 of Hearts
+3 of Clubs
+4 of Diamonds
+5 of Diamonds
+10 of Clubs
+2 of Clubs
+14 of Hearts
+4 of Clubs
+
+Player 3 ----- 658 pts
+8 of Hearts
+11 of Diamonds
+2 of Spades
+12 of Hearts
+11 of Clubs
+8 of Diamonds
+13 of Hearts
+8 of Clubs
+8 of Spades
+12 of Spades
+9 of Diamonds
+7 of Diamonds
+12 of Clubs
+
+
+Player 0's turn - trading
+
+
+Player 1's turn - trading
+
+
+Player 2's turn - trading
+
+
+Player 3's turn - trading
+
+P0 traded these cards ---
+14 of Spades
+14 of Clubs
+14 of Diamonds
+
+P0 hand ---
+4 of Hearts
+6 of Diamonds
+9 of Spades
+3 of Spades
+11 of Spades
+10 of Hearts
+6 of Clubs
+3 of Diamonds
+7 of Spades
+11 of Hearts
+pool:
+
+Player 0 ----- 4 pts
+4 of Hearts
+6 of Diamonds
+9 of Spades
+3 of Spades
+11 of Spades
+10 of Hearts
+6 of Clubs
+3 of Diamonds
+7 of Spades
+11 of Hearts
+12 of Spades
+12 of Clubs
+11 of Clubs
+
+Player 1 ----- 472 pts
+10 of Spades
+7 of Hearts
+6 of Hearts
+5 of Clubs
+13 of Diamonds
+2 of Diamonds
+10 of Diamonds
+12 of Diamonds
+6 of Spades
+3 of Hearts
+2 of Clubs
+5 of Diamonds
+4 of Diamonds
+
+Player 2 ----- 889 pts
+2 of Hearts
+4 of Spades
+9 of Clubs
+5 of Spades
+9 of Hearts
+5 of Hearts
+3 of Clubs
+10 of Clubs
+14 of Hearts
+4 of Clubs
+13 of Spades
+13 of Clubs
+7 of Clubs
+
+Player 3 ----- 658 pts
+8 of Hearts
+11 of Diamonds
+2 of Spades
+12 of Hearts
+8 of Diamonds
+13 of Hearts
+8 of Clubs
+8 of Spades
+9 of Diamonds
+7 of Diamonds
+14 of Spades
+14 of Clubs
+14 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+6 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+5 of Diamonds
+6 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+14 of Hearts
+5 of Diamonds
+6 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 4 pts
+4 of Hearts
+9 of Spades
+3 of Spades
+11 of Spades
+10 of Hearts
+6 of Clubs
+3 of Diamonds
+7 of Spades
+11 of Hearts
+12 of Spades
+12 of Clubs
+11 of Clubs
+
+Player 1 ----- 472 pts
+10 of Spades
+7 of Hearts
+6 of Hearts
+5 of Clubs
+13 of Diamonds
+2 of Diamonds
+10 of Diamonds
+12 of Diamonds
+6 of Spades
+3 of Hearts
+2 of Clubs
+4 of Diamonds
+
+Player 2 ----- 889 pts
+2 of Hearts
+4 of Spades
+9 of Clubs
+5 of Spades
+9 of Hearts
+5 of Hearts
+3 of Clubs
+10 of Clubs
+4 of Clubs
+13 of Spades
+13 of Clubs
+7 of Clubs
+
+Player 3 ----- 658 pts
+8 of Hearts
+11 of Diamonds
+2 of Spades
+12 of Hearts
+8 of Diamonds
+13 of Hearts
+8 of Clubs
+8 of Spades
+9 of Diamonds
+14 of Spades
+14 of Clubs
+14 of Diamonds
+
+
+pool -----
+
+
+Player 0's turn
+
+
+pool -----
+3 of Diamonds
+
+
+Player 1's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+2 of Diamonds
+3 of Diamonds
+
+
+Player 2's turn
+Current lead suit (lose): Diamond
+
+
+pool -----
+9 of Hearts
+2 of Diamonds
+3 of Diamonds
+
+
+Player 3's turn
+pool:
+
+Player 0 ----- 4 pts
+4 of Hearts
+9 of Spades
+3 of Spades
+11 of Spades
+10 of Hearts
+6 of Clubs
+7 of Spades
+11 of Hearts
+12 of Spades
+12 of Clubs
+11 of Clubs
+
+Player 1 ----- 472 pts
+10 of Spades
+7 of Hearts
+6 of Hearts
+5 of Clubs
+13 of Diamonds
+10 of Diamonds
+12 of Diamonds
+6 of Spades
+3 of Hearts
+2 of Clubs
+4 of Diamonds
+
+Player 2 ----- 889 pts
+2 of Hearts
+4 of Spades
+9 of Clubs
+5 of Spades
+5 of Hearts
+3 of Clubs
+10 of Clubs
+4 of Clubs
+13 of Spades
+13 of Clubs
+7 of Clubs
+
+Player 3 ----- 
