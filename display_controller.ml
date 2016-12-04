@@ -661,7 +661,7 @@ let rec game_points lst =
   let s = wait_next_event [Key_pressed] in 
   if s.keypressed && s.key = '\r' then () else game_points lst
 
-let draw_game lst = 
+let draw_end_game lst = 
   ()
 
 let rec find_index lst num acc =
