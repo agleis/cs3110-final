@@ -149,7 +149,7 @@ let fix_ai_data_suits players (data:player_data list) =
 
 let fix_ai_data (crd:card) (ps:player_state list) (dt:stored_data) =
 	let () = if crd.suit=Heart then dt.hearts_played<-true
-			else if crd={suit=Spade; value=11} then dt.q_spades_played<-true else () in
+			else if crd={suit=Spade; value=12} then dt.q_spades_played<-true else () in
 	fix_ai_data_suits ps dt.players
 
 let reset_players_data prs =
