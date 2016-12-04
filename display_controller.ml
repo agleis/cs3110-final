@@ -665,14 +665,14 @@ let rec winner state pnum =
 let rec game_points plst =
   clear_graph ();
   set_color black;
-  for i = 0 to (List.length lst) - 1 do
-    let player = (List.nth (List.filter (fun x -> x.p_num = pnum) state.prs) 0).name in 
-    let points = string_of_int ((List.nth (List.filter (fun x -> x.p_num = pnum) state.prs) 0).round_points) in 
+  for i = 0 to (List.length plst) - 1 do
+    let player = (List.nth (List.filter (fun x -> x.p_num = i) plst) 0).name in 
+    let points = string_of_int ((List.nth (List.filter (fun x -> x.p_num = i) plst) 0).round_points) in 
     draw_string1 (player ^ ": " ^ points) ((window_width/2)-525) (((3*(window_height/4)) - (i*60)))
   done;
   draw_string1 "PRESS ENTER TO CONTINUE" ((window_width/2) - 575) (80);
   let s = wait_next_event [Key_pressed] in
-  if s.keypressed && s.key = '\r' then () else game_points lst
+  if s.keypressed && s.key = '\r' then () else game_points plst
 
 let rec draw_end_game lst =
   clear_graph ();
