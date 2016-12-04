@@ -11,27 +11,30 @@ let last_card lst =
 
 let card_to_play game_state player_state = {suit=Heart; value=2}
 
+let play_non_low_heart hand data =
+if (match get_short_suit hand with SpadeS _ -> true | _ -> false)
+then if has_card_of_suit Diamond hand
+     then high_card_from_suit hand Diamond (-1) (-1)
+     else if has_card_of_suit Club hand
+     then high_card_from_suit hand Club (-1) (-1)
+     else low_card_from_suit hand Spade (-1) (-1)
+else if (is_early hand) && (no_shorts data)
+then high_card_from_suit_not hand Heart (-1) (-1)
+else let shorted_suit = get_shorted_suit data in
+if get_short_suit hand = shorted_suit
+then (match shorted_suit with
+| HeartS _ -> middle_card_from_suit_not hand Heart (-1) (-1)
+| ClubS _ -> middle_card_from_suit_not hand Club (-1) (-1)
+| SpadeS _ -> middle_card_from_suit_not hand Spade (-1) (-1)
+| DiamondS _ -> middle_card_from_suit_not hand Diamond (-1) (-1))
+else middle_card_from_suit_not hand Heart (-1) (-1)
+
 let perfect_lead_card hand data =
   if data.hearts_played
   then if has_low_hearts hand
        then play_low_heart hand
-       else middle_card_from_short_suit hand
-  else if (match get_short_suit hand with SpadeS _ -> true | _ -> false)
-  then if has_card_of_suit Diamond hand
-       then high_card_from_suit hand Diamond (-1) (-1)
-       else if has_card_of_suit Club hand
-       then high_card_from_suit hand Club (-1) (-1)
-       else low_card_from_suit hand Spade (-1) (-1)
-  else if (is_early hand) && (no_shorts data)
-  then high_card_from_suit_not hand Heart (-1) (-1)
-  else let shorted_suit = get_shorted_suit data in
-  if get_short_suit hand = shorted_suit
-  then (match shorted_suit with
-  | HeartS _ -> high_card_from_suit_not hand Heart (-1) (-1)
-  | ClubS _ -> high_card_from_suit_not hand Club (-1) (-1)
-  | SpadeS _ -> high_card_from_suit_not hand Spade (-1) (-1)
-  | DiamondS _ -> high_card_from_suit_not hand Diamond (-1) (-1))
-  else high_card_from_suit_not hand Heart (-1) (-1)
+       else play_non_low_heart hand data
+  else play_non_low_heart hand data
 
 let play_lead_card hand ai_level data =
   match ai_level with
@@ -44,7 +47,7 @@ let play_lead_card hand ai_level data =
 let guess_turn_first p_state data =
   let new_hand = (if data.q_spades_played ||
                      get_index (Spade, 12) p_state.hand >= 0 ||
-                     List.length p_state.hand <= 2
+                     List.length p_state.hand <= 3
   then p_state.hand
   else let without_k_spades =
     hand_without_card p_state.hand {suit = Spade; value = 13} in
@@ -75,9 +78,6 @@ let take_trick_if_possible hand pool =
 
 let take_trick_max hand pool data =
   let lead_suit = (last_card pool).suit in
-  print_string "Current lead suit (take): ";
-  let suit_str = match lead_suit with Club -> "Club" | Diamond -> "Diamond" | Spade -> "Spade" | _ -> "Heart" in
-  print_string suit_str; print_string "\n";
   let high_card = highest_card_so_far pool lead_suit in
   let prob_list = beating_cards_still_out high_card pool data in
   let beating_cards = high_card::prob_list in
@@ -85,9 +85,6 @@ let take_trick_max hand pool data =
 
 let lose_trick_max hand pool data =
   let lead_suit = (last_card pool).suit in
-  print_string "Current lead suit (lose): ";
-  let suit_str = match lead_suit with Club -> "Club" | Diamond -> "Diamond" | Spade -> "Spade" | _ -> "Heart" in
-  print_string suit_str; print_string "\n";
   let high_card = highest_card_so_far pool lead_suit in
   let played_card = highest_losing_card high_card hand data.hearts_played in
   if played_card.value = (-1)
@@ -144,11 +141,18 @@ let guess_turn_third p_state pool data =
 
 let guess_turn p_state pool data =
   let _ = check_if_shooting_moon p_state.hand pool data p_state.p_num in
-  match List.length pool with
-  | 0 -> guess_turn_first p_state data
-  | 1 -> guess_turn_second p_state pool data
-  | 2 -> guess_turn_third p_state pool data
-  | _ -> guess_turn_last p_state pool data
+  let possible_card =
+    match List.length pool with
+    | 0 -> guess_turn_first p_state data
+    | 1 -> guess_turn_second p_state pool data
+    | 2 -> guess_turn_third p_state pool data
+    | _ -> guess_turn_last p_state pool data in
+  if possible_card.value = (-1)
+  then if List.length pool = 0
+       then random_card_no_suit p_state.hand
+       else let lead_suit = (last_card pool).suit in
+       random_card p_state.hand lead_suit
+  else possible_card
 
 let pass_cards p_state =
   let spade_state = get_spade_state p_state.hand in

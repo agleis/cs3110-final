@@ -5,8 +5,9 @@ open Display_controller
 open Game_helpers
 open Unix
 
-let rec initialize_state ai_list deck =
-	let p_states = build_player_states ai_list 0 deck in
+let rec initialize_state ai_list name_list deck =
+	let ai_name_list = List.map2 (fun x1 x2 -> (x1,x2)) ai_list name_list in
+	let p_states = build_player_states ai_name_list 0 deck in
 	let next_human = find_first_human p_states in
 	{pool=[]; prs=p_states; phase=Pass; round_num=1; last_human_player=next_human}
 
@@ -56,7 +57,7 @@ let do_trading st =
 	let p = st.round_num in
 	let traded_cards = process_players_trades st st.prs in
 	let new_players = remove_cards_players st.prs traded_cards in
-	let to_add_cards = reorder_cards traded_cards in
+	let to_add_cards = reorder_cards (p mod 3) traded_cards in
 	let fin_players = add_cards new_players to_add_cards in
 	{st with prs=fin_players; phase=Play}
 
@@ -142,7 +143,7 @@ let rec repl st (data:stored_data) =
 	begin
 		if st.phase=Pass then
 								let n_state = do_trading st in
-								let _ = fix_ai_data_suits n_state.prs data.players in
+								let _ = fix_ai_data_suits (get_ordered_p_states n_state.prs) data.players in
 								let reorder_players = reorder_players_2clubs n_state.prs [] in
 								let next_human = find_first_human reorder_players in
 								repl {n_state with prs=reorder_players; last_human_player=next_human} data
@@ -163,19 +164,21 @@ and reflush_round (st:game_state) data =
 	let () = if did_win then draw_end_game total_points in
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
-	let init_state = initialize_state [0;0;0;0] shuffled in
+	let init_state = initialize_state [0;0;0;0] ["";"";"";""] shuffled in
 	let hands = List.map (fun x -> x.hand) init_state.prs in
-	let f_players = List.map2 (fun p h -> {p with hand=h}) new_players hands in
+	let f_players = List.map2 (fun p h -> {p with hand=h; round_points=0}) new_players hands in
+	let () = reset_ai_data data in
+	let () = fix_ai_data_suits (get_ordered_p_states f_players) data.players in
 	if did_win then () else
 	repl { st with prs=f_players;
 		round_num=(st.round_num+1);
 		pool=[];
 		phase=Pass} data
 
-let main p_lst =
+let main p_lst name_lst =
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
-	let init_state = initialize_state p_lst shuffled in
+	let init_state = initialize_state p_lst name_lst shuffled in
 	let ai_data = build_ai_data init_state.prs in
 	(* let _ = print_cards shuffled in *)
 	repl init_state ai_data
