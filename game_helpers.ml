@@ -71,8 +71,12 @@ let get_ordered_p_states players =
 let remove_cards main_list to_remove =
 	List.filter (fun x -> not (List.exists (fun y -> x=y) to_remove)) main_list
 
-let reorder_cards cardlist =
-	List.rev cardlist
+let reorder_cards which [c0; c1; c2; c3] =
+	match which with
+		| 0 -> [c1; c2; c3; c0]
+		| 1 -> [c3; c0; c2; c1]
+		| 2 -> [c2; c3; c0; c1]
+		| _ -> [c0; c1; c2; c3]
 
 let add_cards players cards =
 	List.map2 (fun p c -> {p with hand=(p.hand@c)}) players cards
