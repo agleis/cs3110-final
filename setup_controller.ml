@@ -50,9 +50,9 @@ let colon = ": "
 
 let enter = "\n"
 
-let ai_names = ["M. Clarkson"; "D. Gries"; "Chirag"; "M. George";
-                "E. Tardos"; "R. Tate"; "A. Bracy"; "R. Constable";
-                "J. Hopcroft"; "G. Morrisett"; "A. Myers"]
+let ai_names = ["M. CLARKSON"; "D. GRIES"; "CHIRAG"; "M. GEORGE";
+                "E. TARDOS"; "R. TATE"; "A. BRACY"; "R. CONSTABLE";
+                "J. HOPCROFT"; "G. MORRISETT"; "A. MYERS"]
 let rec lst_has_name lst name =
   match lst with
   | [] -> false
@@ -63,8 +63,7 @@ let rec get_names num_humans human_number lst =
   | 4 -> lst
   | _ -> if num_humans > 0
   then (print_string name_prompt; print_int human_number; print_string colon;
-        let human_name = read_line () in
-        let _ = Sys.command "clear" in
+        let human_name = String.uppercase_ascii (read_line ()) in
         get_names (num_humans - 1) (human_number + 1) (human_name::lst))
   else (Random.self_init ();
         let ai_length = List.length ai_names in
