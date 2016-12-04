@@ -132,7 +132,6 @@ let resolve_round st data =
 	let to_change = List.nth data.players loser in
 	let () = to_change.round_points<-(to_change.round_points + points) in
 	let () = to_change.tricks<-(to_change.tricks@pool_cards) in
-	let split_players = List.partition (fun x -> x.p_num >= loser) new_players in
 	let reorder_players = reorder_players_winner new_players [] loser in
 	(* draw winner with loser *)
 	let () = winner st loser in
@@ -161,7 +160,7 @@ and reflush_round (st:game_state) data =
 	let new_players = dole_out_points st.prs checked_for_moon in
 	let total_points = List.map (fun x-> x.game_points) (get_ordered_p_states new_players) in
 	let did_win = List.exists (fun x-> x>=100) total_points in
-	let () = if did_win then draw_end_game total_points in
+	let () = if did_win then draw_end_game new_players in
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
 	let init_state = initialize_state [0;0;0;0] ["";"";"";""] shuffled in
