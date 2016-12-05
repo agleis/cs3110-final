@@ -23,7 +23,7 @@ let rec get_human_cards_to_pass st p =
 	else let () = draw_board st p in get_human_cards_to_pass st p
 
 let switch_player_screen player st =
-	let n_num = (player.p_num + 1) mod 4 in 
+	let n_num = (player.p_num + 1) mod 4 in
 	let n_player = List.find (fun x -> x.p_num=n_num) st.prs in
 	let name = n_player.name in
 	switch_player name
@@ -187,7 +187,7 @@ let rec repl st (data:stored_data) =
 and reflush_round (st:game_state) data =
 	(* let trick_list = List.map (fun x->x.tricks) data.players in
 	let point_list = List.map (fun x-> (List.fold_left point_allocation 0 x)) trick_list in *)
-	let point_list = List.map (fun x-> x.round_pts) st.prs in
+	let point_list = List.map (fun x-> x.round_pts) (get_ordered_p_states st.prs) in
 	let checked_for_moon = make_moon_points point_list in
 	(* game_points display call *)
 	let new_players = dole_out_points st.prs checked_for_moon in
