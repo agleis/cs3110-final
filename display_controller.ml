@@ -3,6 +3,10 @@ open Types
 open Graphics_helper
 (* #load "cma" *)
 
+(******************************************************************************)
+(** Global Variables **********************************************************)
+(******************************************************************************)
+
 let window_width = 1280
 let window_height = 750
 let card_height = 90
@@ -11,10 +15,28 @@ let card_spacing = 5
 let exit = ref true
 let player_hand = ref []
 
+(******************************************************************************)
+(** End Global Variables ******************************************************)
+(******************************************************************************)
+
+
+(* 
+ * [x_triple a] function similar to fst and snd
+ * for tuples, but instead for triples. If x is
+ * f then gets first in triple, s gets second,
+ * and t gets third.
+*)
 let f_triple (a,_,_) = a
 let s_triple (_,a,_) = a
 let t_triple (_,_,a) = a
 
+
+(* 
+ * [draw_string1 s x y] Similar to draw_string for
+ * the graphics module but instead uses the letters
+ * defined in graphics_helper. Draws the string [s]
+ * at position x y on the screen.
+*)
 let draw_string1 s x y =
   let lst = explode s in
   let () = set_line_width 10 in
@@ -33,10 +55,11 @@ let init_window w h =
   let s = " " ^ (string_of_int w) ^ "x" ^ (string_of_int h) in
   open_graph s
 
-let rec find_index lst num acc =
-  match lst with
-  |[] -> acc
-  |h::t -> if h.p_num == num then acc else find_index t num (acc+1)
+
+(******************************************************************************)
+(** Main Draw Functions *******************************************************)
+(******************************************************************************)
+
 
 let draw_card num suit x y =
     let card_char =
@@ -222,7 +245,7 @@ let draw_play_phase x y =
 let draw_pass_phase round x y =
   set_line_width 10;
   set_color black;
-  draw_string1 "CHOOSE THREE" x y;
+  draw_string1 "PASS THREE" x y;
     (match round with
     | 0 -> draw_left_arrow (x+300) (y+100)
     | 1 -> draw_right_arrow (x+300) (y+100) 
@@ -295,6 +318,11 @@ let player_string state idx =
   let game_points = "Game Points: " ^ (string_of_int (List.nth state.prs idx).game_points) in
   let round_points = "Round Points: " ^ (string_of_int (List.nth state.prs idx).round_pts) in
   (player, game_points, round_points)
+
+let rec find_index lst num acc =
+  match lst with
+  |[] -> acc
+  |h::t -> if h.p_num == num then acc else find_index t num (acc+1)
 
 let draw_board state pstate =
   init_window window_width window_height;
@@ -401,3 +429,5 @@ let rec trade_cards lst st pstate =
       let () = card_selection st pstate n_lst ph in
       trade_cards n_lst st pstate 
     end
+
+
