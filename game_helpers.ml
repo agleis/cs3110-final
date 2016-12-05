@@ -47,25 +47,30 @@ let rec num_humans_playing ps =
 		| h::t -> if h.ai_level=0 then 1 + num_humans_playing t else num_humans_playing t
 		| [] -> 0
 
+(* Given a list of player states return the first element that is a human*)
 let rec find_first_human ps =
 	match ps with
 		| h::t -> if h.ai_level=0 then h.p_num else find_first_human t
 		| [] -> failwith "No humans"
 
+(* Given a list of player states return the list reordered so that the player
+* with the 2 of clubs goes first*)
 let rec reorder_players_2clubs players acc =
 	match players with
 		| h::t -> if List.exists (fun x->x={suit=Club; value=2}) h.hand then
 					(h::t)@acc else reorder_players_2clubs t acc@[h]
 		| [] -> acc
 
+(* Given a list of player states return the list reordered with winner first*)
 let rec reorder_players_winner ps acc winner=
 	match ps with
 		| h::t -> if h.p_num=winner then (h::t)@(List.rev acc) else reorder_players_winner t (h::acc) winner
 		| [] -> []
 
+(* Given a list of player states return the list reordered so that the player
+* the p_nums are in ascending order*)
 let get_ordered_p_states players =
 	List.sort (fun x1 x2 -> x1.p_num - x2.p_num) players
-
 
 let remove_cards main_list to_remove =
 	List.filter (fun x -> not (List.exists (fun y -> x=y) to_remove)) main_list

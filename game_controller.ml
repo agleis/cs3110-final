@@ -23,12 +23,11 @@ let rec get_human_cards_to_pass st p =
 	else let () = draw_board st p in get_human_cards_to_pass st p
 
 (* [switch_player_screen player st] is a helper function to switch_player *)
-let switch_player_screen player st =
+(* let switch_player_screen player st =
 	let ordered_players = reorder_players_winner st.prs [] player.p_num in
 	match ordered_players with
 		| h::t -> let p = List.find (fun x->x.ai_level=0) t in switch_player p.name
-		| _ -> switch_player player.name
-
+		| _ -> switch_player player.name *)
 
 (* [process_players_trades st ps] is a list of tuples of cards selected to
  * trade and modified player_states. It also has the side effect of calling
@@ -53,6 +52,8 @@ let rec process_players_trades st ps =
 			end
 			else begin
 			(* display board with st having last_human_player updated if need be*)
+			let multi_player = (num_humans_playing st.prs) > 1 in
+			let () = if multi_player then switch_player h.name else () in
 			let () = draw_board {st with last_human_player=h.p_num} h in
 			let to_pass = get_human_cards_to_pass {st with last_human_player=h.p_num} h in
 			let new_hand = remove_cards h.hand to_pass in
@@ -61,8 +62,8 @@ let rec process_players_trades st ps =
 												else x) st.prs in
 			let () = draw_board {st with last_human_player=h.p_num; prs=new_players} h in
 			(* if multiple players then switch_player *)
-			let multi_player = (num_humans_playing st.prs) > 1 in
-			let () = if multi_player then switch_player_screen h st else () in
+			(* let multi_player = (num_humans_playing st.prs) > 1 in
+			let () = if multi_player then switch_player_screen h st else () in *)
 			to_pass::(process_players_trades {st with last_human_player=h.p_num; prs=new_players} t)
 			end
 		end
@@ -120,6 +121,8 @@ let rec process_players st data ps =
 				process_players ns data t
 			end
 			else begin
+				let multi_player = (num_humans_playing st.prs) > 1 in
+				let () = if multi_player then switch_player h.name else () in
 				let () = draw_board {st with last_human_player=h.p_num} h in
 				let card_to_play = get_human_card_to_play {st with last_human_player=h.p_num} h data in
 				let new_hand = remove_cards h.hand [card_to_play] in
@@ -127,13 +130,13 @@ let rec process_players st data ps =
 				let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
 													else x) st.prs in
 				let _ = fix_ai_data card_to_play (get_ordered_p_states st.prs) data in
-				let multi_player = (num_humans_playing st.prs) > 1 in
-				let () = if multi_player then switch_player_screen h st else () in
 				let ns = {st with prs=new_players;
 								pool=((card_to_play,h.p_num)::st.pool);
 								last_human_player=h.p_num} in
 				let () = draw_board ns h in
 				let () = Unix.sleep 1 in
+				(* let multi_player = (num_humans_playing st.prs) > 1 in
+				let () = if multi_player then switch_player_screen h st else () in *)
 				process_players ns data t
 			end
 		end
