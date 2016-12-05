@@ -1,11 +1,11 @@
 open Graphics
 open Types
 
-(* http://stackoverflow.com/questions/10068713/string-to-list-of-char *)
-let explode s =
-  let rec exp i l =
-    if i < 0 then l else exp (i - 1) (s.[i] :: l) in
-  exp (String.length s - 1) []
+let rec explode s acc num = 
+  if num = (String.length s) then
+    List.rev acc
+  else 
+    let new_acc = s.[num]::acc in explode s new_acc (num+1)
 
 let draw_A x y =
   moveto x y;

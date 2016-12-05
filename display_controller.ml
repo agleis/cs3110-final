@@ -37,7 +37,7 @@ let t_triple (_,_,a) = a
  * at position x y on the screen.
 *)
 let draw_string1 s x y =
-  let lst = explode s in
+  let lst = explode s [] 0 in
   let () = set_line_width 10 in
   for i = 0 to (List.length lst) - 1 do
     if (List.nth lst i) = ' ' then moveto (x+(50*i)) y else
