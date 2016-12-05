@@ -106,7 +106,7 @@ let rec process_players st data ps =
 			let is_ai = (h.ai_level<>0) in
 			if is_ai then begin
 				(* draw board *)
-				let () = draw_board st h in
+				(* let () = draw_board st h in *)
 				let pool_cards = fst (List.split st.pool) in
 				let card_to_play = Ai_controller.guess_turn h pool_cards data in
 				let has_2clubs = List.exists (fun x-> x={suit=Club; value=2}) h.hand in

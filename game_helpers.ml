@@ -79,8 +79,8 @@ let reorder_cards which to_trade =
 	match to_trade with
 		| [c0; c1; c2; c3] -> begin
 			match which with
-				| 0 -> [c1; c2; c3; c0]
-				| 1 -> [c3; c0; c1; c2]
+				| 0 -> [c3; c0; c1; c2]
+				| 1 -> [c1; c2; c3; c0]
 				| 2 -> [c2; c3; c0; c1;]
 				| _ -> failwith "Invalid trade round type"
 		end
