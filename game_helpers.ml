@@ -1,20 +1,5 @@
 open Types
 
-(* Legacy printing *)
-let rec print_cards cards =
-	match cards with
-		| {suit=s; value=v}::t -> (match s with
-					| Heart -> let _ = print_string ((string_of_int v) ^ " of Hearts\n") in print_cards t
-					| Club -> let _ = print_string ((string_of_int v) ^ " of Clubs\n") in print_cards t
-					| Spade -> let _ = print_string ((string_of_int v) ^ " of Spades\n") in print_cards t
-					| Diamond -> let _ = print_string ((string_of_int v) ^ " of Diamonds\n") in print_cards t)
-		| [] -> ()
-
-let print_game st =
-	let _ = print_string "pool:\n" in
-	let _ = print_cards (fst (List.split st.pool)) in
-	List.iter (fun x -> let _ = print_string ("\nPlayer "^ (string_of_int x.p_num)^" ----- "^(string_of_int x.game_points)^" pts\n") in print_cards x.hand) st.prs
-
 (* Deck building helpers *)
 let rec init_deck su v =
 	if su = 4 then []
@@ -32,14 +17,14 @@ let rec partition_list deck start length =
 					else []
 		| [] -> []
 
-(* code inspired from http://stackoverflow.com/questions/15095541/how-to-shuffle-list-in-on-in-ocaml*)
+(* code inspired from
+http://stackoverflow.com/questions/15095541/how-to-shuffle-list-in-on-in-ocaml*)
 let shuffle_deck deck =
   Random.self_init ();
 	let weighted = List.map (fun x -> ((Random.int 5000), x)) deck in
 	let sorted = List.sort (fun x1 x2 -> (fst x1) - (fst x2)) weighted in
 	List.map (fun x -> snd x) sorted
 (*-------*)
-
 
 (* Player state manipulation helpers *)
 let rec num_humans_playing ps =
@@ -64,7 +49,8 @@ let rec reorder_players_2clubs players acc =
 (* Given a list of player states return the list reordered with winner first*)
 let rec reorder_players_winner ps acc winner=
 	match ps with
-		| h::t -> if h.p_num=winner then (h::t)@(List.rev acc) else reorder_players_winner t (h::acc) winner
+		| h::t -> if h.p_num=winner then (h::t)@(List.rev acc)
+			else reorder_players_winner t (h::acc) winner
 		| [] -> []
 
 (* Given a list of player states return the list reordered so that the player
@@ -108,8 +94,10 @@ let suit_available su pdata =
 
 let is_valid_play pool pnum data has_2clubs crd =
 	match pool with
-		| (c, pn)::t -> c.suit = crd.suit || not (suit_available c.suit (List.nth data.players pnum))
-		| [] -> (not has_2clubs || crd={suit=Club; value=2}) && (crd.suit<>Heart || data.hearts_played)
+		| (c, pn)::t -> c.suit = crd.suit
+			|| not (suit_available c.suit (List.nth data.players pnum))
+		| [] -> (not has_2clubs || crd={suit=Club; value=2})
+			&& (crd.suit<>Heart || data.hearts_played)
 
 let rec valid_helper cards =
 	match cards with
@@ -122,7 +110,8 @@ let rec are_valid_trades cards =
 	valid_helper sorted
 
 let get_loser su cards =
-	let sorted = List.sort (fun x1 x2-> compare_cards_with_suit su (fst x2) (fst x1)) cards in
+	let sorted = List.sort
+		(fun x1 x2-> compare_cards_with_suit su (fst x2) (fst x1)) cards in
 	List.hd sorted
 
 let point_allocation acc y =
@@ -141,19 +130,22 @@ let make_moon_points points =
 		make_moon_h points else points
 
 let dole_out_points (players:player_state list) points =
-	List.map2 (fun pl pts -> {pl with game_points=(pl.game_points+pts); round_pts=pts})
+	List.map2 (fun pl pts ->
+		{pl with game_points=(pl.game_points+pts); round_pts=pts})
 		(get_ordered_p_states players) points
 (* Game ai_data manipulation *)
 let fix_ai_data_suits players (data:player_data list) =
 	List.iter2 (fun p d ->
-			d.has_clubs <- (List.exists (fun x -> x.suit=Club) p.hand);
-			d.has_spades <- (List.exists (fun x -> x.suit=Spade) p.hand);
-			d.has_diamonds <- (List.exists (fun x -> x.suit=Diamond) p.hand);
-			d.has_hearts <- (List.exists (fun x -> x.suit=Heart) p.hand)) players data
+		d.has_clubs <- (List.exists (fun x -> x.suit=Club) p.hand);
+		d.has_spades <- (List.exists (fun x -> x.suit=Spade) p.hand);
+		d.has_diamonds <- (List.exists (fun x -> x.suit=Diamond) p.hand);
+		d.has_hearts <- (List.exists (fun x -> x.suit=Heart) p.hand))
+		players data
 
 let fix_ai_data (crd:card) (ps:player_state list) (dt:stored_data) =
 	let () = if crd.suit=Heart then dt.hearts_played<-true
-			else if crd={suit=Spade; value=12} then dt.q_spades_played<-true else () in
+			else if crd={suit=Spade; value=12}
+			then dt.q_spades_played<-true else () in
 	fix_ai_data_suits ps dt.players
 
 let reset_players_data prs =
@@ -179,7 +171,8 @@ let rec build_player_states ai_name_list pnum deck =
 	match ai_name_list with
 		| (a, n)::t -> let p_cards = partition_list deck (pnum*13) 13 in
 				{hand=p_cards; game_points=0; round_pts=0; name=n;
-				 ai_level=a; collected_cards=[]; p_num=pnum}::(build_player_states t (pnum+1) deck)
+				 ai_level=a; collected_cards=[]; p_num=pnum}::
+				 (build_player_states t (pnum+1) deck)
 		| [] -> []
 
 let build_single_data player =
