@@ -440,6 +440,8 @@ let cards_played suit pool data =
   let player_cards = player_cards_of_suit suit data.players [] in
   player_cards@pool_cards
 
+(* [build_list suit i lst] builds a list of cards having suit [suit] and
+ * values <= [i], storing the result in [lst]. *)
 let rec build_list suit i lst =
   if i >= 2
   then build_list suit (i - 1) ({suit = suit; value = i}::lst)
