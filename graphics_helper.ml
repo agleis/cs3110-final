@@ -361,4 +361,3 @@ let draw_symbol sym x y =
     fill_circle (x+5) y 7;
     fill_circle x (y+10) 7;
     fill_rect (x-2) (y-10) 4 10
-
