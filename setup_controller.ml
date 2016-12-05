@@ -74,7 +74,7 @@ let rec print_with_num_get_str str num =
   print_string colon;
   let n = (try read_line () with
   | _ -> print_string try_again; print_with_num_get_str str num) in
-  let _ = Sys.command "clear" in n
+  let _ = Sys.command "clear" in String.uppercase_ascii n
 
 let rec get_names num_humans human_number lst =
   match List.length lst with
