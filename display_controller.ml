@@ -38,25 +38,6 @@ let rec find_index lst num acc =
   |[] -> acc
   |h::t -> if h.p_num == num then acc else find_index t num (acc+1)
 
-let draw_symbol sym x y = 
-  match sym with
-  |Heart ->
-    set_color red;
-    fill_poly [|(x,y);(x-10,y+10);(x-10,y+15);(x-5,y+15);(x,y+10);(x+5,y+15);(x+10,y+15);(x+10,y+10);(x,y)|]
-  |Diamond ->
-    set_color red;
-    fill_poly [|(x,y);(x+5,y+10);(x,y+20);(x-5,y+10);(x,y)|]
-  |Spade ->
-    set_color black;
-    fill_poly [|(x,y);(x-5,y-5);(x-10,y);(x-10,y+5);(x,y+15);(x+10,y+5);(x+10,y);(x+5,y-5);(x,y)|];
-    fill_rect (x-3) (y-10) 5 10
-  |Club ->
-    set_color black;
-    fill_circle (x-5) y 7;
-    fill_circle (x+5) y 7;
-    fill_circle x (y+10) 7;
-    fill_rect (x-2) (y-10) 4 10
-
 let draw_card num suit x y =
     let card_char =
       match num with
@@ -233,34 +214,6 @@ let draw_pool state pool =
   done;
   in ()
 
-let draw_left_arrow x y =
-    set_color black;
-    moveto x y;
-    lineto (x - 30) y;
-    lineto (x - 20) (y - 15);
-    moveto (x - 30) y;
-    lineto (x - 20) (y + 15)
-
-    (* code for arrow left*)
-
-let draw_right_arrow x y =
-    set_color black;
-    moveto x y;
-    lineto (x + 30) y;
-    lineto (x + 20) (y - 15);
-    moveto (x + 30) y;
-    lineto (x + 20) (y + 15)
-(* code for arrow left*)
-
-let draw_across_arrow x y =
-    set_color black;
-    moveto x y;
-    lineto x (y+30);
-    lineto (x - 15) (y + 20);
-    moveto x (y+30);
-    lineto (x + 15) (y + 20)
-(* code for arrow left*)
-
 let draw_play_phase x y =
   set_line_width 10;
   set_color black;
@@ -271,24 +224,25 @@ let draw_pass_phase round x y =
   set_color black;
   draw_string1 "CHOOSE THREE" x y;
     (match round with
-    | 0 -> draw_left_arrow (x+200) (y+100)
-    | 1 -> draw_right_arrow (x+200) (y+100) 
-    | _ -> draw_across_arrow (x+200) (y+100))
+    | 0 -> draw_left_arrow (x+300) (y+100)
+    | 1 -> draw_right_arrow (x+300) (y+100) 
+    | 2 -> draw_across_arrow (x+300) (y+100)
+    | _ -> ())
 
 let draw_phase phase round_num x y =
   match phase with
   |Play -> draw_play_phase (x+60) y
-  |Pass -> draw_pass_phase (round_num mod 3) (x-50) (y-300)
-  |Setup -> draw_pass_phase (round_num mod 3) x (y-300)
+  |Pass -> draw_pass_phase (round_num mod 4) (x-50) (y-300)
+  |Setup -> draw_pass_phase (round_num mod 4) x (y-300)
 
-let rec switch_player () =
+let rec switch_player pl =
   clear_graph ();
   set_color black;
   moveto (window_width/2) (window_height/2);
   draw_string1 "PRESS ENTER TO" ((window_width/2) - 350) (window_height/2);
-  draw_string1 "SWITCH PLAYERS" ((window_width/2) - 350) ((window_height/2) - 60);
+  draw_string1 ("SWITCH TO " ^ pl) ((window_width/2) - 350) ((window_height/2) - 60);
   let s = wait_next_event [Key_pressed] in
-  if s.keypressed && s.key = '\r' then () else switch_player ()
+  if s.keypressed && s.key = '\r' then () else switch_player pl
 
 let rec winner state pnum =
   clear_graph ();

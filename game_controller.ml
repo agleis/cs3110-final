@@ -22,6 +22,12 @@ let rec get_human_cards_to_pass st p =
 	if are_valid_trades cards then cards
 	else let () = draw_board st p in get_human_cards_to_pass st p
 
+let switch_player_screen player st =
+	let n_num = (player.p_num + 1) mod 4 in 
+	let n_player = List.find (fun x -> x.p_num=n_num) st.prs in
+	let name = n_player.name in
+	switch_player name
+
 (* [process_players_trades st ps] is a list of tuples of cards selected to
  * trade and modified player_states. It also has the side effect of calling
  * GUI draw functions and delaying so that the game can be absorbed
@@ -46,15 +52,15 @@ let rec process_players_trades st ps =
 			else begin
 			(* display board with st having last_human_player updated if need be*)
 			let () = draw_board {st with last_human_player=h.p_num} h in
-			let to_pass = get_human_cards_to_pass st h in
+			let to_pass = get_human_cards_to_pass {st with last_human_player=h.p_num} h in
 			let new_hand = remove_cards h.hand to_pass in
 			let new_p_state = {h with hand=new_hand} in
 			let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
 												else x) st.prs in
 			let () = draw_board {st with last_human_player=h.p_num; prs=new_players} h in
-			(* switch player*)
+			(* if multiple players then switch_player *)
 			let multi_player = (num_humans_playing st.prs) > 1 in
-			let () = if multi_player then switch_player () else () in
+			let () = if multi_player then switch_player_screen h st else () in
 			to_pass::(process_players_trades {st with last_human_player=h.p_num; prs=new_players} t)
 			end
 		end
@@ -100,7 +106,6 @@ let rec process_players st data ps =
 				let pool_cards = fst (List.split st.pool) in
 				let card_to_play = Ai_controller.guess_turn h pool_cards data in
 				let has_2clubs = List.exists (fun x-> x={suit=Club; value=2}) h.hand in
-				let valid_play = is_valid_play st.pool h.p_num data has_2clubs card_to_play in
 				let new_hand = remove_cards h.hand [card_to_play] in
 				let new_p_state = {h with hand=new_hand} in
 				let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
@@ -115,7 +120,7 @@ let rec process_players st data ps =
 			else begin
 				(* draw board with st having last_human_player=h.pnum *)
 				let () = draw_board {st with last_human_player=h.p_num} h in
-				let card_to_play = get_human_card_to_play st h data in
+				let card_to_play = get_human_card_to_play {st with last_human_player=h.p_num} h data in
 				let new_hand = remove_cards h.hand [card_to_play] in
 				let new_p_state = {h with hand=new_hand} in
 				let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
@@ -123,7 +128,7 @@ let rec process_players st data ps =
 				let _ = fix_ai_data card_to_play (get_ordered_p_states st.prs) data in
 				(* if multiple players then switch_player *)
 				let multi_player = (num_humans_playing st.prs) > 1 in
-				let () = if multi_player then switch_player () else () in
+				let () = if multi_player then switch_player_screen h st else () in
 				let ns = {st with prs=new_players;
 								pool=((card_to_play,h.p_num)::st.pool);
 								last_human_player=h.p_num} in
