@@ -170,25 +170,29 @@ let high_card_from_suit hand suit ind1 ind2 =
     match suit_ind.heart with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Heart;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) (List.length (h::t) - 1)}
+               value = List.nth (List.sort (Pervasives.compare) (h::t))
+                       (List.length (h::t) - 1)}
   end
   | Club -> begin
     match suit_ind.club with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Club;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) (List.length (h::t) - 1)}
+               value = List.nth (List.sort (Pervasives.compare) (h::t))
+                       (List.length (h::t) - 1)}
   end
   | Spade -> begin
     match suit_ind.spade with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Spade;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) (List.length (h::t) - 1)}
+               value = List.nth (List.sort (Pervasives.compare) (h::t))
+                       (List.length (h::t) - 1)}
   end
   | Diamond -> begin
     match suit_ind.diamond with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Diamond;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) (List.length (h::t) - 1)}
+               value = List.nth (List.sort (Pervasives.compare) (h::t))
+                       (List.length (h::t) - 1)}
   end
 
 (* [middle_card_from_suit hand suit ind1 ind2] returns the middle-ranked
@@ -201,25 +205,29 @@ let middle_card_from_suit hand suit ind1 ind2 =
     match suit_ind.heart with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Heart;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) ((List.length (h::t)) / 2)}
+               value = List.nth (List.sort (Pervasives.compare) (h::t))
+                       ((List.length (h::t)) / 2)}
   end
   | Club -> begin
     match suit_ind.club with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Club;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) ((List.length (h::t)) / 2)}
+               value = List.nth (List.sort (Pervasives.compare) (h::t))
+                       ((List.length (h::t)) / 2)}
   end
   | Spade -> begin
     match suit_ind.spade with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Spade;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) ((List.length (h::t)) / 2)}
+               value = List.nth (List.sort (Pervasives.compare) (h::t))
+                       ((List.length (h::t)) / 2)}
   end
   | Diamond -> begin
     match suit_ind.diamond with
     | [] -> get_random_not_two hand ind1 ind2
     | h::t -> {suit = Diamond;
-               value = List.nth (List.sort (Pervasives.compare) (h::t)) ((List.length (h::t)) / 2)}
+               value = List.nth (List.sort (Pervasives.compare) (h::t))
+                       ((List.length (h::t)) / 2)}
   end
 
 (* [low_card_from_suit hand suit ind1 ind2] returns the lowest ranked
