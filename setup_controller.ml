@@ -55,6 +55,7 @@ let enter = "\n"
 let ai_names = ["M. CLARKSON"; "D. GRIES"; "CHIRAG"; "M. GEORGE";
                 "E. TARDOS"; "R. TATE"; "A. BRACY"; "R. CONSTABLE";
                 "J. HOPCROFT"; "G. MORRISETT"; "A. MYERS"]
+
 let rec lst_has_name lst name =
   match lst with
   | [] -> false
