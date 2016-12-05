@@ -137,7 +137,7 @@ let make_moon_points points =
 		make_moon_h points else points
 
 let dole_out_points (players:player_state list) points =
-	List.map2 (fun pl pts -> {pl with game_points=(pl.game_points+pts)})
+	List.map2 (fun pl pts -> {pl with game_points=(pl.game_points+pts); round_pts=pts})
 		(get_ordered_p_states players) points
 (* Game ai_data manipulation *)
 let fix_ai_data_suits players (data:player_data list) =
