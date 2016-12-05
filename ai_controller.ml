@@ -200,7 +200,7 @@ let guess_turn p_state pool data =
     | 1 -> guess_turn_second p_state pool data
     | 2 -> guess_turn_third p_state pool data
     | _ -> guess_turn_last p_state pool data in
-  if possible_card.value = (-1)
+  if possible_card.value  < 2
   then if List.length pool = 0
        then random_card_no_suit p_state.hand
        else let lead_suit = (last_card pool).suit in

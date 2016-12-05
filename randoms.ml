@@ -39,7 +39,7 @@ let rec get_three_random hand =
 
 let rec random_card hand lead_suit =
   if List.length hand = 0
-  then {suit = Diamond; value = -1}
+  then {suit = Diamond; value = -12}
   else (Random.self_init ();
   if has_card_of_suit lead_suit hand
   then let card = List.nth hand (Random.int (List.length hand)) in
@@ -50,11 +50,11 @@ let rec random_card hand lead_suit =
 
 let rec random_card_no_suit hand =
   if List.length hand = 0
-  then {suit = Diamond; value = -1}
+  then {suit = Diamond; value = -12}
   else (Random.self_init ();
     let card = List.nth hand (Random.int (List.length hand)) in
     if card.suit = Heart &&
-       (has_card_of_suit Club hand || 
+       (has_card_of_suit Club hand ||
         has_card_of_suit Diamond hand ||
         has_card_of_suit Spade hand)
     then random_card_no_suit hand
