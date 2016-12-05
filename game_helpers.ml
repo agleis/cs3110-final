@@ -15,7 +15,6 @@ let print_game st =
 	let _ = print_cards (fst (List.split st.pool)) in
 	List.iter (fun x -> let _ = print_string ("\nPlayer "^ (string_of_int x.p_num)^" ----- "^(string_of_int x.game_points)^" pts\n") in print_cards x.hand) st.prs
 
-
 (* Deck building helpers *)
 let rec init_deck su v =
 	if su = 4 then []
