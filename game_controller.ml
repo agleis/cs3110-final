@@ -173,8 +173,8 @@ let resolve_round st data =
 let rec repl st (data:stored_data) =
 	if round_over st then reflush_round st data else
 	let n_st = if (st.round_num mod 4 <> 3) then st else begin
-		let reord_plrs = reorder_players_2clubs st.prs in
-		{st with prs=reord_plrs; phase=Play} in
+		let reord_plrs = reorder_players_2clubs st.prs [] in
+		{st with prs=reord_plrs; phase=Play}
 	end in
 	begin
 		if n_st.phase=Pass then
