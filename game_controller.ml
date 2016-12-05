@@ -12,7 +12,7 @@ let rec initialize_state ai_list name_list deck =
 	let ai_name_list = List.map2 (fun x1 x2 -> (x1,x2)) ai_list name_list in
 	let p_states = build_player_states ai_name_list 0 deck in
 	let next_human = find_first_human p_states in
-	{pool=[]; prs=p_states; phase=Pass; round_num=1; last_human_player=next_human}
+	{pool=[]; prs=p_states; phase=Pass; round_num=0; last_human_player=next_human}
 
 (* [get_human_cards_to_pass st p]  is a list of valid cards that player p
  * can play given game _state st. It relies on polling display_controller for input

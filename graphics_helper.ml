@@ -318,29 +318,29 @@ let draw_letter ch x y =
 let draw_left_arrow x y =
     set_color black;
     moveto x y;
-    lineto (x - 100) y;
-    lineto (x - 80) (y - 30);
-    moveto (x - 90) y;
-    lineto (x - 80) (y + 30)
+    lineto (x - 400) y;
+    lineto (x - 350) (y - 50);
+    moveto (x - 400) y;
+    lineto (x - 350) (y + 50)
 
     (* code for arrow left*)
 
 let draw_right_arrow x y =
     set_color black;
     moveto x y;
-    lineto (x + 100) y;
-    lineto (x + 80) (y - 30);
-    moveto (x + 90) y;
-    lineto (x + 800) (y + 30)
+    lineto (x + 400) y;
+    lineto (x + 350) (y - 50);
+    moveto (x + 400) y;
+    lineto (x + 350) (y + 50)
 (* code for arrow left*)
 
 let draw_across_arrow x y =
     set_color black;
     moveto x y;
-    lineto x (y+100);
-    lineto (x - 30) (y + 80);
-    moveto x (y+90);
-    lineto (x + 30) (y + 80)
+    lineto x (y+300);
+    lineto (x - 50) (y + 250);
+    moveto x (y+300);
+    lineto (x + 50) (y + 250)
 (* code for arrow left*)
 
 let draw_symbol sym x y = 
