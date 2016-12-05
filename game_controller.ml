@@ -214,5 +214,6 @@ let main p_lst name_lst =
 	let deck = init_deck 0 2 in
 	let shuffled = shuffle_deck deck in
 	let init_state = initialize_state p_lst name_lst shuffled in
+  let () = init_window 1280 750 in
 	let ai_data = build_ai_data init_state.prs in
 	repl init_state ai_data
