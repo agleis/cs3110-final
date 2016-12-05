@@ -7,12 +7,10 @@ val click_card: card list -> game_state -> player_state  -> card
 
 val trade_cards: card list -> game_state -> player_state -> card list
 
-val switch_player: unit -> unit
+val switch_player: string -> unit
 
 val winner: game_state -> int -> unit
 
 val game_points: player_state list -> unit
 
 val draw_end_game: player_state list -> unit
-
-val draw_string1 : string -> int -> int -> unit
