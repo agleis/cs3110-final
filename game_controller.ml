@@ -184,8 +184,7 @@ and reflush_round (st:game_state) data =
 	let point_list = List.map (fun x-> (List.fold_left point_allocation 0 x)) trick_list in
 	let checked_for_moon = make_moon_points point_list in
 	(* game_points display call *)
-	let n_players = dole_out_points st.prs checked_for_moon in
-	let new_players = List.map (fun x->{x with round_pts=(List.nth checked_for_moon x.p_num)}) n_players in
+	let new_players = dole_out_points st.prs checked_for_moon in
 	let () = game_points new_players in
 	let total_points = List.map (fun x-> x.game_points) (get_ordered_p_states new_players) in
 	let did_win = List.exists (fun x-> x>=100) total_points in
