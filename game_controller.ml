@@ -180,8 +180,9 @@ let rec repl st (data:stored_data) =
 								repl n_state data
 	end
 and reflush_round (st:game_state) data =
-	let trick_list = List.map (fun x->x.tricks) data.players in
-	let point_list = List.map (fun x-> (List.fold_left point_allocation 0 x)) trick_list in
+	(* let trick_list = List.map (fun x->x.tricks) data.players in
+	let point_list = List.map (fun x-> (List.fold_left point_allocation 0 x)) trick_list in *)
+	let point_list = List.map (fun x-> x.round_pts) st.prs in
 	let checked_for_moon = make_moon_points point_list in
 	(* game_points display call *)
 	let new_players = dole_out_points st.prs checked_for_moon in
