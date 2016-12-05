@@ -149,13 +149,16 @@ let draw_hand lst s =
   clear_player_hand ();
   set_color black;
   moveto ((window_width/2)-125) ((window_height/2)-225);
-  draw_string ((f_triple s) ^ "         " ^ (s_triple s) ^ "         " ^ (t_triple s));
+  draw_string ((f_triple s) ^ 
+    "         " ^ (s_triple s) ^ 
+    "         " ^ (t_triple s));
   let delta = ref 0 in
   let len = List.length lst in
   let total_len = (len * (card_width + card_spacing)) in
   let () =
   for i=0 to (List.length lst) - 1 do
-      let xpos = ((int_of_float (0.5*.(float window_width))) + !delta - (total_len/2)) in
+      let xpos = 
+        ((int_of_float (0.5*.(float window_width))) + !delta - (total_len/2)) in
       let ypos = (int_of_float (0.06*.(float window_height))) in
       let key =
         if i = 0 then "~"
@@ -176,12 +179,14 @@ let draw_hand lst s =
 let draw_card_top num x y s =
   let () =
   let delta = ref 0 in
+  let xpos = (int_of_float (0.05*.(float window_width))) in
+  let ypos = (int_of_float (0.1*.(float window_height))) in 
   set_color black;
-  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 40) (y+(int_of_float (0.1*.(float window_height))));
+  moveto ((x-xpos) - 40) (y+ypos);
   draw_string (f_triple s);
-  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 40) ((y+(int_of_float (0.1*.(float window_height)))) - 20);
+  moveto ((x-xpos) - 40) ((y+ypos) - 20);
   draw_string (s_triple s);
-  moveto ((x-(int_of_float (0.05*.(float window_width)))) - 40) ((y+(int_of_float (0.1*.(float window_height)))) - 40);
+  moveto ((x-xpos) - 40) ((y+ypos) - 40);
   draw_string (t_triple s);
   for i=1 to num do
     draw_card 0 Spade (x + !delta) y;
@@ -192,46 +197,53 @@ let draw_card_top num x y s =
 let draw_card_side num x y s side =
   let () =
   let delta = ref 0 in
+  let xpos = (int_of_float (0.08*.(float window_width))) in 
+  let ypos = (int_of_float (0.5*.(float window_height))) in
+  let change_x = (int_of_float ((float window_height)*.0.05)) in 
   let () =
     if side then
       begin
         set_color black;
-        moveto (x-(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 0);
+        moveto (x-xpos) ((y+ypos) - 0);
         draw_string (f_triple s);
-        moveto (x-(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 20);
+        moveto (x-xpos) ((y+ypos) - 20);
         draw_string (s_triple s);
-        moveto (x-(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 40);
+        moveto (x-xpos) ((y+ypos) - 40);
         draw_string (t_triple s)
       end
     else
       begin
         set_color black;
-        moveto (x+(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 0);
+        moveto (x+xpos) ((y+ypos) - 0);
         draw_string (f_triple s);
-        moveto (x+(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 20);
+        moveto (x+xpos) ((y+ypos) - 20);
         draw_string (s_triple s);
-        moveto (x+(int_of_float (0.08*.(float window_width)))) ((y+(int_of_float (0.5*.(float window_height)))) - 40);
+        moveto (x+xpos) ((y+ypos) - 40);
         draw_string (t_triple s)
       end
   in
   for i=1 to num do
     draw_card (-1) Spade x (y + !delta);
-    delta := !delta + (int_of_float ((float window_height)*.0.05))
+    delta := !delta + change_x
   done;
   in ()
 
 let draw_pool state pool =
   let delta = ref 0 in
   let len = List.length pool in
-  let total_len = (len * (card_width + card_spacing)) in
+  let t_len = (len * (card_width + card_spacing)) in
   let () =
   for i=0 to (List.length pool) - 1 do
-    let xpos = ((int_of_float (0.5*.(float window_width))) + !delta - (total_len/2)) in
+    let offset = !delta - (t_len/2) in 
+    let xpos = ((int_of_float (0.5*.(float window_width))) + offset) in
     let ypos = (int_of_float (0.45*.(float window_height))) in
-    draw_card ((fst (List.nth pool i)).value) ((fst (List.nth pool i)).suit) xpos ypos;
+    let f_val = ((fst (List.nth pool i)).value) in 
+    let f_suit = ((fst (List.nth pool i)).suit) in 
+    draw_card f_val f_suit xpos ypos;
     moveto xpos (ypos - 15);
     set_color black;
-    let player = (List.nth (List.filter (fun x -> x.p_num = (snd (List.nth pool i))) state.prs) 0).name in 
+    let f = fun x -> x.p_num = (snd (List.nth pool i)) in
+    let player = (List.nth (List.filter f state.prs) 0).name in 
     draw_string player;
     delta := !delta + (card_width + card_spacing + 20);
   done;
@@ -263,20 +275,23 @@ let rec switch_player pl =
   set_color black;
   moveto (window_width/2) (window_height/2);
   draw_string1 "PRESS ENTER TO" ((window_width/2) - 350) (window_height/2);
-  draw_string1 ("SWITCH TO " ^ pl) ((window_width/2) - 350) ((window_height/2) - 60);
+  draw_string1 ("SWITCH TO " ^ pl) ((window_width/2)-350) ((window_height/2)-60);
   let s = wait_next_event [Key_pressed] in
   if s.keypressed && s.key = '\r' then () else switch_player pl
 
 let rec winner state pnum =
+  let x = (window_width/2) in 
+  let y = (window_height/2) in
+  let f = (fun x -> x.p_num = pnum) in 
   clear_graph ();
   set_color black;
-  draw_string1 " HAND GOES TO " ((window_width/2) - 350) ((window_height/2) + 160);
-  let player = (List.nth (List.filter (fun x -> x.p_num = pnum) state.prs) 0).name in 
-  draw_string1 player ((window_width/2) - 200) ((window_height/2) + 100);
-  draw_string1 "PRESS ENTER TO CONTINUE" ((window_width/2) - 575) ((window_height/2) - 200);
+  draw_string1 " HAND GOES TO " (x - 350) (y + 160);
+  let player = (List.nth (List.filter f state.prs) 0).name in 
+  draw_string1 player (x - 200) (y + 100);
+  draw_string1 "PRESS ENTER TO CONTINUE" (x - 575) (y - 200);
   draw_pool state state.pool;
   let s = wait_next_event [Key_pressed] in
-  if s.keypressed && s.key = '\r' then () else winner state  pnum
+  if s.keypressed && s.key = '\r' then () else winner state pnum
 
 let rec game_points plst =
   clear_graph ();
