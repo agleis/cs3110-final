@@ -115,6 +115,8 @@ let find_max_suit c s d h =
   else if (h >= c && h >= d && h >= s) then HeartS h
   else SpadeS s
 
+(* [get_num_suit_acc hand f c s d h] accumulates the result of comparison
+ * function f on cards in hand. Used for find_max and find_min. *)
 let rec get_num_suit_acc hand f c s d h =
   match hand with
   | [] -> f c s d h
@@ -137,6 +139,7 @@ let get_short_suit hand =
 let get_long_suit hand =
   get_num_suit_acc hand find_max_suit 0 0 0 0
 
+(* [rec_get_suit_values hand record] is a helper for [get_suit_values hand]. *)
 let rec rec_get_suit_values hand record =
   match hand with
   | [] -> record
@@ -455,19 +458,25 @@ let rec build_list suit i lst =
   then build_list suit (i - 1) ({suit = suit; value = i}::lst)
   else lst
 
+(* [not_in_lst c lst] returns [true] if [c] is not in [lst]. *)
 let rec not_in_lst c = function
   | [] -> true
   | c1::t -> if c1 = c then false else not_in_lst c t
 
+(* [inverse_list suit lst] returns all cards of [suit] not in [lst]. *)
 let inverse_list suit lst =
   let full_suit = build_list suit 14 [] in
   List.filter (fun c -> not_in_lst c lst) full_suit
 
+(* [beating_cards_still_out card pool data] calculates the cards that can
+ * beat [card] that are not in the pool or in any of the players' tricks. *)
 let beating_cards_still_out card pool data =
   let high_suit = card.suit in
   let cards_of_suit_played = cards_played high_suit pool data in
   inverse_list card.suit cards_of_suit_played
 
+(* [lowest_beating_card lst hand h_played] calculates the lowest card in [hand]
+ * that will beat the given list of cards [lst]. *)
 let lowest_beating_card lst hand h_played =
   let sorted_beaters = List.sort (compare_cards false) lst in
   let sorted_hand = List.sort (compare_cards true) lst in
@@ -479,6 +488,8 @@ let lowest_beating_card lst hand h_played =
   then high_card_from_suit sorted_hand highest_beater.suit (-1) (-1)
   else beater_mine
 
+(* [lose_to_card card hand] attempts to select a card in [hand] that is lower
+ * ranked than [card]. *)
 let lose_to_card card hand =
   if has_card_of_suit card.suit hand
   then low_card_from_suit hand card.suit (-1) (-1)
@@ -488,6 +499,8 @@ let lose_to_card card hand =
        else {suit = Diamond; value = -1}
   else screw_other_player hand card.suit
 
+(* [contains_heart_or_q_spades pool] returns [true] if [pool] contains any
+ * cards having suit Heart, or if [pool] contains the Queen of Spades. *)
 let rec contains_heart_or_q_spades pool =
   match pool with
   | [] -> false
@@ -495,6 +508,9 @@ let rec contains_heart_or_q_spades pool =
             then true
             else contains_heart_or_q_spades t
 
+(* [count_falses lst suit num] counts the number of players in [lst] for which
+ * the value of the English statement "player has cards of [suit]" is false,
+ * accumulating the result in num. *)
 let rec count_falses lst suit num =
   match lst with
   | [] -> num
@@ -514,17 +530,23 @@ let rec count_falses lst suit num =
               else count_falses t suit (num + 1)
   end
 
+(* [count_shorted suit data] finds out the number of people who are short on
+ * [suit] in [data]. *)
 let count_shorted suit data =
   count_falses data.players suit 0
 
+(* [check_if_shorted suit data] checks if anyone in [data] is short on [suit]. *)
 let check_if_shorted suit data =
   if count_shorted suit data >= 2
   then ((List.nth data.players 0).shooting_moon <- true; data)
   else data
 
+(* [no_points player] figures out if [player] has no points this round. *)
 let rec no_points player =
   player.round_points = 0
 
+(* [no_player_points players p_num] figures out if every player in [players]
+ * except the one at index [p_num] have 0 round points. *)
 let rec no_player_points players p_num =
   match p_num with
   | 0 -> no_points (List.nth players 1) &&
@@ -540,6 +562,9 @@ let rec no_player_points players p_num =
          no_points (List.nth players 2) &&
          no_points (List.nth players 0)
 
+(* [check_if_shooting_moon hand pool data p_num] will update whether this
+ * player is shooting the moon based on what is going on in the round and
+ * in [hand]. *)
 let check_if_shooting_moon hand pool data p_num =
   if no_player_points data.players p_num
   then match get_long_suit hand with
