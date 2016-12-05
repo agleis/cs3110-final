@@ -147,7 +147,7 @@ let rec process_players st data ps =
 * and then the round_num incremented*)
 let do_round st data =
 	let new_state = process_players st data st.prs in
-	{new_state with round_num=st.round_num+1; phase=Play}
+	{new_state with phase=Play}
 
 (* [resolve_round st data] is the modified game_state after the game decides
 * who won the trick and how many points they should receive. It has the side
