@@ -1,4 +1,5 @@
 open Graphics
+open Types
 
 (* http://stackoverflow.com/questions/10068713/string-to-list-of-char *)
 let explode s =
@@ -313,4 +314,51 @@ let draw_letter ch x y =
   |'.' -> draw_Period x y
   |':' -> draw_Colon x y
   |_ -> failwith "Not a letter"
+
+let draw_left_arrow x y =
+    set_color black;
+    moveto x y;
+    lineto (x - 400) y;
+    lineto (x - 350) (y - 50);
+    moveto (x - 400) y;
+    lineto (x - 350) (y + 50)
+
+    (* code for arrow left*)
+
+let draw_right_arrow x y =
+    set_color black;
+    moveto x y;
+    lineto (x + 400) y;
+    lineto (x + 350) (y - 50);
+    moveto (x + 400) y;
+    lineto (x + 350) (y + 50)
+(* code for arrow left*)
+
+let draw_across_arrow x y =
+    set_color black;
+    moveto x y;
+    lineto x (y+300);
+    lineto (x - 50) (y + 250);
+    moveto x (y+300);
+    lineto (x + 50) (y + 250)
+(* code for arrow left*)
+
+let draw_symbol sym x y = 
+  match sym with
+  |Heart ->
+    set_color red;
+    fill_poly [|(x,y);(x-10,y+10);(x-10,y+15);(x-5,y+15);(x,y+10);(x+5,y+15);(x+10,y+15);(x+10,y+10);(x,y)|]
+  |Diamond ->
+    set_color red;
+    fill_poly [|(x,y);(x+5,y+10);(x,y+20);(x-5,y+10);(x,y)|]
+  |Spade ->
+    set_color black;
+    fill_poly [|(x,y);(x-5,y-5);(x-10,y);(x-10,y+5);(x,y+15);(x+10,y+5);(x+10,y);(x+5,y-5);(x,y)|];
+    fill_rect (x-3) (y-10) 5 10
+  |Club ->
+    set_color black;
+    fill_circle (x-5) y 7;
+    fill_circle (x+5) y 7;
+    fill_circle x (y+10) 7;
+    fill_rect (x-2) (y-10) 4 10
 
