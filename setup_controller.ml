@@ -1,5 +1,6 @@
 open Types
 open Sys
+open Str
 open Game_controller
 
 let welcome_string = "Hello! Welcome to Hearts, a game of chance, skill, and "^
@@ -42,11 +43,15 @@ let rule_six = "6. However, there is a special case if you receive all \n"^
 
 let human_prompt = "Please enter the number of human players: "
 
-let name_prompt = "Please enter a name for human number "
+let name_prompt = "Please enter a name (characters only) for human number "
 
 let ai_prompt = "Please enter the level (1 - 3) for the AI number "
 
 let try_again = "Please enter a valid value.\n\n"
+
+let shorter_name = "Please keep your name to under 10 characters.\n\n"
+
+let invalid_chars = "Please only enter characters or period for a name!\n\n"
 
 let colon = ": "
 
@@ -60,6 +65,12 @@ let rec lst_has_name lst name =
   match lst with
   | [] -> false
   | n::t -> if n = name then true else lst_has_name t name
+
+let bad_characters s =
+  if (String.length (Str.global_replace (Str.regexp "[^a-zA-Z0-9. ]+") "" s))
+     <> (String.length s)
+  then true
+  else false
 
 let rec print_with_num str num =
   print_string str;
@@ -75,7 +86,11 @@ let rec print_with_num_get_str str num =
   print_string colon;
   let n = (try read_line () with
   | _ -> print_string try_again; print_with_num_get_str str num) in
-  let _ = Sys.command "clear" in String.uppercase_ascii n
+  if String.length n > 10
+  then (print_string shorter_name;  print_with_num_get_str str num)
+  else if bad_characters n
+  then (print_string invalid_chars;  print_with_num_get_str str num)
+  else let _ = Sys.command "clear" in String.uppercase_ascii n
 
 let rec get_names num_humans human_number lst =
   match List.length lst with
