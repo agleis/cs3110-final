@@ -23,7 +23,7 @@ let rec get_human_cards_to_pass st p =
 	else let () = draw_board st p in get_human_cards_to_pass st p
 
 let switch_player_screen player st =
-	let n_num = (player.p_num + 1) mod 4 in 
+	let n_num = (player.p_num + 1) mod 4 in
 	let n_player = List.find (fun x -> x.p_num=n_num) st.prs in
 	let name = n_player.name in
 	switch_player name
@@ -172,15 +172,16 @@ let resolve_round st data =
 * is run*)
 let rec repl st (data:stored_data) =
 	if round_over st then reflush_round st data else
+	let n_st = if (st.round_num mod 4 <> 3) then st else {st with phase=Play} in
 	begin
-		if st.phase=Pass then
-								let n_state = do_trading st in
+		if n_st.phase=Pass then
+								let n_state = do_trading n_st in
 								let _ = fix_ai_data_suits (get_ordered_p_states n_state.prs) data.players in
 								let reorder_players = reorder_players_2clubs n_state.prs [] in
 								let next_human = find_first_human reorder_players in
 								repl {n_state with prs=reorder_players; last_human_player=next_human} data
 							else
-								let round_result = do_round st data in
+								let round_result = do_round n_st data in
 								let n_state = resolve_round round_result data in
 								repl n_state data
 	end
