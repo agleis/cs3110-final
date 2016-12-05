@@ -65,6 +65,20 @@ let rec find_pos ph c =
   |[] -> (-1,-1)
   |h::t -> if (f_triple h) = c then (s_triple h, t_triple h) else find_pos t c
 
+(*
+ * [player_string state idx] generates the string that will
+ * be displayed on various screens that shows the player at 
+ * index [idx] in the game state [x] with their current name
+ * and points
+*)
+let player_string state idx =
+  let player = (List.nth state.prs idx).name in 
+  let g_points = (string_of_int (List.nth state.prs idx).game_points) in 
+  let r_points = (string_of_int (List.nth state.prs idx).round_pts) in 
+  let game_points = "Game Points: " ^  g_points in 
+  let round_points = "Round Points: " ^ r_points in
+  (player, game_points, round_points)
+
 (******************************************************************************)
 (** Main Draw Functions *******************************************************)
 (******************************************************************************)
@@ -461,20 +475,6 @@ let index c x =
   |'=' ->  if x > 12 then 12 else (-2)
   |'\r' -> (-2)
   |_ -> (-2)
-
-(*
- * [player_string state idx] generates the string that will
- * be displayed on various screens that shows the player at 
- * index [idx] in the game state [x] with their current name
- * and points
-*)
-let player_string state idx =
-  let player = (List.nth state.prs idx).name in 
-  let g_points = (string_of_int (List.nth state.prs idx).game_points) in 
-  let r_points = (string_of_int (List.nth state.prs idx).round_pts) in 
-  let game_points = "Game Points: " ^  g_points in 
-  let round_points = "Round Points: " ^ r_points in
-  (player, game_points, round_points)
 
 
 
