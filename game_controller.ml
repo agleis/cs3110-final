@@ -39,7 +39,7 @@ let rec process_players_trades st ps =
 			let is_ai = h.ai_level<>0 in
 			if is_ai then begin
 				(* draw board*)
-				let () = draw_board st h in
+				(* let () = draw_board st h in *)
 				let to_pass = Ai_controller.pass_cards h in
 				let new_hand = remove_cards h.hand to_pass in
 				let new_p_state = {h with hand=new_hand} in
@@ -61,6 +61,7 @@ let rec process_players_trades st ps =
 			let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
 												else x) st.prs in
 			let () = draw_board {st with last_human_player=h.p_num; prs=new_players} h in
+      let () = Unix.sleep 1 in
 			(* if multiple players then switch_player *)
 			(* let multi_player = (num_humans_playing st.prs) > 1 in
 			let () = if multi_player then switch_player_screen h st else () in *)
@@ -68,8 +69,8 @@ let rec process_players_trades st ps =
 			end
 		end
 		| [] -> (* draw board - delay*)
-				let () = draw_board st (List.nth st.prs ((List.length st.prs)-1)) in
-				let () = Unix.sleep 1 in
+				(* let () = draw_board st (List.nth st.prs ((List.length st.prs)-1)) in *)
+				(* let () = Unix.sleep 1 in *)
 				[]
 
 (* [do_trading st] is the modified game_state after all 4 players have
@@ -122,9 +123,9 @@ let rec process_players st data ps =
 			end
 			else begin
 				let multi_player = (num_humans_playing st.prs) > 1 in
-				let () = if multi_player then switch_player h.name else () in
 				let () = draw_board {st with last_human_player=h.p_num} h in
 				let card_to_play = get_human_card_to_play {st with last_human_player=h.p_num} h data in
+				let () = if multi_player then switch_player h.name else () in
 				let new_hand = remove_cards h.hand [card_to_play] in
 				let new_p_state = {h with hand=new_hand} in
 				let new_players = List.map (fun x -> if x.p_num=h.p_num then new_p_state
